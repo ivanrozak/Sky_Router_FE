@@ -38,7 +38,47 @@
         ></b-col>
       </b-row>
       <div v-show="isClickDetails">
-        <h1>Payment</h1>
+        <div class="passenger-detail">
+          <div class="box-detail">
+            <h5>Passenger Details</h5>
+            <div class="line"></div>
+            <b-row>
+              <b-col md="auto">
+                <h6>Airline</h6>
+                <img
+                  style="width:60px"
+                  src="../../../assets/myBooking/GA_900.png"
+                  alt=""
+                />
+              </b-col>
+              <b-col>
+                <h6>Route</h6>
+                <p style="font-size: 20px;font-weight: 600">
+                  IDN
+                  <span
+                    ><img
+                      src="../../../assets/myBooking/airplaneIcon.png"
+                      alt=""
+                  /></span>
+                  JPN
+                </p>
+              </b-col>
+              <b-col>
+                <h6>Departure Date</h6>
+                <p>20 July 2020</p>
+              </b-col>
+              <b-col md="auto">
+                <h6>Airtime</h6>
+                <p>10.00 - 20.00</p>
+              </b-col>
+              <b-col md="auto"
+                ><h6>Total Payment</h6>
+                <p>IDR 50.200.000,00</p></b-col
+              >
+            </b-row>
+            <b-table hover :items="passengers"></b-table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -79,7 +119,13 @@ export default {
   data() {
     return {
       isClickDetails: false,
-      isPaymentSuccess: false
+      isPaymentSuccess: false,
+      passengers: [
+        { No: 1, Passengers: 'Mrs. Katty', Ticket_Type: 'Adult' },
+        { No: 2, Passengers: 'Mr. Louis', Ticket_Type: 'Adult' },
+        { No: 3, Passengers: 'Mr. Downy', Ticket_Type: 'Adult' },
+        { No: 4, Passengers: 'Mr. Molto', Ticket_Type: 'Adult' }
+      ]
     }
   },
   methods: {
@@ -92,6 +138,9 @@ export default {
 </script>
 
 <style scoped>
+h6 {
+  color: #2395ff;
+}
 .title {
   letter-spacing: 0.3em;
   font-weight: 500;
@@ -155,5 +204,9 @@ span {
 
 .status-issued {
   background-color: #4fcf4d;
+}
+.passenger-detail,
+.box-detail {
+  padding: 20px;
 }
 </style>
