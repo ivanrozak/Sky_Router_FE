@@ -34,7 +34,7 @@
         <p style="margin-bottom: 0;" class=" mt-lg-3">
           Did you forgot your password?
         </p>
-        <a class="btn_reset">Tap here for reset</a>
+        <a @click="onReset" class="btn_reset">Tap here for reset</a>
       </div>
       <hr class="mx-lg-3" />
     </b-form>
@@ -59,7 +59,12 @@
 </template>
 <script>
 export default {
-  name: 'LeftComponentLogin'
+  name: 'LeftComponentLogin',
+  methods: {
+    onReset() {
+      this.$router.push('/forgot')
+    }
+  }
 }
 </script>
 <style scoped>

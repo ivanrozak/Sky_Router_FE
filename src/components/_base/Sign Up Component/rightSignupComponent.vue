@@ -67,7 +67,7 @@
     <b-col class="btn_RegisterbyType" lg="12">
       <p class="text-center">Already have an account?</p>
       <div class="d-flex justify-content-center">
-        <button class="btn_google w-50 px-lg-4 py-lg-3">
+        <button @click="onSignIn" class="btn_google w-50 px-lg-4 py-lg-3">
           Sign in
         </button>
       </div>
@@ -76,7 +76,12 @@
 </template>
 <script>
 export default {
-  name: 'LeftComponentRegister'
+  name: 'LeftComponentRegister',
+  methods: {
+    onSignIn() {
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 <style scoped>
