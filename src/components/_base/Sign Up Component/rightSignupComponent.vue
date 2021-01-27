@@ -79,7 +79,7 @@ export default {
   name: 'LeftComponentRegister',
   methods: {
     onSignIn() {
-      this.$router.push('/')
+      this.$router.push('/login')
     }
   }
 }
