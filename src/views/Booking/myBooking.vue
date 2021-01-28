@@ -32,5 +32,6 @@ export default {
 <style scoped>
 .mybooking-page {
   background: #f5f6fa;
+  margin-bottom: 100px;
 }
 </style>
