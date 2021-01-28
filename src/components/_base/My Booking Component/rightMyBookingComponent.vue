@@ -71,34 +71,17 @@
                 </p></b-col
               >
             </b-row>
-            <b-row>
-              <b-col md="auto"
-                ><div class="frame">
-                  <img
-                    style="position: absolute; top:8px; left: 23px"
-                    src="../../../assets/myBooking/Vector.png"
-                    alt=""
-                  /></div
-              ></b-col>
-              <b-col class="blue">Refundable</b-col>
-            </b-row>
+
             <br />
             <b-row>
-              <b-col md="auto"
-                ><div class="frame">
-                  <img
-                    style="position: absolute; top:8px; left: 23px"
-                    src="../../../assets/myBooking/Vector.png"
-                    alt=""
-                  /></div
-              ></b-col>
-              <b-col class="blue">Can Reschedule</b-col>
+              <b-col cols="7"><h5>Total Payment</h5></b-col>
+              <b-col cols="5" class="right">@145.00</b-col>
             </b-row>
             <br />
-            <b-row>
-              <b-col><h5>Total Payment</h5></b-col>
-              <b-col class="right">@145.00</b-col>
-            </b-row>
+            <div class="line"></div>
+            <div>
+              <b-table hover :items="passengers"></b-table>
+            </div>
           </div>
         </div>
       </div>
