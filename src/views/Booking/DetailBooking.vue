@@ -2,12 +2,10 @@
   <div>
     <div class="booking-detail">
       <Navbar />
-      <b-container>
-        <b-row>
-          <b-col>
-            <DetailCompo />
-          </b-col>
-        </b-row>
+      <b-container class="container-detail-booking">
+        <div class="detail-compo">
+          <DetailCompo />
+        </div>
       </b-container>
       <Footer />
     </div>
@@ -27,4 +25,12 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.container-detail-booking {
+  background: #2395ff;
+  padding: 60px 0;
+}
+div.detail-compo {
+  margin: 0 auto;
+}
+</style>
