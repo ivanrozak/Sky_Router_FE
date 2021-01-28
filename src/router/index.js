@@ -6,11 +6,17 @@ import Forgot from '../views/Auth/forgot.vue'
 import ForgotPassword from '../views/Auth/forgotPassword.vue'
 import ConfirmEmail from '../views/Auth/ConfirmEmail.vue'
 import myBooking from '../views/Booking/myBooking.vue'
+import landingPage from '../views/LandingPage/LandingPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'LandingPage',
+    component: landingPage
+  },
+  {
+    path: '/login',
     name: 'login',
     component: Login
   },
@@ -38,6 +44,11 @@ const routes = [
     path: '/mybooking',
     name: 'myBooking',
     component: myBooking
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
   }
 ]
 
