@@ -2,13 +2,14 @@
   <div>
     <Navbar />
     <div class="main">
+      <TopSearch />
       <b-container>
         <b-row class="profile">
           <b-col sm="12" md="4" lg="3">
-            <LeftProfile />
+            <LeftSearch />
           </b-col>
           <b-col sm="12" md="8" lg="9">
-            <RightProfile />
+            <RightSearch />
           </b-col>
         </b-row>
       </b-container>
@@ -18,15 +19,17 @@
 </template>
 
 <script>
-import LeftProfile from '../components/_base/Profile Component/LeftProfileComponent'
-import RightProfile from '../components/_base/Profile Component/RightProfileComponent'
-import Navbar from '../components/naviationBar'
-import Footer from '../components/footer'
+import TopSearch from '../../components/_base/Search Component/TopSearchComponent'
+import LeftSearch from '../../components/_base/Search Component/LeftSearchComponent'
+import RightSearch from '../../components/_base/Search Component/RightSearchComponent'
+import Navbar from '../../components/naviationBar'
+import Footer from '../../components/footer'
 
 export default {
   components: {
-    LeftProfile,
-    RightProfile,
+    TopSearch,
+    LeftSearch,
+    RightSearch,
     Navbar,
     Footer
   }
@@ -37,8 +40,5 @@ export default {
 .main {
   font-family: 'Poppins', sans-serif;
   background-color: whitesmoke;
-}
-.profile {
-  padding: 40px 0px;
 }
 </style>
