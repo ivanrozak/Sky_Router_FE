@@ -71,7 +71,9 @@
           <!-- ====================== -->
           <!-- Right aligned nav items -->
           <b-navbar-nav>
-            <button class="btn_login py-3 px-lg-4 py-lg-2">Log in</button>
+            <button @click="SignUp" class="btn_login py-3 px-lg-4 py-lg-2">
+              Sign Up
+            </button>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -84,6 +86,9 @@ export default {
   methods: {
     goHome() {
       this.$router.push('/')
+    },
+    SignUp() {
+      this.$router.push('/signup')
     }
   }
 }

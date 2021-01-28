@@ -37,13 +37,13 @@ const routes = [
     meta: { requiresVisitor: true }
   },
   {
-    path: '/forgot/:id',
+    path: '/forgot/:TokenForgot',
     name: 'forgotPassword',
     component: ForgotPassword,
     meta: { requiresVisitor: true }
   },
   {
-    path: '/confirmEmail/:id',
+    path: '/confirmEmail/:TokenConfirm',
     name: 'ConfirmEmail',
     component: ConfirmEmail,
     meta: { requiresVisitor: true }

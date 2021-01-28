@@ -7,13 +7,14 @@
       />
       <span class="ml-2">SkyRouter</span>
     </div>
-    <b-form class="form_Register ">
+    <b-form @submit.prevent="onSubmit" class="form_Register ">
       <h1>Register</h1>
       <b-form-group class="pt-lg-3" id="input-group-1">
         <b-form-input
           id="input-1"
           type="text"
           autocomplete="off"
+          v-model="form.user_name"
           placeholder="Full Name"
           required
         ></b-form-input>
@@ -27,6 +28,7 @@
           id="input-1"
           type="text"
           autocomplete="off"
+          v-model="form.user_email"
           placeholder="Email"
           required
         ></b-form-input>
@@ -35,6 +37,7 @@
         <b-form-input
           id="input-2"
           type="password"
+          v-model="form.user_password"
           autocomplete="off"
           placeholder="Password"
           required
@@ -45,6 +48,7 @@
           id="input-2"
           autocomplete="off"
           type="password"
+          v-model="confirmPassword"
           placeholder="Confirm Password"
           required
         ></b-form-input>
@@ -56,7 +60,8 @@
           required
           class="checkbox_class"
           name="checkbox-1"
-          value="accepted"
+          value="0"
+          v-model="form.user_role"
           unchecked-value="not_accepted"
         >
           Accept terms and condition
@@ -75,11 +80,43 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import Alert from '../../../mixins/Alert'
 export default {
   name: 'LeftComponentRegister',
+  mixins: [Alert],
+  data() {
+    return {
+      form: {
+        user_name: '',
+        user_email: '',
+        user_password: '',
+        user_role: 0
+      },
+      confirmPassword: ''
+    }
+  },
   methods: {
+    ...mapActions(['RegisterAccount']),
     onSignIn() {
       this.$router.push('/login')
+    },
+    onSubmit() {
+      if (this.confirmPassword === this.form.user_password) {
+        this.RegisterAccount(this.form)
+          .then(result => {
+            this.AlertSuccesRegister(result.data.data.user_email).then(res => {
+              if (res) {
+                this.$router.push('/login')
+              }
+            })
+          })
+          .catch(err => {
+            this.AlertError(err.data.message)
+          })
+      } else {
+        this.AlertError('Password not match')
+      }
     }
   }
 }
