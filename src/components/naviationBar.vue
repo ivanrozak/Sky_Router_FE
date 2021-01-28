@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="mt-lg-3">
+    <b-container class="mt-lg-3 mt-2 mb-3 mb-lg-3">
       <b-navbar toggleable="lg">
         <b-navbar-brand
           @click="goHome"
@@ -11,7 +11,10 @@
         </b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav class="ml-lg-auto mr-lg-auto navbar_styleing">
+          <!-- Dekstop Navbar -->
+          <b-navbar-nav
+            class="d-none d-lg-block ml-lg-auto mr-lg-auto navbar_styleing"
+          >
             <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
               <template #prepend>
                 <b-input-group-text class="search_btn">
@@ -36,10 +39,39 @@
               </b-nav-item>
             </b-input-group>
           </b-navbar-nav>
-
+          <!-- ========================= -->
+          <!-- Mobile Navbar -->
+          <b-navbar-nav
+            class="d-block d-lg-none ml-lg-auto mr-lg-auto navbar_styleing"
+          >
+            <b-nav-item class="nav_items mt-2"
+              ><router-link tag="a" to="/">Find Ticket</router-link>
+            </b-nav-item>
+            <b-nav-item class="nav_items"
+              ><router-link tag="a" to="/mybooking">My Booking</router-link>
+            </b-nav-item>
+            <b-input-group class="mb-2 mt-2 mb-4 mr-sm-2 mb-sm-0">
+              <template #prepend>
+                <b-input-group-text class="search_btn">
+                  <b-icon
+                    icon="search"
+                    style="color: #A3A3A3;"
+                    font-scale="1.5"
+                    aria-hidden="true"
+                  ></b-icon
+                ></b-input-group-text>
+              </template>
+              <b-form-input
+                class="shadow-none"
+                autocomplete="off"
+                placeholder="Where you want to go?"
+              ></b-form-input>
+            </b-input-group>
+          </b-navbar-nav>
+          <!-- ====================== -->
           <!-- Right aligned nav items -->
           <b-navbar-nav>
-            <button class="btn_login px-lg-4 py-lg-2">Log in</button>
+            <button class="btn_login py-3 px-lg-4 py-lg-2">Log in</button>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -122,5 +154,25 @@ a.router-link-exact-active::after {
 .btn_login:hover {
   background: #128afa;
   transition: 1s;
+}
+
+@media (max-width: 576px) {
+  .input-group {
+    width: 100%;
+  }
+  a.router-link-exact-active::after {
+    content: '';
+    position: static;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    background: none;
+    border-radius: 0;
+  }
+  a.router-link-exact-active {
+    padding-bottom: 0;
+  }
 }
 </style>
