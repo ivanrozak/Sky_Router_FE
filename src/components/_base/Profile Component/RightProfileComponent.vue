@@ -64,6 +64,7 @@ label {
   font-size: 0.9em;
 }
 .btn-save {
+  border-radius: 10px;
   margin-top: 20px;
   padding: 7px 30px;
 }
