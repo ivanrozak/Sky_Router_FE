@@ -7,7 +7,7 @@
       />
       <span class="ml-2">SkyRouter</span>
     </div>
-    <b-form class="form_login ">
+    <b-form @submit.prevent="onSubmit" class="form_login ">
       <h1>Login</h1>
       <b-form-group
         class="pt-lg-3"
@@ -16,8 +16,9 @@
       >
         <b-form-input
           id="input-1"
-          type="text"
-          placeholder="Username"
+          type="email"
+          v-model="form.user_email"
+          placeholder="Email"
           required
         ></b-form-input>
       </b-form-group>
@@ -25,11 +26,14 @@
         <b-form-input
           id="input-2"
           type="password"
+          v-model="form.user_password"
           placeholder="password"
           required
         ></b-form-input>
       </b-form-group>
-      <button class="btn_signin w-100 mt-lg-4 py-lg-3">Sign in</button>
+      <button type="submit" class="btn_signin w-100 mt-lg-4 py-lg-3">
+        Sign in
+      </button>
       <div class="reset_btn text-center">
         <p style="margin-bottom: 0;" class=" mt-lg-3">
           Did you forgot your password?
@@ -41,13 +45,13 @@
     <b-col class="btn_loginbyType" lg="12">
       <p class="text-center">or sign in with</p>
       <div class="d-flex justify-content-center">
-        <button class="btn_google px-lg-4 py-lg-2">
+        <button type="button" class="btn_google px-lg-4 py-lg-2">
           <img
             src="../../../assets/Images/Logo/google.svg"
             alt="Icon_btnGoogle"
           />
         </button>
-        <button class="btn_facebook px-lg-4 py-lg-2 ml-3">
+        <button type="button" class="btn_facebook px-lg-4 py-lg-2 ml-3">
           <img
             src="../../../assets/Images/Logo/FB.svg"
             alt="Icon_btnFacebook"
@@ -58,9 +62,34 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import Alert from '../../../mixins/Alert'
 export default {
   name: 'LeftComponentLogin',
+  mixins: [Alert],
+  data() {
+    return {
+      form: {
+        user_email: '',
+        user_password: ''
+      }
+    }
+  },
   methods: {
+    ...mapActions(['LoginAccount']),
+    onSubmit() {
+      this.LoginAccount(this.form)
+        .then(result => {
+          this.AlertSuccesLogin(result.data.data.user_name).then(res => {
+            if (res) {
+              this.$router.push('/')
+            }
+          })
+        })
+        .catch(err => {
+          this.AlertError(err.data.message)
+        })
+    },
     onReset() {
       this.$router.push('/forgot')
     }

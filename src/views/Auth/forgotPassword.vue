@@ -20,12 +20,13 @@
               />
               <span class="ml-2">SkyRouter</span>
             </div>
-            <b-form class="form_Forgot ">
+            <b-form @submit.prevent="onChange" class="form_Forgot ">
               <h1>Re-new your Password</h1>
               <b-form-group class="pt-lg-3" id="input-group-1">
                 <b-form-input
                   id="input-1"
                   type="password"
+                  v-model="form.user_password"
                   placeholder="New Password"
                   required
                 ></b-form-input>
@@ -34,11 +35,12 @@
                 <b-form-input
                   id="input-1"
                   type="password"
+                  v-model="confirmPassword"
                   placeholder="Confirm New Password"
                   required
                 ></b-form-input>
               </b-form-group>
-              <button class="btn_signin w-100 mt-lg-4 py-lg-3">
+              <button type="submit" class="btn_signin w-100 mt-lg-4 py-lg-3">
                 Change Password
               </button>
             </b-form>
@@ -49,8 +51,44 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import Alert from '../../mixins/Alert'
 export default {
-  name: 'ForgotChangePassword'
+  name: 'ForgotChangePassword',
+  mixins: [Alert],
+  data() {
+    return {
+      token: this.$route.params.TokenForgot,
+      form: {
+        user_password: ''
+      },
+      confirmPassword: ''
+    }
+  },
+  methods: {
+    ...mapActions(['ChangePasswordForgot']),
+    onChange() {
+      const form = {
+        data: this.form,
+        id: this.token
+      }
+      if (this.confirmPassword === this.form.user_password) {
+        this.ChangePasswordForgot(form)
+          .then(result => {
+            this.AlertSucces(result.data.message).then(res => {
+              if (res) {
+                this.$router.push('/login')
+              }
+            })
+          })
+          .catch(err => {
+            this.AlertError(err.data.message)
+          })
+      } else {
+        this.AlertError('Password Not Match')
+      }
+    }
+  }
 }
 </script>
 <style scoped>
