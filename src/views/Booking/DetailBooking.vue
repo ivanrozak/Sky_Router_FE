@@ -1,18 +1,29 @@
 <template>
   <div>
     <div class="booking-detail">
-      <DetailBooking />
-      <h1>tes</h1>
+      <Navbar />
+      <b-container>
+        <b-row>
+          <b-col>
+            <DetailCompo />
+          </b-col>
+        </b-row>
+      </b-container>
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-import DetailBooking from '../../components/_base/My Booking Component/detailBookingComponent'
+import Navbar from '../../components/naviationBar'
+import Footer from '../../components/footer'
+import DetailCompo from '../../components/_base/My Booking Component/detailBookingComponent'
 export default {
-  name: 'DetailBooking',
+  name: 'BookingDetails',
   components: {
-    DetailBooking
+    Navbar,
+    Footer,
+    DetailCompo
   }
 }
 </script>
