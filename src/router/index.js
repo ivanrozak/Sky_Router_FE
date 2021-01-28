@@ -47,14 +47,14 @@ const routes = [
     component: myBooking
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('../views/Profile.vue')
-  },
-  {
     path: '/detailbooking',
     name: 'DetailBooking',
     component: DetailBooking
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
   },
   {
     path: '/searchresult',
