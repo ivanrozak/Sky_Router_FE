@@ -8,11 +8,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'animate.css'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import VueTelInput from 'vue-tel-input'
+import 'vue-tel-input/dist/vue-tel-input.css'
+import { AutoCompletePlugin } from '@syncfusion/ej2-vue-dropdowns'
+
 Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.config.productionTip = false
+Vue.use(VueTelInput)
+Vue.use(AutoCompletePlugin)
 
 new Vue({
   router,
