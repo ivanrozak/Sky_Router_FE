@@ -24,6 +24,7 @@ import ChatLeft from '../../components/_base/Chat Component/MainListChatComponen
 import ChatRight from '../../components/_base/Chat Component/MainRoomChatComponent'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
+import { mapActions } from 'vuex'
 export default {
   name: 'ListChat',
   components: {
@@ -31,6 +32,12 @@ export default {
     ChatRight,
     Navbar,
     Footer
+  },
+  created() {
+    this.getListChat()
+  },
+  methods: {
+    ...mapActions(['getListChat'])
   }
 }
 </script>
