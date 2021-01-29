@@ -12,47 +12,32 @@
           <div class="chat-list-style">
             <b-list-group>
               <b-list-group-item
-                href="#"
+                v-for="(item, index) in chats"
+                :key="index"
+                @click="getDataRoom(item.room_chat)"
                 active
                 class="flex-column align-items-start"
+                style="cursor:pointer;"
               >
                 <div class="d-flex w-100 justify-content-between">
                   <b-media>
                     <template #aside>
                       <img
                         style="width:60px; border-radius:10px"
-                        src="../../../assets/chatImg/profile1.jpg"
+                        :src="
+                          item.user_image == ''
+                            ? require('../../../assets/chatImg/profile1.jpg')
+                            : config + item.user_image
+                        "
                         alt=""
                       />
                     </template>
 
-                    <h5 class="mb-1">Hipster</h5>
-                    <small>Donec id elit non mi porta.</small>
+                    <h5 class="mb-1">{{ item.user_name }}</h5>
+                    <small>{{ item.chat_content }}</small>
                   </b-media>
 
                   <small style="text-align: right">1 days ago</small>
-                </div>
-              </b-list-group-item>
-              <b-list-group-item
-                href="#"
-                active
-                class="flex-column align-items-start"
-              >
-                <div class="d-flex w-100 justify-content-between">
-                  <b-media>
-                    <template #aside>
-                      <img
-                        style="width:60px; border-radius:10px"
-                        src="../../../assets/chatImg/profile1.jpg"
-                        alt=""
-                      />
-                    </template>
-
-                    <h5 class="mb-1">Hustler</h5>
-                    <small>Donec id elit non mi porta.</small>
-                  </b-media>
-
-                  <small style="text-align: right">3 days ago</small>
                 </div>
               </b-list-group-item>
             </b-list-group>
@@ -62,6 +47,31 @@
     </b-row>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+import dotenv from 'dotenv'
+dotenv.config()
+export default {
+  name: 'MailListChatComponent',
+  computed: {
+    ...mapGetters({ chats: 'getListChats' })
+  },
+  data() {
+    return {
+      config: ''
+    }
+  },
+  created() {
+    this.config = process.env.VUE_APP_URL
+  },
+  methods: {
+    getDataRoom(room) {
+      console.log(room)
+    }
+  }
+}
+</script>
 
 <style scoped>
 .font-chat {
