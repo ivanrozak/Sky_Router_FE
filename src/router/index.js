@@ -9,6 +9,7 @@ import myBooking from '../views/Booking/myBooking.vue'
 import DetailBooking from '../views/Booking/DetailBooking.vue'
 import landingPage from '../views/LandingPage/HomePage.vue'
 import store from '../store'
+import ChatList from '../views/Chat/ChatList.vue'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,12 @@ const routes = [
     path: '/searchresult',
     name: 'SearchResult',
     component: () => import('../views/Search Result/SearchResult.vue')
+  },
+  {
+    path: '/chatlist',
+    name: 'ChatList',
+    component: ChatList,
+    meta: { requiresAuth: true }
   }
 ]
 
