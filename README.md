@@ -42,7 +42,7 @@ VUE_APP_URL=http://localhost:3000/
 - [Axios](https://www.npmjs.com/package/axios)
 - [Vuex](https://vuex.vuejs.org/)
 
-## License - TEAM GDJ
+## License - TEAM Sky Router
 
 
 © [Anka Abdullah](https://github.com/Anka-Abdullah)<br>
