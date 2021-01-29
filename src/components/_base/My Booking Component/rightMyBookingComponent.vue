@@ -83,6 +83,14 @@
               <b-table hover :items="passengers"></b-table>
             </div>
           </div>
+          <br />
+          <b-button style="background-color:#2395ff; text-align: right"
+            ><router-link
+              to="/detailbooking"
+              style="display: block; color:white"
+              >Booking Detail</router-link
+            ></b-button
+          >
         </div>
       </div>
     </div>

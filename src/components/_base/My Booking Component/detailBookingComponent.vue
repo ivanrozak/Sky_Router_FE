@@ -9,12 +9,12 @@
             <b-row align-h="baseline">
               <b-col md="auto">
                 <img
-                  style="width:100px"
+                  style="width:70px"
                   src="../../../assets/myBooking/GA_900.png"
                   alt=""
               /></b-col>
               <b-col>
-                <p style="font-size: 30px;font-weight: 600">
+                <p style="font-size: 20px;font-weight: 600">
                   IDN
                   <span
                     ><img
@@ -109,7 +109,7 @@ span {
 .line {
   border-width: 1px;
   border-style: dashed;
-  height: 320px;
+  height: 300px;
   width: 2px;
   margin-left: -45px;
 }
