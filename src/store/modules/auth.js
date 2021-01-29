@@ -8,6 +8,7 @@ export default {
   mutations: {
     setUser(state, payload) {
       state.user = payload.data
+      console.log(state.user)
       state.token = payload.data.token
     },
     setUserByEmail(state, payload) {
