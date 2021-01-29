@@ -12,7 +12,7 @@
         class="mb-2 px-2 pt-2 image_destination"
       >
         <b-card-text class="title_card">
-          <h5 class="mt-lg-3">Tokyo,</h5>
+          <h5 class="mt-lg-3 mt-2">Tokyo,</h5>
           <div class="title_card_destination d-flex align-items-center">
             <h3>Japan</h3>
             <span class="badge ml-auto"
@@ -58,14 +58,15 @@ export default {
           {
             breakpoint: 576,
             settings: {
-              centerPadding: '0px',
-              slidesToShow: 1
+              centerPadding: '-40px',
+              slidesToShow: 2
             }
           },
           {
-            breakpoint: 1000,
+            breakpoint: 1025,
             settings: {
-              slidesToShow: 2
+              centerPadding: '-6px',
+              slidesToShow: 4
             }
           }
         ]

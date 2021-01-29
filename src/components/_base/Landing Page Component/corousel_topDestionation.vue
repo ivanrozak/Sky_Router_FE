@@ -13,11 +13,11 @@
             alt="image_desti"
           />
         </div>
-        <h5 class="text-center mt-3 mr-lg-3">SINGAPORE</h5>
+        <h5 class="text-center mt-3 mr-3 mr-lg-4 mr-xl-3">Australia</h5>
       </div>
     </VueSlickCarousel>
     <div class="btnNextnPrev">
-      <button class="px-4 mr-lg-3 py-2 btn_prev" @click="showPrev">
+      <button class="px-4 mr-lg-3 mr-3 py-2 btn_prev" @click="showPrev">
         <img src="../../../assets/Images/Logo/btnbackleft.png" alt="prev" />
       </button>
       <button class="px-4 py-2 btn_next" @click="showNext">
@@ -59,14 +59,15 @@ export default {
           {
             breakpoint: 576,
             settings: {
-              centerPadding: '0px',
-              slidesToShow: 1
+              centerPadding: '-8px',
+              slidesToShow: 2
             }
           },
           {
-            breakpoint: 1000,
+            breakpoint: 1025,
             settings: {
-              slidesToShow: 2
+              centerPadding: '-8px',
+              slidesToShow: 4
             }
           }
         ]
@@ -120,5 +121,10 @@ export default {
 }
 .top_carousel {
   padding: 0 10%;
+}
+@media (max-width: 576px) {
+  .top_carousel {
+    padding: 0 3%;
+  }
 }
 </style>

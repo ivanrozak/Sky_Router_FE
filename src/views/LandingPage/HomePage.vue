@@ -1,24 +1,24 @@
 <template>
-  <div class="HomePage">
+  <div class="HomePages">
     <header>
       <Navbar />
     </header>
-    <main class="bg_landingPage mt-lg-4">
-      <b-container>
-        <b-row>
-          <b-col lg="6">
-            <div class="title_landing mt-lg-5 pt-lg-5">
-              <h1>Find your <span>Flight</span></h1>
-              <p class="mt-lg-3">and explore the world with us</p>
-            </div>
-          </b-col>
-          <b-col lg="6">
-            <b-card class="card_ticket mt-lg-5">
-              <b-card-body>
+    <div class="HomePage">
+      <main class="bg_landingPage mt-lg-4">
+        <b-container>
+          <b-row>
+            <b-col lg="6">
+              <div class="title_landing mt-lg-5 mt-4 pt-lg-5">
+                <h1>Find your <span>Flight</span></h1>
+                <p class="mt-lg-3">and explore the world with us</p>
+              </div>
+            </b-col>
+            <b-col lg="6">
+              <b-card class="card_ticket p-xl-4 mt-lg-5">
                 <div class="title_card">
                   <h5>Hey,</h5>
                   <h4>Where you want to go?</h4>
-                  <a class="d-flex mb-lg-4"
+                  <a class="d-flex mb-3 mb-lg-4"
                     >Recently Searched
                     <img
                       class="image_icons"
@@ -27,7 +27,7 @@
                     />
                   </a>
                 </div>
-                <b-card class="mb-lg-4 flight_choose">
+                <b-card class="mb-lg-4 mb-4 flight_choose">
                   <div
                     class="d-flex justify-content-between card_searchLocation"
                   >
@@ -50,10 +50,10 @@
                     </section>
                   </div>
                 </b-card>
-                <div class="btn_card mb-lg-4">
+                <div class="btn_card mb-4 mb-lg-4">
                   <b-row>
                     <b-col cols="6">
-                      <button class="btn_oneWay py-lg-3">
+                      <button class="btn_oneWay py-3 py-lg-3">
                         <img
                           class="mr-2"
                           src="../../assets/Images/Logo/icons_plane.png"
@@ -63,7 +63,7 @@
                       </button>
                     </b-col>
                     <b-col cols="6">
-                      <button class="btn_round py-lg-3">
+                      <button class="btn_round py-3 py-lg-3">
                         <img
                           class="mr-2"
                           src="../../assets/Images/Logo/icns_rollback.png"
@@ -75,7 +75,7 @@
                   </b-row>
                 </div>
                 <div class="departure">
-                  <h5 class="mb-lg-3">Departure</h5>
+                  <h5 class="mb-lg-3 mb-3">Departure</h5>
                   <b-form-datepicker
                     id="datepicker-buttons"
                     class="mb-lg-4"
@@ -86,8 +86,8 @@
                   ></b-form-datepicker>
                 </div>
                 <div class="input_selected">
-                  <h5 class="mb-lg-3">How many person?</h5>
-                  <b-row class="mb-lg-4">
+                  <h5 class="mb-lg-3 mt-3 mt-lg-0 mb-3">How many person?</h5>
+                  <b-row class="mb-lg-4 mb-3">
                     <b-col cols="6">
                       <b-form-select
                         v-model="selected"
@@ -103,48 +103,53 @@
                   </b-row>
                 </div>
                 <div class="choose_class">
-                  <h5 class="mb-lg-3">Which class do you want?</h5>
+                  <h5 class="mb-lg-3 mb-3">Which class do you want?</h5>
                   <b-form-radio-group
                     v-model="selected"
                     :options="options"
-                    class="mb-lg-5 d-flex radio_style ml-lg-2 justify-content-between"
+                    class="mb-lg-5 mb-4 d-flex radio_style ml-lg-2 justify-content-between"
                     value-field="item"
                     text-field="name"
                     disabled-field="notEnabled"
                   ></b-form-radio-group>
                 </div>
-                <button class="btn_search pl-lg-5 py-lg-3">
+                <button
+                  class="btn_search pl-3 py-3 pl-lg-5 mb-2 mb-lg-0  py-lg-3"
+                >
                   SEARCH FLIGHT
                 </button>
-              </b-card-body>
-            </b-card>
-            <div class="position-absolute bg_card">
-              <img src="../../assets/Images/Logo/backroud_card.png" alt="" />
-            </div>
-          </b-col>
-          <b-col lg="12" class="mt-lg-5 pt-lg-5">
-            <div class="mt-lg-5 pt-lg-5 corousel_card mb-lg-5">
-              <h5>TRENDING</h5>
-              <div class="title_desti d-flex align-items-center ">
-                <h2>Trending destinations</h2>
-                <a class="ml-auto mr-lg-4">View all</a>
+              </b-card>
+              <div class="d-none d-lg-block position-absolute bg_card">
+                <img
+                  src="../../assets/Images/Logo/backroud_card.png"
+                  alt="image_bg"
+                />
               </div>
-              <corouseDesti />
-            </div>
-          </b-col>
-          <b-col lg="12">
-            <div class="corousel_cardTopDesti mb-lg-5">
-              <div class="title_topDesti text-center pt-lg-5">
-                <h5>TOP 10</h5>
-                <h4>Top 10 destinations</h4>
+            </b-col>
+            <b-col lg="12" class="mt-lg-5 mt-4 pt-lg-5">
+              <div class="mt-lg-5 pt-lg-5 corousel_card mb-lg-5">
+                <h5>TRENDING</h5>
+                <div class="title_desti d-flex align-items-center ">
+                  <h2>Trending destinations</h2>
+                  <a class="ml-auto mb-2 mb-lg-0 mr-lg-4">View all</a>
+                </div>
+                <corouseDesti />
               </div>
-              <topDesti />
-            </div>
-          </b-col>
-        </b-row>
-      </b-container>
-    </main>
-    <Footer class="mt-lg-5"/>
+            </b-col>
+            <b-col lg="12">
+              <div class="corousel_cardTopDesti mb-lg-5 mb-4">
+                <div class="title_topDesti text-center pt-5 pt-lg-5">
+                  <h5>TOP 10</h5>
+                  <h4>Top 10 destinations</h4>
+                </div>
+                <topDesti />
+              </div>
+            </b-col>
+          </b-row>
+        </b-container>
+      </main>
+    </div>
+    <Footer class="mt-lg-5 mt-4" />
   </div>
 </template>
 <script>
@@ -321,6 +326,7 @@ export default {
 .title_desti a {
   font-weight: 600;
   font-size: 17px;
+  text-decoration: none;
 }
 .card_searchLocation .to {
   text-align: right;
@@ -340,5 +346,42 @@ export default {
 }
 .title_landing p {
   color: #979797;
+}
+@media (max-width: 1024px) {
+  .bg_card {
+    bottom: -80px;
+    right: -20px;
+  }
+  .radio_style {
+    font-size: 14.5px;
+  }
+}
+@media (max-width: 576px) {
+  .bg_landingPage {
+    background-image: none;
+    height: auto;
+  }
+  .corousel_card h5 {
+    letter-spacing: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    color: #ffffff;
+  }
+  .HomePage {
+    background: #000;
+    /* background-image: url('https://images4.alphacoders.com/312/thumb-1920-31288.jpg'); */
+    background-size: cover;
+  }
+  .title_landing h1,
+  .title_landing p {
+    color: #ffffff;
+  }
+
+  .card_ticket {
+    width: 100%;
+  }
+  .radio_style {
+    font-size: 14px;
+  }
 }
 </style>
