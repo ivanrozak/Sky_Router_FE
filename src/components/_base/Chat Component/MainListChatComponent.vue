@@ -1,67 +1,65 @@
 <template>
   <div>
-    <div>
-      <b-row>
-        <b-col md="12" align-h="center">
-          <div class="box">
-            <p class="font-chat">CHAT</p>
-            <b-row align-v="end" align-h="between">
-              <b-col><p class="font-style-chat">Chat</p></b-col>
-              <b-col><p class="font-style-filter">Filter</p></b-col>
-            </b-row>
+    <b-row>
+      <b-col md="12" align-h="center">
+        <div class="box">
+          <p class="font-chat">CHAT</p>
+          <b-row align-v="end" align-h="between">
+            <b-col><p class="font-style-chat">Chat</p></b-col>
+            <b-col><p class="font-style-filter">Filter</p></b-col>
+          </b-row>
 
-            <div class="chat-list-style">
-              <b-list-group>
-                <b-list-group-item
-                  href="#"
-                  active
-                  class="flex-column align-items-start"
-                >
-                  <div class="d-flex w-100 justify-content-between">
-                    <b-media>
-                      <template #aside>
-                        <img
-                          style="width:60px; border-radius:10px"
-                          src="../../../assets/chatImg/profile1.jpg"
-                          alt=""
-                        />
-                      </template>
+          <div class="chat-list-style">
+            <b-list-group>
+              <b-list-group-item
+                href="#"
+                active
+                class="flex-column align-items-start"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <b-media>
+                    <template #aside>
+                      <img
+                        style="width:60px; border-radius:10px"
+                        src="../../../assets/chatImg/profile1.jpg"
+                        alt=""
+                      />
+                    </template>
 
-                      <h5 class="mb-1">Hipster</h5>
-                      <small>Donec id elit non mi porta.</small>
-                    </b-media>
+                    <h5 class="mb-1">Hipster</h5>
+                    <small>Donec id elit non mi porta.</small>
+                  </b-media>
 
-                    <small style="text-align: right">1 days ago</small>
-                  </div>
-                </b-list-group-item>
-                <b-list-group-item
-                  href="#"
-                  active
-                  class="flex-column align-items-start"
-                >
-                  <div class="d-flex w-100 justify-content-between">
-                    <b-media>
-                      <template #aside>
-                        <img
-                          style="width:60px; border-radius:10px"
-                          src="../../../assets/chatImg/profile1.jpg"
-                          alt=""
-                        />
-                      </template>
+                  <small style="text-align: right">1 days ago</small>
+                </div>
+              </b-list-group-item>
+              <b-list-group-item
+                href="#"
+                active
+                class="flex-column align-items-start"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <b-media>
+                    <template #aside>
+                      <img
+                        style="width:60px; border-radius:10px"
+                        src="../../../assets/chatImg/profile1.jpg"
+                        alt=""
+                      />
+                    </template>
 
-                      <h5 class="mb-1">Hustler</h5>
-                      <small>Donec id elit non mi porta.</small>
-                    </b-media>
+                    <h5 class="mb-1">Hustler</h5>
+                    <small>Donec id elit non mi porta.</small>
+                  </b-media>
 
-                    <small style="text-align: right">3 days ago</small>
-                  </div>
-                </b-list-group-item>
-              </b-list-group>
-            </div>
+                  <small style="text-align: right">3 days ago</small>
+                </div>
+              </b-list-group-item>
+            </b-list-group>
           </div>
-        </b-col>
-      </b-row>
-    </div>
+        </div>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -85,15 +83,15 @@
   text-align: right;
 }
 .box {
-  width: 60%;
+  width: 100%;
   height: 450px;
   background-color: white;
   position: absolute;
-  left: 200px;
+
   margin: 0 auto;
   border-radius: 15px;
   box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);
-  padding: 30px 50px;
+  padding: 10px 20px;
 }
 .chat-list-style {
   height: 300px;
