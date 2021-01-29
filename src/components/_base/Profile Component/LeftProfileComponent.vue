@@ -38,7 +38,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Alert from '../../../mixins/Alert'
 export default {
+  mixins: [Alert],
   computed: {
     ...mapGetters({ user: 'getUser' })
   },
@@ -67,10 +69,10 @@ export default {
       this.updateProfileUser(data)
         .then(result => {
           console.log(result)
-          alert(result.data.message)
+          this.AlertSuccess(result.data.message)
         })
         .catch(err => {
-          alert(err.data.message)
+          this.AlertError(err.data.message)
         })
     },
     logingOut() {
