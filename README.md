@@ -32,7 +32,7 @@ Sky Router is a website .....
 4. Add .env file at root folder project
 
 ```
-VUE_APP_URL=localhost:3000
+VUE_APP_URL=http://localhost:3000/
 ```
 
 5. Type `npm run serve`
