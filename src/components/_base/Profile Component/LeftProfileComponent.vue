@@ -1,13 +1,21 @@
 <template>
   <div class="left-profile">
     <div class="top centered">
-      <img src="../../../assets/logo.png" />
+      <img
+        v-if="user.user_image"
+        :src="`http://localhost:3000/${user.user_image}`"
+      />
+      <img v-else src="../../../assets/logo.png" />
       <div>
-        <button><strong>Select Photo</strong></button>
+        <input id="fileUpload" type="file" @change="handleFile" hidden />
+        <button @click.prevent="chooseFile">
+          <strong>Select Photo</strong>
+        </button>
       </div>
-
-      <h4>Mike Kowalski</h4>
-      <div><small>Medan, Indonesia</small></div>
+      <h4>{{ user.user_name }}</h4>
+      <div>
+        <small>{{ user.user_city }}, Indonesia</small>
+      </div>
     </div>
     <div class="bottom">
       <div class="btn-group">
@@ -20,7 +28,7 @@
         <button>
           <img src="../../../assets/icon/gear.png" class="mr-3" />Settings
         </button>
-        <button style="color: red">
+        <button @click="logingOut()" style="color: red">
           <img src="../../../assets/icon/logout.png" class="mr-3" />Logout
         </button>
       </div>
@@ -29,7 +37,56 @@
 </template>
 
 <script>
-export default {}
+import { mapActions, mapGetters } from 'vuex'
+import Alert from '../../../mixins/Alert'
+export default {
+  mixins: [Alert],
+  computed: {
+    ...mapGetters({ user: 'getUser' })
+  },
+  methods: {
+    ...mapGetters(['getUser']),
+    ...mapActions(['updateProfileUser', 'logout']),
+    updateProfile() {
+      const {
+        user_name,
+        user_phone,
+        user_image,
+        user_address,
+        user_city,
+        user_post_code
+      } = this.user
+      const data = new FormData()
+      data.append('user_name', user_name)
+      data.append('user_phone', user_phone)
+      data.append('user_image', user_image)
+      data.append('user_address', user_address)
+      data.append('user_city', user_city)
+      data.append('user_post_code', user_post_code)
+      for (var pair of data.entries()) {
+        console.log(pair[0] + ', ' + pair[1])
+      }
+      this.updateProfileUser(data)
+        .then(result => {
+          console.log(result)
+          this.AlertSuccess(result.data.message)
+        })
+        .catch(err => {
+          this.AlertError(err.data.message)
+        })
+    },
+    logingOut() {
+      this.logout()
+    },
+    handleFile(event) {
+      this.user.user_image = event.target.files[0]
+      this.updateProfile()
+    },
+    chooseFile() {
+      document.getElementById('fileUpload').click()
+    }
+  }
+}
 </script>
 
 <style scoped>

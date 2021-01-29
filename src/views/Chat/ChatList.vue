@@ -4,7 +4,14 @@
       <Navbar />
       <div class="bg-image">
         <b-container class="chat-list">
-          <Chat />
+          <b-row>
+            <b-col sm="12" md="4" lg="4">
+              <ChatLeft />
+            </b-col>
+            <b-col sm="12" md="4" lg="8">
+              <ChatRight />
+            </b-col>
+          </b-row>
         </b-container>
       </div>
       <Footer />
@@ -13,22 +20,31 @@
 </template>
 
 <script>
-import Chat from '../../components/_base/Chat Component/MainListChatComponent'
+import ChatLeft from '../../components/_base/Chat Component/MainListChatComponent'
+import ChatRight from '../../components/_base/Chat Component/MainRoomChatComponent'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
+import { mapActions } from 'vuex'
 export default {
   name: 'ListChat',
   components: {
-    Chat,
+    ChatLeft,
+    ChatRight,
     Navbar,
     Footer
+  },
+  created() {
+    this.getListChat()
+  },
+  methods: {
+    ...mapActions(['getListChat'])
   }
 }
 </script>
 
 <style scoped>
 .bg-image {
-  height: 360px;
+  height: 350px;
   width: 100%;
   margin: 0 auto;
   background: #2395ff;

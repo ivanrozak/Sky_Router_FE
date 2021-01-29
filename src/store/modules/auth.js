@@ -21,6 +21,7 @@ export default {
         axios
           .post(`${process.env.VUE_APP_URL}user/login/`, payload)
           .then(result => {
+            console.log(result)
             context.commit('setUser', result.data)
             localStorage.setItem('token', result.data.data.token)
             resolve(result)
@@ -84,6 +85,19 @@ export default {
           .catch(err => {
             /*   console.clear() */
             reject(err.response)
+          })
+      })
+    },
+    updateProfileUser(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_URL}user/updateuser/`, payload)
+          .then(result => {
+            context.commit('setUser', result.data)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
           })
       })
     },
