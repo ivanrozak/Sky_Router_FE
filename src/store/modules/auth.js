@@ -10,6 +10,9 @@ export default {
       state.user = payload.data
       state.token = payload.data.token
     },
+    setUserByEmail(state, payload) {
+      state.user = payload.data
+    },
     delUser(state) {
       state.user = {}
       state.token = null
@@ -84,6 +87,31 @@ export default {
           .catch(err => {
             /*   console.clear() */
             reject(err.response)
+          })
+      })
+    },
+    updateProfileUser(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_URL}user/updateuser/`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    getUserByEmails(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}user/${payload}`)
+          .then(result => {
+            context.commit('setUserByEmail', result.data.data[0])
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
           })
       })
     },

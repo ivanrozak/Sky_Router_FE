@@ -10,12 +10,14 @@
         <label>Email</label>
         <b-form-input
           type="email"
+          v-model="user.user_email"
           placeholder="Enter email"
           required
         ></b-form-input>
         <label>Phone Number</label>
         <b-form-input
           type="number"
+          v-model="user.user_phone"
           placeholder="Enter phone number"
         ></b-form-input>
       </b-col>
@@ -23,21 +25,34 @@
         <h6><strong>Biodata</strong></h6>
         <br />
         <label>Username</label>
-        <b-form-input type="text" placeholder="Enter your name"></b-form-input>
+        <b-form-input
+          type="text"
+          v-model="user.user_name"
+          placeholder="Enter your name"
+        ></b-form-input>
         <label>City</label>
-        <b-form-input type="text" placeholder="Enter your city"></b-form-input>
+        <b-form-input
+          type="text"
+          v-model="user.user_city"
+          placeholder="Enter your city"
+        ></b-form-input>
         <label>Address</label>
         <b-form-input
           type="text"
+          v-model="user.user_address"
           placeholder="Enter your address"
         ></b-form-input>
         <label>Post Code</label>
         <b-form-input
           type="text"
+          v-model="user.user_post_code"
           placeholder="Enter your post code"
         ></b-form-input>
         <div style="text-align: right;">
-          <b-button class="btn-save" variant="primary"
+          <b-button
+            @click.prevent="updateProfile()"
+            class="btn-save"
+            variant="primary"
             ><strong>Save</strong></b-button
           >
         </div>
@@ -46,6 +61,44 @@
   </div>
 </template>
 
+<script>
+import { mapActions, mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({ user: 'getUser' })
+  },
+  methods: {
+    ...mapActions(['updateProfileUser']),
+    updateProfile() {
+      const {
+        user_name,
+        user_phone,
+        user_image,
+        user_address,
+        user_city,
+        user_post_code
+      } = this.user
+      const data = new FormData()
+      data.append('user_name', user_name)
+      data.append('user_phone', user_phone)
+      data.append('user_image', user_image)
+      data.append('user_address', user_address)
+      data.append('user_city', user_city)
+      data.append('user_post_code', user_post_code)
+      for (var pair of data.entries()) {
+        console.log(pair[0] + ', ' + pair[1])
+      }
+      this.updateProfileUser(data)
+        .then(result => {
+          alert(result.data.msg)
+        })
+        .catch(err => {
+          alert(err.data.msg)
+        })
+    }
+  }
+}
+</script>
 <style scoped>
 .right-profile {
   border-radius: 20px;
