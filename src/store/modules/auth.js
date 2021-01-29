@@ -8,11 +8,7 @@ export default {
   mutations: {
     setUser(state, payload) {
       state.user = payload.data
-      console.log(state.user)
       state.token = payload.data.token
-    },
-    setUserByEmail(state, payload) {
-      state.user = payload.data
     },
     delUser(state) {
       state.user = {}
@@ -97,19 +93,7 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_URL}user/updateuser/`, payload)
           .then(result => {
-            resolve(result)
-          })
-          .catch(error => {
-            reject(error.response)
-          })
-      })
-    },
-    getUserByEmails(context, payload) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get(`${process.env.VUE_APP_URL}user/${payload}`)
-          .then(result => {
-            context.commit('setUserByEmail', result.data.data[0])
+            context.commit('setUser', result.data)
             resolve(result)
           })
           .catch(error => {

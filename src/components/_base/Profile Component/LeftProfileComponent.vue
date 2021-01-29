@@ -1,17 +1,21 @@
 <template>
   <div class="left-profile">
     <div class="top centered">
-      <img src="../../../assets/logo.png" />
-      <!-- <img :src="'http://localhost:3000' + user.user_image" /> -->
+      <img
+        v-if="user.user_image"
+        :src="`http://localhost:3000/${user.user_image}`"
+      />
+      <img v-else src="../../../assets/logo.png" />
       <div>
-        <!-- <input id="fileUpload" type="file" @change="handleFile" hidden /> -->
+        <input id="fileUpload" type="file" @change="handleFile" hidden />
         <button @click.prevent="chooseFile">
           <strong>Select Photo</strong>
         </button>
       </div>
-      <h4>{{ user }}</h4>
-      <h4>Mike Kowalski</h4>
-      <div><small>Medan, Indonesia</small></div>
+      <h4>{{ user.user_name }}</h4>
+      <div>
+        <small>{{ user.user_city }}, Indonesia</small>
+      </div>
     </div>
     <div class="bottom">
       <div class="btn-group">
@@ -38,10 +42,8 @@ export default {
   computed: {
     ...mapGetters({ user: 'getUser' })
   },
-  created() {
-    console.log(this.user)
-  },
   methods: {
+    ...mapGetters(['getUser']),
     ...mapActions(['updateProfileUser', 'logout']),
     updateProfile() {
       const {
@@ -64,17 +66,17 @@ export default {
       }
       this.updateProfileUser(data)
         .then(result => {
-          alert(result.data.msg)
+          console.log(result)
+          alert(result.data.message)
         })
         .catch(err => {
-          alert(err.data.msg)
+          alert(err.data.message)
         })
     },
     logingOut() {
       this.logout()
     },
     handleFile(event) {
-      // console.log(event)
       this.user.user_image = event.target.files[0]
       this.updateProfile()
     },

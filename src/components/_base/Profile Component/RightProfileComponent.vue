@@ -50,7 +50,7 @@
         ></b-form-input>
         <div style="text-align: right;">
           <b-button
-            @click.prevent="updateProfile()"
+            @click.prevent="updateProfiler()"
             class="btn-save"
             variant="primary"
             ><strong>Save</strong></b-button
@@ -68,8 +68,9 @@ export default {
     ...mapGetters({ user: 'getUser' })
   },
   methods: {
+    ...mapGetters(['getUser']),
     ...mapActions(['updateProfileUser']),
-    updateProfile() {
+    updateProfiler() {
       const {
         user_name,
         user_phone,
@@ -90,10 +91,11 @@ export default {
       }
       this.updateProfileUser(data)
         .then(result => {
-          alert(result.data.msg)
+          this.getUser()
+          alert(result.data.message)
         })
         .catch(err => {
-          alert(err.data.msg)
+          alert(err.data.message)
         })
     }
   }
