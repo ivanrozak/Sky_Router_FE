@@ -31,6 +31,63 @@ export default {
           })
       })
     },
+    RegisterAccount(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_URL}user/register/`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(err => {
+            console.clear()
+            reject(err.response)
+          })
+      })
+    },
+    verifyAccount(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_URL}user/verification/${payload}`)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(err => {
+            /*   console.clear() */
+            reject(err.response)
+          })
+      })
+    },
+    sendEmailForgot(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_URL}user/forgetpassword/`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(err => {
+            /*   console.clear() */
+            reject(err.response)
+          })
+      })
+    },
+    ChangePasswordForgot(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `${process.env.VUE_APP_URL}user/forgetpassword/${payload.id}`,
+            payload.data
+          )
+          .then(result => {
+            console.log(result)
+            resolve(result)
+          })
+          .catch(err => {
+            /*   console.clear() */
+            reject(err.response)
+          })
+      })
+    },
+
     logout(context) {
       localStorage.removeItem('token')
       context.commit('delUser')

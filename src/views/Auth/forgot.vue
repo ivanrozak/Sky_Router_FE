@@ -20,7 +20,7 @@
               />
               <span class="ml-2">SkyRouter</span>
             </div>
-            <b-form class="form_Forgot ">
+            <b-form @submit.prevent="onSend" class="form_Forgot ">
               <h1>Forgot Password</h1>
               <b-form-group
                 class="pt-lg-3"
@@ -30,12 +30,15 @@
                 <b-form-input
                   id="input-1"
                   type="email"
+                  v-model="form.user_email"
                   placeholder="Email"
                   required
                 ></b-form-input>
               </b-form-group>
 
-              <button class="btn_signin w-100 mt-lg-4 py-lg-3">Send</button>
+              <button type="submit" class="btn_signin w-100 mt-lg-4 py-lg-3">
+                Send
+              </button>
               <p class="text-center title_bottom mt-lg-3">
                 You’ll get message soon on your email
               </p>
@@ -47,8 +50,30 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import Alert from '../../mixins/Alert'
 export default {
-  name: 'ForgotPassword'
+  name: 'ForgotPassword',
+  mixins: [Alert],
+  data() {
+    return {
+      form: {
+        user_email: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['sendEmailForgot']),
+    onSend() {
+      this.sendEmailForgot(this.form)
+        .then(result => {
+          this.AlertSucces(result.data.message)
+        })
+        .catch(err => {
+          this.AlertError(err.data.message)
+        })
+    }
+  }
 }
 </script>
 <style scoped>

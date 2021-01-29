@@ -21,7 +21,7 @@
               <span class="ml-2">SkyRouter</span>
             </div>
             <h1 class="text-center title_text">Activation your account</h1>
-            <button class="btn_signin w-50 mt-lg-4 py-lg-3">
+            <button @click="onVerify" class="btn_signin w-50 mt-lg-4 py-lg-3">
               Click this Button for Activation
             </button>
           </div>
@@ -31,8 +31,32 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import Alert from '../../mixins/Alert'
 export default {
-  name: 'ConfirmEmail'
+  name: 'ConfirmEmail',
+  mixins: [Alert],
+  data() {
+    return {
+      id: this.$route.params.TokenConfirm
+    }
+  },
+  methods: {
+    ...mapActions(['verifyAccount']),
+    onVerify() {
+      this.verifyAccount(this.id)
+        .then(() => {
+          this.AlertSucces('Activation Your Account Success !!').then(res => {
+            if (res) {
+              this.$router.push('/login')
+            }
+          })
+        })
+        .catch(err => {
+          this.AlertError(err.data.message)
+        })
+    }
+  }
 }
 </script>
 <style scoped>
@@ -46,7 +70,7 @@ export default {
   object-fit: contain;
 }
 .title_text {
-    padding-top: 30%;
+  padding-top: 30%;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 32px;
