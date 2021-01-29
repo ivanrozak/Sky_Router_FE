@@ -8,6 +8,7 @@ export default {
   mutations: {
     setUser(state, payload) {
       state.user = payload.data
+      console.log(state.user)
       state.token = payload.data.token
     },
     setUserByEmail(state, payload) {
@@ -24,6 +25,7 @@ export default {
         axios
           .post(`${process.env.VUE_APP_URL}user/login/`, payload)
           .then(result => {
+            console.log(result)
             context.commit('setUser', result.data)
             localStorage.setItem('token', result.data.data.token)
             resolve(result)

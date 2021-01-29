@@ -38,6 +38,9 @@ export default {
   computed: {
     ...mapGetters({ user: 'getUser' })
   },
+  created() {
+    console.log(this.user)
+  },
   methods: {
     ...mapActions(['updateProfileUser', 'logout']),
     updateProfile() {
