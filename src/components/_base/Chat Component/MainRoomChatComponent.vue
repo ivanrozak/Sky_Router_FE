@@ -60,14 +60,41 @@
               >
             </b-row>
           </div>
-          <div class="input"></div>
+          <div class="input">
+            <b-row align-v="center" align-h="center">
+              <b-col cols="1"><i class="fa fa-smile-o fa-lg"></i></b-col>
+              <b-col cols="8" style="width: 100%"
+                ><b-form-input
+                  id="input-2"
+                  placeholder="Write your message"
+                  required
+                ></b-form-input
+              ></b-col>
+              <b-col cols="1"><i class="fa fa-microphone fa-lg"></i></b-col>
+              <b-col cols="1"><i class="fa fa-send fa-lg"></i></b-col>
+            </b-row>
+          </div>
         </div>
       </b-col>
     </b-row>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isMe: 1
+    }
+  }
+}
+</script>
+
 <style scoped>
+.fa {
+  color: white;
+  cursor: pointer;
+}
 .chat-styling-a {
   position: relative;
   background: #2395ff;
@@ -126,6 +153,7 @@
   background: #2395ff;
   opacity: 0.7;
   border-radius: 0 0 15px 15px;
+  padding-top: 1px;
 }
 .chats {
   padding: 10px 30px;
