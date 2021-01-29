@@ -71,6 +71,7 @@ export default {
       this.logout()
     },
     handleFile(event) {
+      // console.log(event)
       this.user.user_image = event.target.files[0]
       this.updateProfile()
     },
