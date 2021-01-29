@@ -11,6 +11,7 @@ import landingPage from '../views/LandingPage/HomePage.vue'
 import store from '../store'
 import ChatList from '../views/Chat/ChatList.vue'
 import DetailFlight from '../views/FlightDetail/FlightDetail.vue'
+import ChatRoom from '../views/Chat/ChatRoom.vue'
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,12 @@ const routes = [
     path: '/detailflight',
     name: 'DetailFlight',
     component: DetailFlight,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/chatroom',
+    name: 'ChatRoom',
+    component: ChatRoom,
     meta: { requiresAuth: true }
   }
 ]

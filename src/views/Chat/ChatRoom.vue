@@ -5,8 +5,8 @@
       <div class="bg-image">
         <b-container class="chat-list">
           <b-row align-h="center">
-            <b-col sm="12" md="8" lg="7">
-              <ChatLeft />
+            <b-col xs="12" sm="12" md="8" lg="7">
+              <ChatRoom />
             </b-col>
           </b-row>
         </b-container>
@@ -17,15 +17,14 @@
 </template>
 
 <script>
-import ChatLeft from '../../components/_base/Chat Component/MainListChatComponent'
-
+import ChatRoom from '../../components/_base/Chat Component/MainRoomChatComponent'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
 import { mapActions } from 'vuex'
 export default {
   name: 'ListChat',
   components: {
-    ChatLeft,
+    ChatRoom,
     Navbar,
     Footer
   },
