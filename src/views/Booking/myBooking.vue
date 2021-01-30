@@ -5,11 +5,11 @@
       <b-container>
         <div class="mybooking-page">
           <b-row>
-            <b-col sm="12" md="4" lg="4"
+            <b-col cols="12" sm="12" md="5" lg="4"
               ><LeftProfile /> <br />
               <br />
             </b-col>
-            <b-col sm="12" md="8" lg="8">
+            <b-col cols="12" sm="12" md="7" lg="8">
               <RightSideMyBooking />
             </b-col>
           </b-row>

@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import Auth from './modules/auth'
 import Chat from './modules/chat'
-import Search from './modules/search'
+import SearchResult from './modules/searchResult'
 
 Vue.use(Vuex)
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
   modules: {
     Auth,
     Chat,
-    Search
+    SearchResult
   },
   plugins: [
     createPersistedState({

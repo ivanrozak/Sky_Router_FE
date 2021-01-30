@@ -70,10 +70,38 @@
           </b-navbar-nav>
           <!-- ====================== -->
           <!-- Right aligned nav items -->
-          <b-navbar-nav>
+          <b-navbar-nav v-if="!isLogin">
             <button @click="SignUp" class="btn_login py-3 px-lg-4 py-lg-2">
               Sign Up
             </button>
+          </b-navbar-nav>
+          <b-navbar-nav class="iconsIslogin " v-else>
+            <div class="d-flex justify-content-around">
+              <a class="py-3 pr-lg-5 py-lg-2">
+                <img
+                  src="../assets/Images/Logo/ic_round-mail-outline.svg"
+                  alt="email"
+                />
+              </a>
+              <a class="py-3 pr-lg-5 py-lg-2">
+                <img
+                  @click="callNotif"
+                  src="../assets/Images/Logo/bell.svg"
+                  alt="bell"
+                />
+              </a>
+              <a class="py-3 py-lg-1">
+                <img
+                  class="image_logo"
+                  :src="
+                    image
+                      ? `http://localhost:3000/${image}`
+                      : require('../assets/logo.png')
+                  "
+                  alt="image"
+                />
+              </a>
+            </div>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -81,8 +109,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'NavigationBar',
+  computed: {
+    ...mapGetters({ isLogin: 'isLogin', image: 'getImage' })
+  },
   methods: {
     goHome() {
       this.$router.push('/')
@@ -101,6 +133,17 @@ export default {
 .navbar_logo span {
   color: black;
   font-weight: 600;
+}
+.iconsIslogin a img {
+  cursor: pointer;
+}
+.image_logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 5%;
+  border: 2px solid #2395ff;
 }
 a.router-link-exact-active {
   color: #000000 !important;
