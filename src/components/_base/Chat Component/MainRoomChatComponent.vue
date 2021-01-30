@@ -19,14 +19,14 @@
           </div>
           <div class="chats">
             <b-row align-h="end" align-v="center" style="margin-bottom:20px">
-              <b-col cols="1" order="5"
+              <b-col cols="2" sm="2" xs="3" order="5"
                 ><img
                   style="width:40px; border-radius:50%"
                   src="../../../assets/chatImg/profile1.jpg"
                   alt="Avatar"
                   class="right"
               /></b-col>
-              <b-col cols="5"
+              <b-col cols="9" sm="6" xs="9"
                 ><div class="chat-styling-a">
                   <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
@@ -40,14 +40,14 @@
             </b-row>
 
             <b-row align-h="start" align-v="center" style="margin-bottom:20px">
-              <b-col cols="1" order="0"
+              <b-col cols="2" sm="2" xs="3" order="0"
                 ><img
                   style="width:40px; border-radius:50%"
                   src="../../../assets/chatImg/profile1.jpg"
                   alt="Avatar"
                   class="right"
               /></b-col>
-              <b-col cols="5"
+              <b-col cols="9" sm="6" xs="9"
                 ><div class="chat-styling-b">
                   <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
@@ -123,7 +123,6 @@ export default {
   border-radius: 0.4em;
   padding: 10px;
   word-break: break-all;
-  margin-left: 5px;
 }
 .chat-styling-b:after {
   content: '';
@@ -169,5 +168,10 @@ export default {
   margin: 0 auto;
   border-radius: 15px;
   box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);
+}
+@media only screen and (max-width: 576px) {
+  .chats {
+    padding: 10px 5px;
+  }
 }
 </style>

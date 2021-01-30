@@ -1,10 +1,7 @@
 <template>
   <div class="left-profile">
     <div class="top centered">
-      <img
-        v-if="user.user_image"
-        :src="`http://localhost:3000/${user.user_image}`"
-      />
+      <img v-if="image" :src="`http://localhost:3000/${image}`" />
       <img v-else src="../../../assets/logo.png" />
       <div>
         <input id="fileUpload" type="file" @change="handleFile" hidden />
@@ -42,7 +39,7 @@ import Alert from '../../../mixins/Alert'
 export default {
   mixins: [Alert],
   computed: {
-    ...mapGetters({ user: 'getUser' })
+    ...mapGetters({ user: 'getUser', image: 'getImage' })
   },
   methods: {
     ...mapGetters(['getUser']),
@@ -68,8 +65,8 @@ export default {
       }
       this.updateProfileUser(data)
         .then(result => {
-          console.log(result)
-          this.AlertSuccess(result.data.message)
+          console.log(result.data.message)
+          this.AlertSucces('Success Update Image')
         })
         .catch(err => {
           this.AlertError(err.data.message)

@@ -3,6 +3,7 @@ import router from '../../router'
 export default {
   state: {
     user: {},
+    image: '',
     token: localStorage.getItem('token') || null
   },
   mutations: {
@@ -13,6 +14,9 @@ export default {
     delUser(state) {
       state.user = {}
       state.token = null
+    },
+    setImage(state, payload) {
+      state.image = payload.data.user_image
     }
   },
   actions: {
@@ -23,6 +27,7 @@ export default {
           .then(result => {
             console.log(result)
             context.commit('setUser', result.data)
+            context.commit('setImage', result.data)
             localStorage.setItem('token', result.data.data.token)
             resolve(result)
           })
@@ -93,7 +98,7 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_URL}user/updateuser/`, payload)
           .then(result => {
-            context.commit('setUser', result.data)
+            context.commit('setImage', result.data)
             resolve(result)
           })
           .catch(error => {
@@ -149,6 +154,9 @@ export default {
     },
     getUser(state) {
       return state.user
+    },
+    getImage(state) {
+      return state.image
     }
   }
 }

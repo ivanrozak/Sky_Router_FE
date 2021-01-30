@@ -2,7 +2,7 @@
   <div>
     <div class="my-booking">
       <p class="title">MY BOOKING</p>
-      <b-row align-h="between">
+      <b-row align-h="between" align-v="end">
         <b-col class="left">My Booking</b-col>
         <b-col class="right">Order History</b-col>
       </b-row>
@@ -23,11 +23,11 @@
       <p class="grey">Garuda Indonesia, AB-221</p>
       <div class="line"></div>
       <b-row align-v="baseline">
-        <b-col cols="2" class="grey">Status</b-col>
-        <b-col cols="4"
+        <b-col cols="3" sm="3" md="4" lg="2" class="grey">Status</b-col>
+        <b-col cols="12" sm="4" md="6" lg="4"
           ><div class="status-waiting"><p>Waiting for payment</p></div></b-col
         >
-        <b-col class="right"
+        <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
           <span
             ><img
@@ -110,11 +110,11 @@
       <p class="grey">Garuda Indonesia, AB-221</p>
       <div class="line"></div>
       <b-row align-v="baseline">
-        <b-col cols="2" class="grey">Status</b-col>
-        <b-col cols="4"
+        <b-col cols="3" sm="3" md="4" lg="2" class="grey">Status</b-col>
+        <b-col cols="12" sm="4" md="6" lg="4"
           ><div class="status-issued"><p>Eticket Issued</p></div></b-col
         >
-        <b-col class="right"
+        <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
           <span
             ><img
@@ -238,8 +238,32 @@ span {
   padding: 20px;
 }
 .box-detail {
-  width: 350px;
+  width: 80%;
   box-shadow: 3px 3px 5px 6px #979797;
   border-radius: 15px;
+  background: white;
+}
+@media only screen and (max-width: 991px) {
+  .box-detail {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .right {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .right {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
+  }
+  .my-booking,
+  .payment-status {
+    width: 100%;
+  }
 }
 </style>

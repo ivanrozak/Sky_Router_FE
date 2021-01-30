@@ -13,6 +13,7 @@
           v-model="user.user_email"
           placeholder="Enter email"
           required
+          disabled
         ></b-form-input>
         <label>Phone Number</label>
         <b-form-input
@@ -93,8 +94,8 @@ export default {
       }
       this.updateProfileUser(data)
         .then(result => {
-          this.getUser()
-          this.AlertSuccess(result.data.message)
+          this.AlertSucces(result.data.message)
+          console.log(result)
         })
         .catch(err => {
           this.AlertError(err.data.message)

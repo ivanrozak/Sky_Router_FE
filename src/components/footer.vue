@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="mt-lg-3">
     <b-container>
       <b-row>
         <b-col lg="12">
