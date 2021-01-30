@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     schedules: [],
-    limit: 6,
+    limit: 5,
     page: 1,
     totalRows: null,
     takeOff: '',
@@ -27,8 +27,56 @@ export default {
       state.schedules = payload.data
       state.totalRows = payload.pagination.totalData
     },
+    resetPages(state) {
+      state.page = 1
+    },
+    setPage(state, payload) {
+      state.page = payload
+    },
     setSort(state, payload) {
       state.sort = payload
+    },
+    setTakeOff(state, payload) {
+      state.takeOff = payload
+    },
+    setLanding(state, payload) {
+      state.landing = payload
+    },
+    setDate(state, payload) {
+      state.date = payload
+    },
+    setInflightMeal(state, payload) {
+      state.inflightMeal = payload
+    },
+    setWifi(state, payload) {
+      state.wifi = payload
+    },
+    setLuggage(state, payload) {
+      state.luggage = payload
+    },
+    setDirect(state, payload) {
+      state.direct = payload
+    },
+    setTransit(state, payload) {
+      state.transit = payload
+    },
+    setAirlanes(state, payload) {
+      state.airlanes = payload
+    },
+    setDepartureStart(state, payload) {
+      state.departureStart = payload
+    },
+    setDepartureEnd(state, payload) {
+      state.departureEnd = payload
+    },
+    setArrivedStart(state, payload) {
+      state.arrivedStart = payload
+    },
+    setArrivedEnd(state, payload) {
+      state.arrivedEnd = payload
+    },
+    setPrice(state, payload) {
+      state.price = payload
     }
   },
   actions: {
@@ -40,7 +88,7 @@ export default {
           )
           .then(result => {
             resolve(result)
-            commit('setSchedules', result.data.data)
+            commit('setSchedules', result.data)
           })
           .catch(err => {
             reject(err)
@@ -49,6 +97,21 @@ export default {
     }
   },
   getters: {
-    dataSchedules: state => state.schedules
+    dataSchedules: state => state.schedules,
+    dataSort: state => state.sort,
+    dataTakeOff: state => state.takeOff,
+    dataLanding: state => state.landing,
+    dataDate: state => state.date,
+    dataInflightMeal: state => state.inflightMeal,
+    dataWifi: state => state.wifi,
+    dataLuggage: state => state.luggage,
+    dataDirect: state => state.direct,
+    dataTransit: state => state.transit,
+    dataAirlanes: state => state.airlanes,
+    dataDepartureStart: state => state.departureStart,
+    dataDepartureEnd: state => state.departureEnd,
+    dataArrivedStart: state => state.arrivedStart,
+    dataArrivedEnd: state => state.arrivedEnd,
+    dataPrice: state => state.price
   }
 }
