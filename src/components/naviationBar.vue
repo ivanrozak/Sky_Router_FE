@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       notif: 1,
-      chat: 0,
+      chat: 1,
       account: 0
     }
   },
