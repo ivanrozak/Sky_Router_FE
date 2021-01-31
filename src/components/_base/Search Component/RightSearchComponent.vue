@@ -59,6 +59,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      url:'',
       form: {
         takeoff: 'jakarta',
         landing: 'yogyakarta',
