@@ -3,15 +3,17 @@ import dotenv from 'dotenv'
 dotenv.config()
 export default {
   state: {
-    myBooking: '',
+    myBooking: [],
     passengers: [],
-    mySchedule: ''
+    elMyBooking: ''
+    // mySchedule: ''
   },
   mutations: {
     setDataBooking(state, payload) {
       console.log('payload')
       console.log(payload)
       state.myBooking = payload
+      console.log('state.myBooking')
       console.log(state.myBooking)
     },
     setDataPassengers(state, payload) {
@@ -19,8 +21,8 @@ export default {
       console.log('passengers')
       console.log(state.passengers)
     },
-    setDataSchedule(state, payload) {
-      state.mySchedule = payload
+    setElementMyBooking(state, payload) {
+      state.elMyBooking = payload
     }
   },
   actions: {
@@ -31,7 +33,7 @@ export default {
           .get(`${process.env.VUE_APP_URL}booking/mybookingbyid/${payload}`)
           .then(result => {
             console.log(result)
-            context.commit('setDataBooking', result.data.data[0])
+            context.commit('setDataBooking', result.data.data)
             resolve(result)
           })
           .catch(error => {
@@ -55,24 +57,6 @@ export default {
             reject(error)
           })
       })
-    },
-    getSchedule(context, payload) {
-      return new Promise((resolve, reject) => {
-        console.log('schedule id')
-        console.log(payload)
-        axios
-          .get(`${process.env.VUE_APP_URL}schedule/${payload}`)
-          .then(result => {
-            console.log('schedule')
-            console.log(result)
-            context.commit('setDataSchedule', result.data.data[0])
-            resolve(result)
-          })
-          .catch(error => {
-            console.log(error)
-            reject(error)
-          })
-      })
     }
   },
   getters: {
@@ -82,8 +66,8 @@ export default {
     getAllPassengers(state) {
       return state.passengers
     },
-    getMySchedule(state) {
-      return state.mySchedule
+    getElMyBooking(state) {
+      return state.elMyBooking
     }
   }
 }

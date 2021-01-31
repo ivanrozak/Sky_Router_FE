@@ -29,29 +29,29 @@
             <b-row>
               <b-col cols="3">
                 <p class="grey">Code</p>
-                <p>GA-900</p>
+                <p>{{ elMyBooking.airlanes.slice(0, 2).toUpperCase() }}-900</p>
               </b-col>
               <b-col>
                 <p class="grey">Class</p>
-                <p>Economy</p>
+                <p>{{ elMyBooking.class }}</p>
               </b-col>
             </b-row>
             <br />
             <b-row>
               <b-col cols="3">
-                <p class="grey">Code</p>
-                <p>GA-900</p>
+                <p class="grey">Terminal</p>
+                <p>1A</p>
               </b-col>
               <b-col>
-                <p class="grey">Class</p>
-                <p>Economy</p>
+                <p class="grey">Gate</p>
+                <p>4</p>
               </b-col>
             </b-row>
             <br />
             <b-row>
               <b-col cols="8">
                 <p class="grey">Departure</p>
-                <p>Monday, 20 July ‘20 - 12:33</p>
+                <p>{{ formatTime(elMyBooking.takeOffTime) }}</p>
               </b-col>
             </b-row>
           </b-col>
@@ -59,7 +59,10 @@
             <div class="line"></div>
           </b-col>
 
-          <vue-qrcode value="1" style="width: 150px; height:150px;" />
+          <vue-qrcode
+            value="elMyBooking.bookingId"
+            style="width: 150px; height:150px; margin-left:-30px; margin-top:70px"
+          />
         </b-row>
       </div>
     </div>
@@ -68,9 +71,20 @@
 
 <script>
 import VueQrcode from 'vue-qrcode'
+import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
   components: {
     VueQrcode
+  },
+  computed: {
+    ...mapGetters({ elMyBooking: 'getElMyBooking' })
+  },
+  methods: {
+    formatTime(value) {
+      moment.locale('en')
+      return moment(String(value)).format('LLLL')
+    }
   }
 }
 </script>
