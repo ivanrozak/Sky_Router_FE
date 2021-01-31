@@ -12,17 +12,22 @@
             <small>To</small>
           </div>
           <div class="flex-comp mb-2">
-            <div class="mdm">Medan(IDN)</div>
+            <div class="mdm">{{ params.takeOff }}</div>
             <img src="../../../assets/icon/change.png" />
-            <div class="mdm">Tokyo (JPN)</div>
+            <div class="mdm">{{ params.landing }}</div>
           </div>
 
           <div class="flex-comp">
-            <div class="sml mr-2">Monday, 20 July 20</div>
+            <div class="sml mr-2">{{ formatTime(params.date) }}</div>
             <div class="sml mr-2">
-              <li>6 Passenger</li>
+              <li>
+                {{ parseInt(params.totalAdult) + parseInt(params.totalChild) }}
+                Passenger
+              </li>
             </div>
-            <div class="sml"><li>Economy</li></div>
+            <div class="sml">
+              <li>{{ params.class }}</li>
+            </div>
           </div>
         </div>
       </div>
@@ -33,9 +38,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
   computed: {
     ...mapGetters({ params: 'getParams' })
+  },
+  methods: {
+    formatTime(value) {
+      moment.locale('en')
+      return moment(String(value)).format('dddd, D MMMM YYYY')
+    }
   }
 }
 </script>
