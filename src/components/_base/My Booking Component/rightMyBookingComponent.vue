@@ -25,7 +25,12 @@
       <b-row align-v="baseline">
         <b-col cols="3" sm="3" md="4" lg="2" class="grey">Status</b-col>
         <b-col cols="12" sm="4" md="6" lg="4"
-          ><div class="status-waiting"><p>Waiting for payment</p></div></b-col
+          ><div class="status-success" v-if="myBooking.status === 1">
+            <p>Success</p>
+          </div>
+          <div class="status-pending" v-else-if="myBooking.status === 0">
+            <p>Pending</p>
+          </div></b-col
         >
         <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
@@ -80,11 +85,28 @@
             <br />
             <div class="line"></div>
             <div>
-              <b-table hover :items="passengers"></b-table>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Nationality</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in passengers" :key="index">
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>{{ item.title }}. {{ item.fullname }}</td>
+                    <td>{{ item.nationality }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
           <br />
-          <b-button style="background-color:#2395ff; text-align: right"
+          <b-button
+            style="background-color:#2395ff; text-align: right"
+            v-if="myBooking.status === 1"
             ><router-link
               to="/detailbooking"
               style="display: block; color:white"
@@ -95,7 +117,7 @@
       </div>
     </div>
 
-    <div class="payment-status">
+    <!-- <div class="payment-status">
       <p>
         Monday, 20 July ‘20 - 12:33
       </p>
@@ -112,7 +134,7 @@
       <b-row align-v="baseline">
         <b-col cols="3" sm="3" md="4" lg="2" class="grey">Status</b-col>
         <b-col cols="12" sm="4" md="6" lg="4"
-          ><div class="status-issued"><p>Eticket Issued</p></div></b-col
+          ><div class="status-pending"><p>Pending</p></div></b-col
         >
         <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
@@ -123,28 +145,39 @@
               style="cursor:pointer"/></span
         ></b-col>
       </b-row>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
+  beforeUpdate() {
+    console.log('this.myBooking schedule')
+    console.log(this.myBooking.scheduleId)
+    this.getSchedule(this.myBooking.scheduleId)
+  },
   data() {
     return {
       isClickDetails: false,
-      isPaymentSuccess: false,
-      passengers: [
-        { No: 1, Passengers: 'Mrs. Katty', Ticket_Type: 'Adult' },
-        { No: 2, Passengers: 'Mr. Louis', Ticket_Type: 'Adult' },
-        { No: 3, Passengers: 'Mr. Downy', Ticket_Type: 'Adult' },
-        { No: 4, Passengers: 'Mr. Molto', Ticket_Type: 'Adult' }
-      ]
+      isPaymentSuccess: false
     }
   },
+  computed: {
+    ...mapGetters({
+      myBooking: 'getMyBooking',
+      passengers: 'getAllPassengers',
+      mySchedule: 'getMySchedule'
+    })
+  },
   methods: {
+    ...mapActions(['getPassengers', 'getSchedule']),
     myBookingDetail() {
       if (this.isClickDetails) this.isClickDetails = false
       else this.isClickDetails = true
+      this.getPassengers(this.myBooking.bookingId)
+      console.log('passengers vue')
+      console.log(this.passengers)
     }
   }
 }
@@ -220,9 +253,9 @@ span {
   font-size: 14px;
   line-height: 22px;
 }
-.status-waiting,
-.status-issued {
-  background-color: #ff7f23;
+.status-success,
+.status-pending {
+  background-color: red;
   width: 150px;
   text-align: center;
   font-weight: 600;
@@ -230,7 +263,7 @@ span {
   border-radius: 5px;
 }
 
-.status-issued {
+.status-success {
   background-color: #4fcf4d;
 }
 .passenger-detail,

@@ -58,11 +58,22 @@
           <b-col lg="1">
             <div class="line"></div>
           </b-col>
+
+          <vue-qrcode value="1" style="width: 150px; height:150px;" />
         </b-row>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import VueQrcode from 'vue-qrcode'
+export default {
+  components: {
+    VueQrcode
+  }
+}
+</script>
 
 <style scoped>
 .grey {

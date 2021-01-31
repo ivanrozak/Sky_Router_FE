@@ -26,6 +26,7 @@ import RightSideMyBooking from '../../components/_base/My Booking Component/righ
 import LeftProfile from '../../components/_base/Profile Component/LeftProfileComponent'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'myBooking',
   components: {
@@ -33,6 +34,15 @@ export default {
     LeftProfile,
     Navbar,
     Footer
+  },
+  created() {
+    this.getBooking(1)
+  },
+  computed: {
+    ...mapGetters({ user: 'getUser' })
+  },
+  methods: {
+    ...mapActions(['getBooking'])
   }
 }
 </script>
