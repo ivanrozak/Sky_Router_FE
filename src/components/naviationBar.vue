@@ -77,20 +77,24 @@
           </b-navbar-nav>
           <b-navbar-nav class="iconsIslogin " v-else>
             <div class="d-flex justify-content-around">
-              <a class="py-3 pr-lg-5 py-lg-2">
+              <section class="py-3 pr-lg-5 py-lg-2">
                 <img
+                  @click="callMessage"
                   src="../assets/Images/Logo/ic_round-mail-outline.svg"
                   alt="email"
                 />
-              </a>
-              <a class="py-3 pr-lg-5 py-lg-2">
+                <NotifMessage v-if="chat === 1" />
+              </section>
+              <section class="py-3 pr-lg-5 py-lg-2 position-relative">
                 <img
                   @click="callNotif"
                   src="../assets/Images/Logo/bell.svg"
                   alt="bell"
                 />
-              </a>
-              <a class="py-3 py-lg-1">
+                <!-- Notif Showing -->
+                <Notif v-if="notif === 1" />
+              </section>
+              <section class="py-3 py-lg-1">
                 <img
                   class="image_logo"
                   :src="
@@ -100,7 +104,7 @@
                   "
                   alt="image"
                 />
-              </a>
+              </section>
             </div>
           </b-navbar-nav>
         </b-collapse>
@@ -110,10 +114,23 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import Notif from './_base/NavbarShowMenu/Notification'
+import NotifMessage from './_base/NavbarShowMenu/NotificationMessage'
 export default {
   name: 'NavigationBar',
+  data() {
+    return {
+      notif: 0,
+      chat: 0,
+      account: 0
+    }
+  },
   computed: {
     ...mapGetters({ isLogin: 'isLogin', image: 'getImage' })
+  },
+  components: {
+    Notif,
+    NotifMessage
   },
   methods: {
     goHome() {
@@ -121,6 +138,24 @@ export default {
     },
     SignUp() {
       this.$router.push('/signup')
+    },
+    callNotif() {
+      if (this.notif === 0) {
+        this.notif = 1
+        this.chat = 0
+        this.account = 0
+      } else {
+        this.notif = 0
+      }
+    },
+    callMessage() {
+      if (this.chat === 0) {
+        this.chat = 1
+        this.notif = 0
+        this.account = 0
+      } else {
+        this.chat = 0
+      }
     }
   }
 }
@@ -134,7 +169,7 @@ export default {
   color: black;
   font-weight: 600;
 }
-.iconsIslogin a img {
+.iconsIslogin section img {
   cursor: pointer;
 }
 .image_logo {

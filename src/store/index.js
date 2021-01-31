@@ -4,6 +4,8 @@ import createPersistedState from 'vuex-persistedstate'
 import Auth from './modules/auth'
 import Chat from './modules/chat'
 import Book from './modules/booking'
+import SearchResult from './modules/searchResult'
+import Booking from './modules/postBooking'
 
 Vue.use(Vuex)
 
@@ -14,7 +16,9 @@ export default new Vuex.Store({
   modules: {
     Auth,
     Chat,
-    Book
+    Book,
+    SearchResult,
+    Booking
   },
   plugins: [
     createPersistedState({

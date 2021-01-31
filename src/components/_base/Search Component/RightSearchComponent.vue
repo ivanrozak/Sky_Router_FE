@@ -50,13 +50,58 @@
         <p>disini detailnya</p>
       </b-collapse>
     </div>
+    <button @click="getData()">test</button>
   </main>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      form: {
+        takeoff: 'jakarta',
+        landing: 'yogyakarta',
+        inflightMeal: '',
+        wifi: '',
+        luggage: '',
+        direct: '',
+        transit: '',
+        airlanes: 'garuda',
+        departureStart: '',
+        departureEnd: '',
+        arrivedStart: '',
+        arrivedEnd: '',
+        price: 700,
+        limit: 10,
+        page: 1,
+        sort: 'price'
+      }
+    }
+  },
+  created() {
+    // this.getData()
+    // console.log(this.flights)
+  },
+  computed: {
+    ...mapGetters({ flights: 'getDataFlight' })
+  },
+  methods: {
+    ...mapGetters(['getDataFlight']),
+    ...mapActions(['getFlightsData']),
+    getData() {
+      this.getFlightsData(this.form)
+        .then(result => {
+          console.log(result)
+          console.log(this.form)
+          // alert(result.data.message)
+        })
+        .catch(err => {
+          console.log(this.form)
+          console.log(err)
+          // alert(err.data.message)
+        })
+    }
   }
 }
 </script>

@@ -40,5 +40,6 @@ export default {
 .main {
   font-family: 'Poppins', sans-serif;
   background-color: whitesmoke;
+  padding-bottom: 40px;
 }
 </style>
