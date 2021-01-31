@@ -9,26 +9,49 @@
     </div>
     <div class="scroll mt-lg-3 pr-1">
       <b-card
-        v-for="(items, index) in data"
+        v-for="(items, index) in Notif"
         :key="index"
         class="notif_message mb-3"
       >
-        <h5>Congratulation</h5>
+        <h5>{{ items.title }}</h5>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore....
+          {{ items.text }}
         </p>
-        <p class="mt-lg-3">5h ago</p>
+        <p class="mt-lg-3">
+          
+          <timeago
+            :datetime="items.createdAt"
+            locale="id"
+            :auto-update="60"
+          ></timeago>
+        </p>
       </b-card>
     </div>
   </b-card>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Notif',
   data() {
-    return {
-      data: 7
+    return {}
+  },
+  computed: {
+    ...mapGetters({ Notif: 'getNotification', Id: 'getUser' })
+  },
+  created() {
+    this.getNotif(this.Id.user_id)
+  },
+  methods: {
+    ...mapActions(['getNotif']),
+    filterTime(val) {
+      const date = new Date(val)
+      const minute = date.getMinutes()
+      const hours = date.getHours()
+      const result = `${hours < 10 ? '0' + hours : hours}:${
+        minute < 10 ? '0' + minute : minute
+      }`
+      return result
     }
   }
 }

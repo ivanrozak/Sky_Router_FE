@@ -5,7 +5,8 @@ export default {
   state: {
     myBooking: '',
     passengers: [],
-    mySchedule: ''
+    mySchedule: '',
+    notification: []
   },
   mutations: {
     setDataBooking(state, payload) {
@@ -21,9 +22,26 @@ export default {
     },
     setDataSchedule(state, payload) {
       state.mySchedule = payload
+    },
+    setNotif(state, payload) {
+      state.notification = payload.data
     }
   },
   actions: {
+    getNotif(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}notif/${payload}`)
+          .then(result => {
+            context.commit('setNotif', result.data)
+            resolve(result)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
+    },
     getBooking(context, payload) {
       return new Promise((resolve, reject) => {
         console.log(payload)
@@ -84,6 +102,9 @@ export default {
     },
     getMySchedule(state) {
       return state.mySchedule
+    },
+    getNotification(state) {
+      return state.notification
     }
   }
 }
