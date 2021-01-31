@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import Auth from './modules/auth'
 import Chat from './modules/chat'
+import Book from './modules/booking'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     Auth,
-    Chat
+    Chat,
+    Book
   },
   plugins: [
     createPersistedState({
