@@ -58,7 +58,15 @@
                     Passenger : 1 adult
                   </b-col>
                   <b-col style="text-align:right">
-                    <b-form-checkbox switch inline class="my-2">
+                    <b-form-checkbox
+                      switch
+                      v-model="items.statusCheeck"
+                      name="checkbox-1"
+                      value="accepted"
+                      unchecked-value="not_accepted"
+                      inline
+                      class="my-2"
+                    >
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
@@ -119,7 +127,7 @@
           <p>Get Travel compensation up to IDR 5.000.000</p>
         </div>
 
-        <b-button type="submit" class="btn">
+        <b-button type="submit" class="btn_Submit py-lg-3 px-lg-4">
           Process to Payment
         </b-button>
       </b-form>
@@ -137,7 +145,6 @@ export default {
   data() {
     return {
       result: null,
-      status: 1,
       formBooking: {
         scheduleId: 1,
         insurance: 0,
@@ -145,6 +152,7 @@ export default {
       },
       formPesenger: [
         {
+          statusCheeck: 'not_accepted',
           title: '',
           fullname: '',
           nationality: ''
@@ -159,7 +167,8 @@ export default {
       this.formPesenger.push({
         title: '',
         fullname: '',
-        nationality: ''
+        nationality: '',
+        statusCheeck: ''
       })
     },
     async onSubmit() {
@@ -187,6 +196,7 @@ export default {
           })
       }
     },
+    switchOn() {},
     removeFrom(index) {
       this.formPesenger.splice(index, 1)
       return this.$swal({
@@ -194,7 +204,7 @@ export default {
         position: 'top-end',
         showConfirmButton: false,
         toast: true,
-        title: 'Success Remove Passenger',
+        title: 'Success Remove Form Passenger',
         timer: 1500,
         timerProgressBar: true,
         didOpen: () => {
@@ -229,19 +239,7 @@ export default {
   font-family: 'Poppins', sans-serif;
 }
 .badge:hover {
-  position: absolute;
-  width: 25px;
-  right: -20px;
-  z-index: 1;
-  cursor: pointer;
-  top: -10px;
-  font-size: 10px;
-  padding-top: 3px;
-  padding-left: 3px;
-  height: 25px;
-  border-radius: 50%;
   background: #0084ff;
-  color: white;
 }
 .scroll {
   overflow-y: scroll;
@@ -261,6 +259,21 @@ export default {
 }
 .btn_more {
   display: block;
+  border: 2px solid #2395ff;
+  border-radius: 10px;
+  color: #2395ff;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: none;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  margin: 0 auto;
+}
+.btn_more:hover {
+  border: 2px solid #0285ff;
+  color: #0285ff;
+}
+.btn_Submit {
+  display: block;
   border: none;
   border-radius: 10px;
   color: #ffffff;
@@ -270,7 +283,7 @@ export default {
   box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
   margin: 0 auto;
 }
-.btn_more:hover {
+.btn_Submit:hover {
   background: #0986fc;
 }
 .btn {

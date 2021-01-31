@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     schedules: [],
-    limit: 5,
+    limit: 4,
     page: 1,
     totalRows: null,
     takeOff: '',
@@ -20,7 +20,9 @@ export default {
     departureEnd: '',
     arrivedStart: '',
     arrivedEnd: '',
-    price: ''
+    price: '',
+    params: [],
+    scheduleById: {}
   },
   mutations: {
     setSchedules(state, payload) {
@@ -35,15 +37,6 @@ export default {
     },
     setSort(state, payload) {
       state.sort = payload
-    },
-    setTakeOff(state, payload) {
-      state.takeOff = payload
-    },
-    setLanding(state, payload) {
-      state.landing = payload
-    },
-    setDate(state, payload) {
-      state.date = payload
     },
     setInflightMeal(state, payload) {
       state.inflightMeal = payload
@@ -77,6 +70,16 @@ export default {
     },
     setPrice(state, payload) {
       state.price = payload
+    },
+    changePage(state, payload) {
+      state.page = payload
+      console.log(this.state.page)
+    },
+    setParams(state, payload) {
+      state.params = payload
+    },
+    setScheduleById(state, payload) {
+      state.scheduleById = payload
     }
   },
   actions: {
@@ -84,7 +87,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://localhost:3000/schedule?takeoff=${state.takeOff}&landing=${state.landing}&inflightmeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}`
+            `http://localhost:3000/schedule?takeoff=${state.params.takeOff}&landing=${state.params.landing}&inflightMeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}&date=${state.params.date}`
           )
           .then(result => {
             resolve(result)
@@ -94,24 +97,26 @@ export default {
             reject(err)
           })
       })
+    },
+    getScheduleById(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}schedule/${payload}`)
+          .then(response => {
+            context.commit('setScheduleById', response.data.data[0])
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   },
   getters: {
     dataSchedules: state => state.schedules,
-    dataSort: state => state.sort,
-    dataTakeOff: state => state.takeOff,
-    dataLanding: state => state.landing,
-    dataDate: state => state.date,
-    dataInflightMeal: state => state.inflightMeal,
-    dataWifi: state => state.wifi,
-    dataLuggage: state => state.luggage,
-    dataDirect: state => state.direct,
-    dataTransit: state => state.transit,
-    dataAirlanes: state => state.airlanes,
-    dataDepartureStart: state => state.departureStart,
-    dataDepartureEnd: state => state.departureEnd,
-    dataArrivedStart: state => state.arrivedStart,
-    dataArrivedEnd: state => state.arrivedEnd,
-    dataPrice: state => state.price
+    getPage: state => state.page,
+    getTotalRows: state => state.totalRows,
+    getParams: state => state.params,
+    getDataScheduleById: state => state.scheduleById
   }
 }

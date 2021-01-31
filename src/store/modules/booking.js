@@ -5,8 +5,8 @@ export default {
   state: {
     myBooking: [],
     passengers: [],
-    elMyBooking: ''
-    // mySchedule: ''
+    elMyBooking: '',
+    notification: []
   },
   mutations: {
     setDataBooking(state, payload) {
@@ -23,9 +23,26 @@ export default {
     },
     setElementMyBooking(state, payload) {
       state.elMyBooking = payload
+    },
+    setNotif(state, payload) {
+      state.notification = payload.data
     }
   },
   actions: {
+    getNotif(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}notif/${payload}`)
+          .then(result => {
+            context.commit('setNotif', result.data)
+            resolve(result)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
+    },
     getBooking(context, payload) {
       return new Promise((resolve, reject) => {
         console.log(payload)
@@ -68,6 +85,9 @@ export default {
     },
     getElMyBooking(state) {
       return state.elMyBooking
+    },
+    getNotification(state) {
+      return state.notification
     }
   }
 }
