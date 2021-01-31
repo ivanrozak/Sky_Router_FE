@@ -66,7 +66,12 @@
           <div class="plane-pricing">
             $ {{ item.price }} <small>/pax</small>
           </div>
-          <b-button class="btn-select" variant="primary">Select</b-button>
+          <b-button
+            @click.prevent="selectSchedule(item.scheduleId)"
+            class="btn-select"
+            variant="primary"
+            >Select</b-button
+          >
         </b-col>
       </b-row>
     </div>
@@ -105,6 +110,7 @@ export default {
   },
   created() {
     this.getData()
+    console.log(this.rows)
   },
   computed: {
     ...mapGetters({
@@ -117,13 +123,11 @@ export default {
   },
   methods: {
     ...mapMutations(['changePage']),
-    ...mapActions(['getSchedules']),
+    ...mapActions(['getSchedules', 'getScheduleById']),
     getData() {
       this.getSchedules()
         .then(result => {
           console.log(result)
-          // console.log(this.form)
-          // alert(result.data.message)
         })
         .catch(err => {
           console.log(this.form)
@@ -131,12 +135,22 @@ export default {
           // alert(err.data.message)
         })
     },
-    coba() {
-      console.log(this.flights)
-    },
     handlePageChange(numberPage) {
       this.changePage(numberPage)
-      this.getProducts()
+      this.getSchedules()
+    },
+    selectSchedule(param) {
+      // console.log(param)
+      this.getScheduleById(param)
+        .then(result => {
+          console.log(result)
+          this.$router.push('/detailflight')
+          // alert(result.data.message)
+        })
+        .catch(error => {
+          // alert(error.data.message)
+          console.log(error)
+        })
     }
   }
 }
