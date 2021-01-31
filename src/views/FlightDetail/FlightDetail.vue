@@ -47,7 +47,7 @@ export default {
 }
 .detail {
   background: #f5f6fa;
-  height: 1285px;
+  height: 1499px;
 }
 
 @media only screen and (max-width: 576px) {

@@ -12,6 +12,7 @@ export default {
       state.token = payload.data.token
     },
     delUser(state) {
+      state.image = ''
       state.user = {}
       state.token = null
     },
