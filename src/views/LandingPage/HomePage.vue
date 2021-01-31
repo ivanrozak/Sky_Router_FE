@@ -33,7 +33,12 @@
                   >
                     <section class="from">
                       <h5>From</h5>
-                      <h3>Medan</h3>
+                      <b-form-select
+                        style="width: 120px; font-size: 1.1em; font-weight: bolder;"
+                        v-model="takeOff"
+                        :options="takeOffOpt"
+                      ></b-form-select>
+                      <!-- <h3>Medan</h3> -->
                       <p>Indonesia</p>
                     </section>
                     <section class="image_iconsSwith">
@@ -45,8 +50,12 @@
                     </section>
                     <section class="to">
                       <h5>To</h5>
-                      <h3>Tokyo</h3>
-                      <p>Japan</p>
+                      <b-form-select
+                        style="width: 120px; font-size: 1.1em; font-weight: bolder;"
+                        v-model="landing"
+                        :options="landingOpt"
+                      ></b-form-select>
+                      <p>Indonesia</p>
                     </section>
                   </div>
                 </b-card>
@@ -83,6 +92,7 @@
                     reset-button
                     close-button
                     locale="en"
+                    v-model="date"
                   ></b-form-datepicker>
                 </div>
                 <div class="input_selected">
@@ -90,14 +100,14 @@
                   <b-row class="mb-lg-4 mb-3">
                     <b-col cols="6">
                       <b-form-select
-                        v-model="selected"
-                        :options="options"
+                        v-model="totalChild"
+                        :options="child"
                       ></b-form-select>
                     </b-col>
                     <b-col cols="6">
                       <b-form-select
-                        v-model="selected"
-                        :options="options"
+                        v-model="totalAdult"
+                        :options="adult"
                       ></b-form-select>
                     </b-col>
                   </b-row>
@@ -105,7 +115,7 @@
                 <div class="choose_class">
                   <h5 class="mb-lg-3 mb-3">Which class do you want?</h5>
                   <b-form-radio-group
-                    v-model="selected"
+                    v-model="flightClass"
                     :options="options"
                     class="mb-lg-5 mb-4 d-flex radio_style ml-lg-2 justify-content-between"
                     value-field="item"
@@ -114,6 +124,7 @@
                   ></b-form-radio-group>
                 </div>
                 <button
+                  @click="toPageSearch()"
                   class="btn_search pl-3 py-3 pl-lg-5 mb-2 mb-lg-0  py-lg-3"
                 >
                   SEARCH FLIGHT
@@ -157,6 +168,7 @@ import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
 import topDesti from '../../components/_base/Landing Page Component/corousel_topDestionation'
 import corouseDesti from '../../components/_base/Landing Page Component/corousel_destnation'
+import { mapMutations } from 'vuex'
 export default {
   name: 'landingPage',
   components: {
@@ -167,12 +179,56 @@ export default {
   },
   data() {
     return {
-      selected: 'economy',
+      date: '',
+      flightClass: '',
+      totalAdult: '',
+      totalChild: '',
+      takeOff: '',
+      landing: '',
       options: [
         { item: 'economy', name: 'Economy' },
-        { item: 'business', name: 'Business' },
-        { item: 'first class', name: 'First Class' }
+        { item: 'Business', name: 'Business' },
+        { item: 'First Class', name: 'First Class' }
+      ],
+      takeOffOpt: [
+        { value: '', text: 'SELECT' },
+        { value: 'Jakarta', text: 'JKT' },
+        { value: 'Yogyakarta', text: 'YGKT' },
+        { value: 'Semarang', text: 'SMG' }
+      ],
+      landingOpt: [
+        { value: '', text: 'SELECT' },
+        { value: 'Jakarta', text: 'JKT' },
+        { value: 'Yogyakarta', text: 'YGKT' },
+        { value: 'Semarang', text: 'SMG' }
+      ],
+      child: [
+        { value: '', text: 'SELECT' },
+        { value: 1, text: '1 Child' },
+        { value: 2, text: '2 Child' },
+        { value: 3, text: '3 Child' }
+      ],
+      adult: [
+        { value: '', text: 'SELECT' },
+        { value: 1, text: '1 Adult' },
+        { value: 2, text: '2 Adult' },
+        { value: 3, text: '3 Adult' }
       ]
+    }
+  },
+  methods: {
+    ...mapMutations(['setParams']),
+    toPageSearch() {
+      const params = {
+        date: this.date,
+        class: this.flightClass,
+        totalAdult: this.totalAdult,
+        totalChild: this.totalChild,
+        takeOff: this.takeOff,
+        landing: this.landing
+      }
+      this.setParams(params)
+      this.$router.push('/searchresult')
     }
   }
 }

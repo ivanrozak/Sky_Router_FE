@@ -75,4 +75,14 @@ span {
   text-align: right;
   color: #2395ff;
 }
+@media only screen and (max-width: 576px) {
+  .detail {
+    padding: 25px 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .detail {
+    padding: 25px 0;
+  }
+}
 </style>

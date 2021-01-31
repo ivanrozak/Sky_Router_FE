@@ -16,6 +16,7 @@
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
 import DetailCompo from '../../components/_base/My Booking Component/detailBookingComponent'
+
 export default {
   name: 'BookingDetails',
   components: {

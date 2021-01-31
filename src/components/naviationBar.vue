@@ -70,10 +70,42 @@
           </b-navbar-nav>
           <!-- ====================== -->
           <!-- Right aligned nav items -->
-          <b-navbar-nav>
+          <b-navbar-nav v-if="!isLogin">
             <button @click="SignUp" class="btn_login py-3 px-lg-4 py-lg-2">
               Sign Up
             </button>
+          </b-navbar-nav>
+          <b-navbar-nav class="iconsIslogin " v-else>
+            <div class="d-flex justify-content-around">
+              <section class="py-3 pr-lg-5 py-lg-2">
+                <img
+                  @click="callMessage"
+                  src="../assets/Images/Logo/ic_round-mail-outline.svg"
+                  alt="email"
+                />
+                <NotifMessage v-if="chat === 1" />
+              </section>
+              <section class="py-3 pr-lg-5 py-lg-2 position-relative">
+                <img
+                  @click="callNotif"
+                  src="../assets/Images/Logo/bell.svg"
+                  alt="bell"
+                />
+                <!-- Notif Showing -->
+                <Notif v-if="notif === 1" />
+              </section>
+              <section class="py-3 py-lg-1">
+                <img
+                  class="image_logo"
+                  :src="
+                    image
+                      ? `http://localhost:3000/${image}`
+                      : require('../assets/logo.png')
+                  "
+                  alt="image"
+                />
+              </section>
+            </div>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -81,14 +113,49 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import Notif from './_base/NavbarShowMenu/Notification'
+import NotifMessage from './_base/NavbarShowMenu/NotificationMessage'
 export default {
   name: 'NavigationBar',
+  data() {
+    return {
+      notif: 0,
+      chat: 0,
+      account: 0
+    }
+  },
+  computed: {
+    ...mapGetters({ isLogin: 'isLogin', image: 'getImage' })
+  },
+  components: {
+    Notif,
+    NotifMessage
+  },
   methods: {
     goHome() {
       this.$router.push('/')
     },
     SignUp() {
       this.$router.push('/signup')
+    },
+    callNotif() {
+      if (this.notif === 0) {
+        this.notif = 1
+        this.chat = 0
+        this.account = 0
+      } else {
+        this.notif = 0
+      }
+    },
+    callMessage() {
+      if (this.chat === 0) {
+        this.chat = 1
+        this.notif = 0
+        this.account = 0
+      } else {
+        this.chat = 0
+      }
     }
   }
 }
@@ -101,6 +168,17 @@ export default {
 .navbar_logo span {
   color: black;
   font-weight: 600;
+}
+.iconsIslogin section img {
+  cursor: pointer;
+}
+.image_logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 5%;
+  border: 2px solid #2395ff;
 }
 a.router-link-exact-active {
   color: #000000 !important;

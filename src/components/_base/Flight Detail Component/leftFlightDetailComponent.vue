@@ -4,320 +4,288 @@
       <h5 style="color:white">Contact Person Details</h5>
       <div class="box1">
         <label for="name">Full Name</label>
-        <b-form-input type="text" id="name"></b-form-input>
+        <b-form-input
+          type="text"
+          v-model="user.user_name"
+          disabled
+          id="name"
+        ></b-form-input>
 
         <label for="email">Email</label>
-        <b-form-input type="email" id="email"></b-form-input>
+        <b-form-input
+          type="email"
+          v-model="user.user_email"
+          disabled
+          id="email"
+        ></b-form-input>
 
         <label for="mobile">Phone Number</label>
-        <vue-tel-input id="mobile" v-model="phone"></vue-tel-input>
+        <vue-tel-input
+          disabled
+          v-model="user.user_phone"
+          id="mobile"
+        ></vue-tel-input>
         <br />
       </div>
+      <b-form @submit.prevent="onSubmit">
+        <div class="pesengerForm">
+          <h5>Passenger Details</h5>
+          <div class="box2 pt-5">
+            <div class="scroll pr-4">
+              <div
+                v-for="(items, index) in formPesenger"
+                :key="index"
+                class="Forms mb-3"
+              >
+                <span
+                  class="badge"
+                  v-if="index >= 1"
+                  @click="removeFrom(index)"
+                >
+                  <b-icon
+                    font-scale="2"
+                    icon="trash2-fill"
+                    aria-hidden="true"
+                  ></b-icon>
+                </span>
+                <b-row
+                  class="alert alert-info"
+                  role="alert"
+                  align-h="between"
+                  align-v="center"
+                >
+                  <b-col>
+                    Passenger : 1 adult
+                  </b-col>
+                  <b-col style="text-align:right">
+                    <b-form-checkbox
+                      switch
+                      v-model="items.statusCheeck"
+                      name="checkbox-1"
+                      value="accepted"
+                      unchecked-value="not_accepted"
+                      inline
+                      class="my-2"
+                    >
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
 
-      <h5>Passenger Details</h5>
-      <div class="box2">
-        <br />
-        <b-row
-          class="alert alert-info"
-          role="alert"
-          align-h="between"
-          align-v="center"
-        >
-          <b-col>
-            Passenger : 1 adult
-          </b-col>
-          <b-col style="text-align:right">
-            <b-form-checkbox switch inline class="my-2"> </b-form-checkbox>
-          </b-col>
-        </b-row>
-        <label for="title">Title</label>
-        <b-form-select v-model="selected" class="mb-3">
-          <b-form-select-option :value="null"
-            >Please select an option</b-form-select-option
-          >
-          <b-form-select-option value="Mr">Mr</b-form-select-option>
-          <b-form-select-option value="Mrs">Mrs</b-form-select-option>
-        </b-form-select>
-        <label for="fname">Full Name</label>
-        <b-form-input type="text" id="fname"></b-form-input>
+                <label for="title">Title</label>
+                <b-form-select required v-model="items.title" class="mb-3">
+                  <b-form-select-option :value="null"
+                    >Please select an option</b-form-select-option
+                  >
+                  <b-form-select-option value="Mr">Mr</b-form-select-option>
+                  <b-form-select-option value="Mrs">Mrs</b-form-select-option>
+                </b-form-select>
+                <label for="fname">Full Name</label>
+                <b-form-input
+                  type="text"
+                  required
+                  v-model="items.fullname"
+                  id="fname"
+                ></b-form-input>
+                <label for="country">country</label>
+                <ejs-autocomplete
+                  id="country"
+                  :dataSource="countries"
+                  v-model="items.nationality"
+                  popupWidth="300px"
+                  popupHeight="800px"
+                ></ejs-autocomplete>
+              </div>
+            </div>
 
-        <label for="country">country</label>
-        <ejs-autocomplete
-          id="country"
-          :dataSource="countries"
-          popupWidth="300px"
-          popupHeight="800px"
-        ></ejs-autocomplete>
-      </div>
+            <button class="btn_more mt-3 py-lg-3 px-lg-4" @click="AddPesenger">
+              More Pesengger
+            </button>
+          </div>
+        </div>
 
-      <h5>Passenger Details</h5>
-      <div class="box3">
-        <b-row>
-          <b-col>
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="1"
-              unchecked-value="0"
-            >
-              Travel Insurance
-            </b-form-checkbox>
-          </b-col>
-          <b-col style="text-align:right">
-            IDR 5.000.000
-          </b-col>
-        </b-row>
-        <br />
-        <div class="line"></div>
-        <br />
-        <p>Get Travel compensation up to IDR 5.000.000</p>
-      </div>
+        <h5>Passenger Details</h5>
+        <div class="box3">
+          <b-row>
+            <b-col>
+              <b-form-checkbox
+                id="checkbox-1"
+                name="checkbox-1"
+                value="1"
+                v-model="formBooking.insurance"
+                unchecked-value="0"
+              >
+                Travel Insurance
+              </b-form-checkbox>
+            </b-col>
+            <b-col style="text-align:right">
+              IDR 5.000.000
+            </b-col>
+          </b-row>
+          <br />
+          <div class="line"></div>
+          <br />
+          <p>Get Travel compensation up to IDR 5.000.000</p>
+        </div>
 
-      <b-button class="btn">
-        Process to Payment
-      </b-button>
+        <b-button type="submit" class="btn_Submit py-lg-3 px-lg-4">
+          Process to Payment
+        </b-button>
+      </b-form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import Alert from '../../../mixins/Alert'
+import Country from '../../../mixins/Country'
 export default {
+  name: 'BookingTicket',
+  mixins: [Country, Alert],
   data() {
     return {
-      selected: null,
       result: null,
-      status: 1,
-      countries: [
-        'Afghanistan',
-        'Albania',
-        'Algeria',
-        'Andorra',
-        'Angola',
-        'Anguilla',
-        'Antigua & Barbuda',
-        'Argentina',
-        'Armenia',
-        'Aruba',
-        'Australia',
-        'Austria',
-        'Azerbaijan',
-        'Bahamas',
-        'Bahrain',
-        'Bangladesh',
-        'Barbados',
-        'Belarus',
-        'Belgium',
-        'Belize',
-        'Benin',
-        'Bermuda',
-        'Bhutan',
-        'Bolivia',
-        'Bosnia & Herzegovina',
-        'Botswana',
-        'Brazil',
-        'British Virgin Islands',
-        'Brunei',
-        'Bulgaria',
-        'Burkina Faso',
-        'Burundi',
-        'Cambodia',
-        'Cameroon',
-        'Canada',
-        'Cape Verde',
-        'Cayman Islands',
-        'Central Arfrican Republic',
-        'Chad',
-        'Chile',
-        'China',
-        'Colombia',
-        'Congo',
-        'Cook Islands',
-        'Costa Rica',
-        'Cote D Ivoire',
-        'Croatia',
-        'Cuba',
-        'Curacao',
-        'Cyprus',
-        'Czech Republic',
-        'Denmark',
-        'Djibouti',
-        'Dominica',
-        'Dominican Republic',
-        'Ecuador',
-        'Egypt',
-        'El Salvador',
-        'Equatorial Guinea',
-        'Eritrea',
-        'Estonia',
-        'Ethiopia',
-        'Falkland Islands',
-        'Faroe Islands',
-        'Fiji',
-        'Finland',
-        'France',
-        'French Polynesia',
-        'French West Indies',
-        'Gabon',
-        'Gambia',
-        'Georgia',
-        'Germany',
-        'Ghana',
-        'Gibraltar',
-        'Greece',
-        'Greenland',
-        'Grenada',
-        'Guam',
-        'Guatemala',
-        'Guernsey',
-        'Guinea',
-        'Guinea Bissau',
-        'Guyana',
-        'Haiti',
-        'Honduras',
-        'Hong Kong',
-        'Hungary',
-        'Iceland',
-        'India',
-        'Indonesia',
-        'Iran',
-        'Iraq',
-        'Ireland',
-        'Isle of Man',
-        'Israel',
-        'Italy',
-        'Jamaica',
-        'Japan',
-        'Jersey',
-        'Jordan',
-        'Kazakhstan',
-        'Kenya',
-        'Kiribati',
-        'Kosovo',
-        'Kuwait',
-        'Kyrgyzstan',
-        'Laos',
-        'Latvia',
-        'Lebanon',
-        'Lesotho',
-        'Liberia',
-        'Libya',
-        'Liechtenstein',
-        'Lithuania',
-        'Luxembourg',
-        'Macau',
-        'Macedonia',
-        'Madagascar',
-        'Malawi',
-        'Malaysia',
-        'Maldives',
-        'Mali',
-        'Malta',
-        'Marshall Islands',
-        'Mauritania',
-        'Mauritius',
-        'Mexico',
-        'Micronesia',
-        'Moldova',
-        'Monaco',
-        'Mongolia',
-        'Montenegro',
-        'Montserrat',
-        'Morocco',
-        'Mozambique',
-        'Myanmar',
-        'Namibia',
-        'Nauro',
-        'Nepal',
-        'Netherlands',
-        'Netherlands Antilles',
-        'New Caledonia',
-        'New Zealand',
-        'Nicaragua',
-        'Niger',
-        'Nigeria',
-        'North Korea',
-        'Norway',
-        'Oman',
-        'Pakistan',
-        'Palau',
-        'Palestine',
-        'Panama',
-        'Papua New Guinea',
-        'Paraguay',
-        'Peru',
-        'Philippines',
-        'Poland',
-        'Portugal',
-        'Puerto Rico',
-        'Qatar',
-        'Reunion',
-        'Romania',
-        'Russia',
-        'Rwanda',
-        'Saint Pierre & Miquelon',
-        'Samoa',
-        'San Marino',
-        'Sao Tome and Principe',
-        'Saudi Arabia',
-        'Senegal',
-        'Serbia',
-        'Seychelles',
-        'Sierra Leone',
-        'Singapore',
-        'Slovakia',
-        'Slovenia',
-        'Solomon Islands',
-        'Somalia',
-        'South Africa',
-        'South Korea',
-        'South Sudan',
-        'Spain',
-        'Sri Lanka',
-        'St Kitts & Nevis',
-        'St Lucia',
-        'St Vincent',
-        'Sudan',
-        'Suriname',
-        'Swaziland',
-        'Sweden',
-        'Switzerland',
-        'Syria',
-        'Taiwan',
-        'Tajikistan',
-        'Tanzania',
-        'Thailand',
-        'Timor Leste',
-        'Togo',
-        'Tonga',
-        'Trinidad & Tobago',
-        'Tunisia',
-        'Turkey',
-        'Turkmenistan',
-        'Turks & Caicos',
-        'Tuvalu',
-        'Uganda',
-        'Ukraine',
-        'United Arab Emirates',
-        'United Kingdom',
-        'United States of America',
-        'Uruguay',
-        'Uzbekistan',
-        'Vanuatu',
-        'Vatican City',
-        'Venezuela',
-        'Vietnam',
-        'Virgin Islands (US)',
-        'Yemen',
-        'Zambia',
-        'Zimbabwe'
+      formBooking: {
+        scheduleId: 1,
+        insurance: 0,
+        status: 0
+      },
+      formPesenger: [
+        {
+          statusCheeck: 'not_accepted',
+          title: '',
+          fullname: '',
+          nationality: ''
+        }
       ]
+    }
+  },
+  computed: { ...mapGetters({ user: 'getUser' }) },
+  methods: {
+    ...mapActions(['postPesenger', 'postBooking']),
+    AddPesenger() {
+      this.formPesenger.push({
+        title: '',
+        fullname: '',
+        nationality: '',
+        statusCheeck: ''
+      })
+    },
+    async onSubmit() {
+      const dataCombine = {
+        userId: this.user.user_id,
+        total: 9000 * this.formPesenger.length
+      }
+      const payload = {
+        ...this.formBooking,
+        ...dataCombine
+      }
+      await this.postBooking(payload)
+      for (let i = 0; i < this.formPesenger.length; i++) {
+        const data = {
+          title: this.formPesenger[i].title,
+          fullname: this.formPesenger[i].fullname,
+          nationality: this.formPesenger[i].nationality
+        }
+        await this.postPesenger(data)
+          .then(() => {
+            this.AlertSucces('Success Booking Ticket')
+          })
+          .catch(() => {
+            this.AlertError('Error Booking')
+          })
+      }
+    },
+    switchOn() {},
+    removeFrom(index) {
+      this.formPesenger.splice(index, 1)
+      return this.$swal({
+        icon: 'info',
+        position: 'top-end',
+        showConfirmButton: false,
+        toast: true,
+        title: 'Success Remove Form Passenger',
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+          this.$swal.showLoading()
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped>
+.Forms {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  width: 25px;
+  right: -20px;
+  z-index: 1;
+  cursor: pointer;
+  top: -10px;
+  font-size: 10px;
+  padding-top: 3px;
+  padding-left: 3px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2395ff;
+  color: white;
+}
+.box-flight {
+  font-family: 'Poppins', sans-serif;
+}
+.badge:hover {
+  background: #0084ff;
+}
+.scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 450px;
+}
+.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+.btn_more {
+  display: block;
+  border: 2px solid #2395ff;
+  border-radius: 10px;
+  color: #2395ff;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: none;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  margin: 0 auto;
+}
+.btn_more:hover {
+  border: 2px solid #0285ff;
+  color: #0285ff;
+}
+.btn_Submit {
+  display: block;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: #2395ff;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  margin: 0 auto;
+}
+.btn_Submit:hover {
+  background: #0986fc;
+}
 .btn {
   margin-left: 35%;
   background-color: #2395ff;

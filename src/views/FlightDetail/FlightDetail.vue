@@ -4,11 +4,11 @@
     <div class="detail">
       <div class="top-bg">
         <b-container>
-          <b-row>
-            <b-col md="7">
+          <b-row align-h="center">
+            <b-col md="7" sm="12">
               <LeftFlight />
             </b-col>
-            <b-col md="5"> <RightFlight /></b-col>
+            <b-col md="5" sm="12"> <RightFlight /></b-col>
           </b-row>
         </b-container>
       </div>
@@ -47,6 +47,17 @@ export default {
 }
 .detail {
   background: #f5f6fa;
-  height: 1285px;
+  height: 1499px;
+}
+
+@media only screen and (max-width: 576px) {
+  .detail {
+    height: 1800px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .detail {
+    height: 1800px;
+  }
 }
 </style>
