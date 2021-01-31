@@ -120,7 +120,7 @@ export default {
   name: 'NavigationBar',
   data() {
     return {
-      notif: 1,
+      notif: 0,
       chat: 0,
       account: 0
     }

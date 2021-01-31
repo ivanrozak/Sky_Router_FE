@@ -13,7 +13,7 @@
           </div>
           <div class="flex-comp mb-2">
             <div class="mdm">Medan(IDN)</div>
-            <img src="../../../assets/icon/flight-to.png" />
+            <img src="../../../assets/icon/change.png" />
             <div class="mdm">Tokyo (JPN)</div>
           </div>
 
@@ -30,6 +30,15 @@
     </b-container>
   </main>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({ params: 'getParams' })
+  }
+}
+</script>
 
 <style scoped>
 main {
