@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -102,7 +102,6 @@ export default {
         arrivedStart: '',
         arrivedEnd: '',
         price: 700,
-        limit: 10,
         page: 1,
         sort: 'price'
       }
@@ -117,9 +116,9 @@ export default {
       flights: 'dataSchedules',
       page: 'getPage',
       rows: 'getTotalRows',
-      params: 'getParams'
-    }),
-    ...mapState({ limit: 'limit' })
+      params: 'getParams',
+      limit: 'getLimit'
+    })
   },
   methods: {
     ...mapMutations(['changePage']),
