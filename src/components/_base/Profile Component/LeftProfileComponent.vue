@@ -1,10 +1,7 @@
 <template>
   <div class="left-profile">
     <div class="top centered">
-      <img
-        v-if="image"
-        :src="`https://backend-vincent.fwebdev.online/${image}`"
-      />
+      <img v-if="image" :src="`${config}${image}`" />
       <img v-else src="../../../assets/logo.png" />
       <div>
         <input id="fileUpload" type="file" @change="handleFile" hidden />
@@ -19,14 +16,14 @@
     </div>
     <div class="bottom">
       <div class="btn-group">
-        <button style="color: #2395ff">
+        <button @click="changeDisplay" style="color: #2395ff">
           <img src="../../../assets/icon/profile.png" class="mr-3" />Profile
+        </button>
+        <button v-if="user.user_role === 1" @click="Addschedelue">
+          <img src="../../../assets/icon/gear.png" class="mr-3" />Add Schedule
         </button>
         <button>
           <img src="../../../assets/icon/star.png" class="mr-3" />My Review
-        </button>
-        <button>
-          <img src="../../../assets/icon/gear.png" class="mr-3" />Settings
         </button>
         <button @click="logingOut()" style="color: red">
           <img src="../../../assets/icon/logout.png" class="mr-3" />Logout
@@ -40,13 +37,22 @@
 import { mapActions, mapGetters } from 'vuex'
 import Alert from '../../../mixins/Alert'
 export default {
+  data() {
+    return {
+      config: process.env.VUE_APP_URL
+    }
+  },
   mixins: [Alert],
   computed: {
     ...mapGetters({ user: 'getUser', image: 'getImage' })
   },
   methods: {
     ...mapGetters(['getUser']),
+
     ...mapActions(['updateProfileUser', 'logout']),
+    changeDisplay() {
+      this.$router.push('/profile')
+    },
     updateProfile() {
       const {
         user_name,
@@ -84,6 +90,9 @@ export default {
     },
     chooseFile() {
       document.getElementById('fileUpload').click()
+    },
+    Addschedelue() {
+      this.$router.push('/postschedule')
     }
   }
 }

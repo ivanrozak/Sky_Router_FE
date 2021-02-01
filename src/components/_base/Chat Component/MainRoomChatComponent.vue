@@ -128,7 +128,7 @@ export default {
       user: 'getUser',
       roomChat: 'displayData',
       oldRoom: 'setOldRoom',
-       image: 'getImage'
+      image: 'getImage'
     })
   },
   created() {
@@ -141,7 +141,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['postChat']),
+    ...mapActions(['postChat', 'getChat']),
     ...mapMutations(['setSocketchat', 'setChating', 'setRoom']),
     formatTime(value) {
       moment.locale('ID')
@@ -162,6 +162,7 @@ export default {
         chat_content: this.message,
         chat_created_at: new Date()
       }
+
       this.socket.emit('roomMessage', setDataToSocket)
       this.postChat(setDataToDatabase)
       this.message = ''
@@ -170,7 +171,9 @@ export default {
     leaveRoom() {
       if (this.oldRoom) {
         this.socket.emit('leaveRoom', this.oldRoom)
+        this.getChat(this.roomChat.room_chat)
       }
+      this.getChat(this.roomChat.room_chat)
       this.$router.push('/chatlist')
     }
     // =================

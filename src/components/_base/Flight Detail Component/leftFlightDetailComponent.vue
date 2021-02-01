@@ -126,7 +126,6 @@
           <br />
           <p>Get Travel compensation up to IDR 5.000.000</p>
         </div>
-
         <b-button type="submit" class="btn_Submit py-lg-3 px-lg-4">
           Process to Payment
         </b-button>
@@ -146,7 +145,6 @@ export default {
     return {
       result: null,
       formBooking: {
-        scheduleId: 1,
         insurance: 0,
         status: 0
       },
@@ -160,7 +158,7 @@ export default {
       ]
     }
   },
-  computed: { ...mapGetters({ user: 'getUser' }) },
+  computed: { ...mapGetters({ user: 'getUser', data: 'getDataScheduleById' }) },
   methods: {
     ...mapActions(['postPesenger', 'postBooking']),
     AddPesenger() {
@@ -174,13 +172,20 @@ export default {
     async onSubmit() {
       const dataCombine = {
         userId: this.user.user_id,
-        total: 9000 * this.formPesenger.length
+        total: this.data.price * this.formPesenger.length,
+        scheduleId: this.data.scheduleId
       }
       const payload = {
         ...this.formBooking,
         ...dataCombine
       }
       await this.postBooking(payload)
+        .then(result => {
+          this.AlertSuccesBooking(result.data.data)
+        })
+        .catch(() => {
+          this.AlertError('Error Booking')
+        })
       for (let i = 0; i < this.formPesenger.length; i++) {
         const data = {
           title: this.formPesenger[i].title,
@@ -188,12 +193,6 @@ export default {
           nationality: this.formPesenger[i].nationality
         }
         await this.postPesenger(data)
-          .then(() => {
-            this.AlertSucces('Success Booking Ticket')
-          })
-          .catch(() => {
-            this.AlertError('Error Booking')
-          })
       }
     },
     switchOn() {},
