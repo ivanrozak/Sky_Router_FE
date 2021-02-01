@@ -51,13 +51,17 @@
         <b-form-radio value="1" unchecked-value="0">Direct</b-form-radio>
         <b-form-radio value="1" unchecked-value="0">Transit</b-form-radio>
       </b-form-radio-group>
-
-      <br />
     </div>
+    <br />
+    <div style="text-align: right;"><b-button class="btn">Add</b-button></div>
   </div>
 </template>
 
 <style scoped>
+.btn {
+  background: #2395ff;
+  width: 120px;
+}
 .right-form {
   border-radius: 15px;
   padding: 20px;
