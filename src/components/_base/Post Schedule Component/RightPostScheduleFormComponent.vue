@@ -3,8 +3,17 @@
     <div class="right-form">
       <label for="duration">Duration</label>
       <b-form-input type="text" id="duration"></b-form-input>
-      <label for="class">Airplane's Class</label>
-      <b-form-input type="text" id="class"></b-form-input>
+      <label for="class">Class</label>
+      <b-form-select id="class" class="mb-3">
+        <b-form-select-option :value="null"
+          >Please select an option</b-form-select-option
+        >
+        <b-form-select-option value="economy">Economy</b-form-select-option>
+        <b-form-select-option value="First Class"
+          >First Class</b-form-select-option
+        >
+        <b-form-select-option value="Business">Business</b-form-select-option>
+      </b-form-select>
       <label for="price">Price</label>
       <b-form-input type="number" id="price"></b-form-input>
 
@@ -51,13 +60,17 @@
         <b-form-radio value="1" unchecked-value="0">Direct</b-form-radio>
         <b-form-radio value="1" unchecked-value="0">Transit</b-form-radio>
       </b-form-radio-group>
-
-      <br />
     </div>
+    <br />
+    <div style="text-align: right;"><b-button class="btn">Add</b-button></div>
   </div>
 </template>
 
 <style scoped>
+.btn {
+  background: #2395ff;
+  width: 120px;
+}
 .right-form {
   border-radius: 15px;
   padding: 20px;

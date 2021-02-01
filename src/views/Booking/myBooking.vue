@@ -36,7 +36,7 @@ export default {
     Footer
   },
   created() {
-    this.getBooking(1)
+    this.getBooking(this.user.user_id)
   },
   computed: {
     ...mapGetters({ user: 'getUser' })
@@ -51,7 +51,7 @@ export default {
 .mybooking-page {
   margin-bottom: 100px;
   font-family: 'Poppins', sans-serif;
-  padding: 40px 80px 0;
+  padding: 40px 0;
 }
 .booking-history {
   background: #f5f6fa;
