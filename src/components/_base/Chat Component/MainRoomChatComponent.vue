@@ -18,47 +18,59 @@
             </b-media>
           </div>
           <div class="chats">
-            <b-row align-h="end" align-v="center" style="margin-bottom:20px">
-              <b-col cols="2" sm="2" xs="3" order="5"
-                ><img
-                  style="width:40px; border-radius:50%"
-                  src="../../../assets/chatImg/profile1.jpg"
-                  alt="Avatar"
-                  class="right"
-              /></b-col>
-              <b-col cols="9" sm="6" xs="9"
-                ><div class="chat-styling-a">
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
-                    consequuntur ipsum, et nisi similique fuga aliquid magnam.
-                    Error, atque doloribus culpa delectus, magni molestiae
-                    pariatur quas veniam omnis voluptate officia?
-                  </p>
-                  <span style="color:#ccc;font-size:12px">10:15</span>
-                </div></b-col
+            <div v-for="(items, index) in chat" :key="index" class="chat_list">
+              <b-row
+                v-if="
+                  items.user_id_from === user.user_id &&
+                    items.user_id_to !== user.user_id
+                "
+                align-h="end"
+                align-v="center"
+                style="margin-bottom:20px"
               >
-            </b-row>
-
-            <b-row align-h="start" align-v="center" style="margin-bottom:20px">
-              <b-col cols="2" sm="2" xs="3" order="0"
-                ><img
-                  style="width:40px; border-radius:50%"
-                  src="../../../assets/chatImg/profile1.jpg"
-                  alt="Avatar"
-                  class="right"
-              /></b-col>
-              <b-col cols="9" sm="6" xs="9"
-                ><div class="chat-styling-b">
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
-                    consequuntur ipsum, et nisi similique fuga aliquid magnam.
-                    Error, atque doloribus culpa delectus, magni molestiae
-                    pariatur quas veniam omnis voluptate officia?
-                  </p>
-                  <span style="color:#ccc;font-size:12px;">10:15</span>
-                </div></b-col
+                <b-col cols="2" sm="2" xs="3" order="5"
+                  ><img
+                    style="width:40px; border-radius:50%"
+                    src="../../../assets/chatImg/profile1.jpg"
+                    alt="Avatar"
+                    class="right"
+                /></b-col>
+                <b-col cols="9" sm="6" xs="9"
+                  ><div class="chat-styling-a">
+                    <p>
+                      {{ items.chat_content }}
+                    </p>
+                    <span style="color:#ccc;font-size:12px">{{
+                      formatTime(items.chat_created_at)
+                    }}</span>
+                  </div>
+                </b-col>
+              </b-row>
+              <b-row
+                v-if="items.user_id_from !== user.user_id"
+                align-h="start"
+                align-v="center"
+                style="margin-bottom:20px"
               >
-            </b-row>
+                <b-col cols="2" sm="2" xs="3" order="0"
+                  ><img
+                    style="width:40px; border-radius:50%"
+                    src="../../../assets/chatImg/profile1.jpg"
+                    alt="Avatar"
+                    class="right"
+                /></b-col>
+                <b-col cols="9" sm="6" xs="9"
+                  ><div class="chat-styling-b">
+                    <p>
+                      {{ items.chat_content }}
+                    </p>
+                    <span style="color:#ccc;font-size:12px;">{{
+                      formatTime(items.chat_created_at)
+                    }}</span>
+                  </div></b-col
+                >
+              </b-row>
+            </div>
           </div>
           <div class="input">
             <b-row align-v="center" align-h="center">
@@ -66,8 +78,11 @@
               <b-col cols="8" style="width: 100%"
                 ><b-form-input
                   id="input-2"
+                  v-model="message"
+                  autocomplete="off"
                   placeholder="Write your message"
                   required
+                  @keydown.enter.prevent="sendMessage"
                 ></b-form-input
               ></b-col>
               <b-col cols="1"><i class="fa fa-microphone fa-lg"></i></b-col>
@@ -81,12 +96,50 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import io from 'socket.io-client'
+import moment from 'moment'
 export default {
   data() {
     return {
-      isMe: 1
+      isMe: 1,
+      socket: io('http://localhost:3000'),
+      message: ''
     }
-  }
+  },
+  computed: {
+    ...mapGetters({ chat: 'getChat', user: 'getUser', roomChat: 'displayData' })
+  },
+  created() {
+     console.log('Open Message');
+  },
+  methods: {
+    ...mapActions(['postChat']),
+    ...mapMutations(['setSocketchat']),
+    formatTime(value) {
+      moment.locale('ID')
+      return moment(String(value)).format('LT')
+    },
+    sendMessage() {
+      const setDataToDatabase = {
+        room: this.roomChat.room_chat,
+        data: {
+          user_id_to: this.roomChat.user_id,
+          chat_content: this.message
+        }
+      }
+      const setDataToSocket = {
+        room_chat: this.roomChat.room_chat,
+        user_id_to: this.roomChat.user_id,
+        user_id_from: this.user.user_id,
+        chat_content: this.message,
+        chat_created_at: new Date()
+      }
+      this.socket.emit('roomMessage', setDataToSocket)
+      this.postChat(setDataToDatabase)
+      this.message = ''
+    }
+  } 
 }
 </script>
 
