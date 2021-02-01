@@ -213,13 +213,15 @@ export default {
         { value: '', text: 'SELECT' },
         { value: 'Jakarta', text: 'JKT' },
         { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang', text: 'SMG' }
+        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
       ],
       landingOpt: [
         { value: '', text: 'SELECT' },
         { value: 'Jakarta', text: 'JKT' },
         { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang', text: 'SMG' }
+        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
       ],
       child: [
         { value: '', text: 'SELECT' },

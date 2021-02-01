@@ -1,7 +1,10 @@
 <template>
   <div class="left-profile">
     <div class="top centered">
-      <img v-if="image" :src="`http://localhost:3000/${image}`" />
+      <img
+        v-if="image"
+        :src="`https://backend-vincent.fwebdev.online/${image}`"
+      />
       <img v-else src="../../../assets/logo.png" />
       <div>
         <input id="fileUpload" type="file" @change="handleFile" hidden />

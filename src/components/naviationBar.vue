@@ -96,10 +96,11 @@
               </section>
               <section class="py-3 py-lg-1">
                 <img
+                  @click="toProfilePage()"
                   class="image_logo"
                   :src="
                     image
-                      ? `http://localhost:3000/${image}`
+                      ? `https://backend-vincent.fwebdev.online/${image}`
                       : require('../assets/logo.png')
                   "
                   alt="image"
@@ -156,6 +157,9 @@ export default {
       } else {
         this.chat = 0
       }
+    },
+    toProfilePage() {
+      this.$router.push('/profile')
     }
   }
 }
