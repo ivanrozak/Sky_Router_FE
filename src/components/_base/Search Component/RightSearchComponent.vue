@@ -45,14 +45,14 @@
         </b-col>
         <b-col sm="6" md="9" lg="9" class="plane2">
           <div class="plane-time">
-            <div>
+            <div class="hidden-sm">
               <small>{{ item.Duration }}</small>
             </div>
             <small v-if="item.direct === 1">(Direct)</small>
             <small v-if="item.transit === '1'">(1 Transit)</small>
             <small v-if="item.transit === '2x'">(2 Transit)</small>
           </div>
-          <div class="plane-icon">
+          <div class="plane-icon hidden-sm">
             <img
               v-if="item.luggage === 1"
               src="../../../assets/icon/trash.png"
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -102,7 +102,6 @@ export default {
         arrivedStart: '',
         arrivedEnd: '',
         price: 700,
-        limit: 10,
         page: 1,
         sort: 'price'
       }
@@ -117,9 +116,9 @@ export default {
       flights: 'dataSchedules',
       page: 'getPage',
       rows: 'getTotalRows',
-      params: 'getParams'
-    }),
-    ...mapState({ limit: 'limit' })
+      params: 'getParams',
+      limit: 'getLimit'
+    })
   },
   methods: {
     ...mapMutations(['changePage']),
@@ -225,5 +224,14 @@ export default {
 }
 .centered {
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .box-logo {
+    display: none;
+  }
+  .hidden-sm {
+    display: none;
+  }
 }
 </style>

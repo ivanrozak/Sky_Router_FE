@@ -117,6 +117,7 @@ export default {
     getPage: state => state.page,
     getTotalRows: state => state.totalRows,
     getParams: state => state.params,
-    getDataScheduleById: state => state.scheduleById
+    getDataScheduleById: state => state.scheduleById,
+    getLimit: state => state.limit
   }
 }
