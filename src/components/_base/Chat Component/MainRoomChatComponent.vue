@@ -6,14 +6,20 @@
           <div class="nav">
             <b-media>
               <template #aside>
+                <button class="btn_back mr-lg-3" @click="leaveRoom">
+                  back
+                </button>
                 <img
                   style="width:50px; border-radius:10px"
-                  src="../../../assets/chatImg/profile1.jpg"
+                  :src="
+                    roomChat.user_image
+                      ? `${config}${roomChat.user_image}`
+                      : require('../../../assets/chatImg/profile1.jpg')
+                  "
                   alt=""
                 />
               </template>
-
-              <h6 class="mb-1">Hipster</h6>
+              <h6 class="mb-1">{{ roomChat.user_name }}</h6>
               <small>Online</small>
             </b-media>
           </div>
@@ -31,7 +37,11 @@
                 <b-col cols="2" sm="2" xs="3" order="5"
                   ><img
                     style="width:40px; border-radius:50%"
-                    src="../../../assets/chatImg/profile1.jpg"
+                    :src="
+                      image
+                        ? `${config}${image}`
+                        : require('../../../assets/chatImg/profile1.jpg')
+                    "
                     alt="Avatar"
                     class="right"
                 /></b-col>
@@ -55,7 +65,11 @@
                 <b-col cols="2" sm="2" xs="3" order="0"
                   ><img
                     style="width:40px; border-radius:50%"
-                    src="../../../assets/chatImg/profile1.jpg"
+                    :src="
+                      roomChat.user_image
+                        ? `${config}${roomChat.user_image}`
+                        : require('../../../assets/chatImg/profile1.jpg')
+                    "
                     alt="Avatar"
                     class="right"
                 /></b-col>
@@ -104,18 +118,31 @@ export default {
     return {
       isMe: 1,
       socket: io('http://localhost:3000'),
+      config: process.env.VUE_APP_URL,
       message: ''
     }
   },
   computed: {
-    ...mapGetters({ chat: 'getChat', user: 'getUser', roomChat: 'displayData' })
+    ...mapGetters({
+      chat: 'getChat',
+      user: 'getUser',
+      roomChat: 'displayData',
+      oldRoom: 'setOldRoom',
+       image: 'getImage'
+    })
   },
   created() {
-     console.log('Open Message');
+    this.socket.emit('joinRoom', {
+      room_chat: this.$route.params.room
+    })
+    this.setRoom(this.$route.params.room)
+    this.socket.on('chatMessage', data => {
+      this.setChating(data)
+    })
   },
   methods: {
     ...mapActions(['postChat']),
-    ...mapMutations(['setSocketchat']),
+    ...mapMutations(['setSocketchat', 'setChating', 'setRoom']),
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
@@ -138,8 +165,16 @@ export default {
       this.socket.emit('roomMessage', setDataToSocket)
       this.postChat(setDataToDatabase)
       this.message = ''
+    },
+    // =================
+    leaveRoom() {
+      if (this.oldRoom) {
+        this.socket.emit('leaveRoom', this.oldRoom)
+      }
+      this.$router.push('/chatlist')
     }
-  } 
+    // =================
+  }
 }
 </script>
 
@@ -147,6 +182,14 @@ export default {
 .fa {
   color: white;
   cursor: pointer;
+}
+.btn_back {
+  background: #ffffff;
+  color: #2395ff;
+  border: 3px solid #2395ff;
+  border-radius: 8px;
+  outline: none;
+  font-weight: 700;
 }
 .chat-styling-a {
   position: relative;
@@ -214,6 +257,7 @@ export default {
 }
 .box {
   width: 90%;
+  font-family: 'Poppins', sans-serif;
   height: 450px;
   background-color: white;
   position: absolute;
