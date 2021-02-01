@@ -30,12 +30,12 @@
             <p>Pending</p>
           </div></b-col
         >
-        <b-col cols="2" sm="2" md="2" lg="2" v-if="el.status === 0"
+        <!-- <b-col cols="2" sm="2" md="2" lg="2" v-if="el.status === 0"
           ><b-button
             style="background:#2395ff;width:80px;height:30px;font-size:10px"
             >Cancel</b-button
           ></b-col
-        >
+        > -->
         <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
           <span
@@ -43,10 +43,10 @@
               src="../../../assets/myBooking/btnback.png"
               alt=""
               style="cursor:pointer"
-              @click="myBookingDetail(el)"/></span
+              @click="myBookingDetail(el, i)"/></span
         ></b-col>
       </b-row>
-      <div v-show="isClickDetails">
+      <div v-show="isClickDetails[i]">
         <div class="passenger-detail">
           <div class="box-detail">
             <b-row align-v="baseline">
@@ -132,7 +132,7 @@ import moment from 'moment'
 export default {
   data() {
     return {
-      isClickDetails: false,
+      isClickDetails: [false],
       isPaymentSuccess: false
     }
   },
@@ -145,9 +145,10 @@ export default {
   methods: {
     ...mapActions(['getPassengers']),
     ...mapMutations(['setElementMyBooking']),
-    myBookingDetail(el) {
-      if (this.isClickDetails) this.isClickDetails = false
-      else this.isClickDetails = true
+    myBookingDetail(el, i) {
+      this.isClickDetails.push(false)
+      if (this.isClickDetails[i]) this.isClickDetails[i] = false
+      else this.isClickDetails[i] = true
       this.getPassengers(el.bookingId)
       console.log('passengers vue')
       console.log(this.passengers)

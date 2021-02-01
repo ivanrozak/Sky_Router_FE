@@ -33,7 +33,7 @@
               </b-col>
               <b-col>
                 <p class="grey">Class</p>
-                <p>{{ elMyBooking.class }}</p>
+                <p>{{ elMyBooking.airplanesClass }}</p>
               </b-col>
             </b-row>
             <br />
