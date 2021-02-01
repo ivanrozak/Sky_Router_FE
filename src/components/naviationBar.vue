@@ -100,7 +100,7 @@
                   class="image_logo"
                   :src="
                     image
-                      ? `https://backend-vincent.fwebdev.online/${image}`
+                      ? `${config}${image}`
                       : require('../assets/logo.png')
                   "
                   alt="image"
@@ -123,7 +123,8 @@ export default {
     return {
       notif: 0,
       chat: 0,
-      account: 0
+      account: 0,
+      config: process.env.VUE_APP_URL
     }
   },
   computed: {
