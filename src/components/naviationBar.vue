@@ -96,10 +96,11 @@
               </section>
               <section class="py-3 py-lg-1">
                 <img
+                  @click="toProfilePage()"
                   class="image_logo"
                   :src="
                     image
-                      ? `http://localhost:3000/${image}`
+                      ? `${config}${image}`
                       : require('../assets/logo.png')
                   "
                   alt="image"
@@ -122,7 +123,8 @@ export default {
     return {
       notif: 0,
       chat: 0,
-      account: 0
+      account: 0,
+      config: process.env.VUE_APP_URL
     }
   },
   computed: {
@@ -156,6 +158,9 @@ export default {
       } else {
         this.chat = 0
       }
+    },
+    toProfilePage() {
+      this.$router.push('/profile')
     }
   }
 }

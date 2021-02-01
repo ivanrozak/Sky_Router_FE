@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     schedules: [],
-    limit: 4,
+    limit: 8,
     page: 1,
     totalRows: null,
     takeOff: '',
@@ -87,7 +87,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://localhost:3000/schedule?takeoff=${state.params.takeOff}&landing=${state.params.landing}&inflightMeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}&date=${state.params.date}`
+            `${process.env.VUE_APP_URL}schedule?takeoff=${state.params.takeOff}&landing=${state.params.landing}&inflightMeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}&date=${state.params.date}&airplanesClass=${state.params.class}`
           )
           .then(result => {
             resolve(result)

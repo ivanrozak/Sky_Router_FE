@@ -2,20 +2,27 @@
   <main>
     <div class="top">
       <h5>
-        <strong>Select Ticket<small> (6 flight found)</small></strong>
+        <strong
+          >Select Ticket<small> ({{ rows }} flight found)</small></strong
+        >
       </h5>
-      <h6>
-        <small
+      <b-dropdown right variant="none" class="m-md-2" no-caret
+        ><template slot="button-content"
           ><strong
-            ><span class="mr-3">Sort by</span
-            ><b-icon icon="arrow-down-up"></b-icon></strong
-        ></small>
-      </h6>
+            >Sort By<b-icon icon="arrow-down-up" class="ml-2"></b-icon></strong
+        ></template>
+        <b-dropdown-item @click.prevent="sortLowest()"
+          >Lowest Price</b-dropdown-item
+        >
+        <b-dropdown-item @click.prevent="sortHighest()"
+          >Highest Price</b-dropdown-item
+        >
+      </b-dropdown>
     </div>
     <div class="box-group" v-for="(item, index) in flights" :key="index">
       <div class="box-logo">
         <img
-          v-if="item.airlanes === 'Batik Air'"
+          v-if="item.airlanes === 'Garuda'"
           src="../../../assets/icon/garuda.png"
           class="mr-4"
         />
@@ -24,8 +31,23 @@
           src="../../../assets/icon/lion air.png"
           class="mr-4"
         />
+        <img
+          v-else-if="item.airlanes === 'Sriwijaya'"
+          src="../../../assets/icon/sriwijaya.png"
+          class="mr-4"
+        />
+        <img
+          v-else-if="item.airlanes === 'Batik Air'"
+          src="../../../assets/icon/batik air.png"
+          class="mr-4"
+        />
+        <img
+          v-else-if="item.airlanes === 'Citilink'"
+          src="../../../assets/icon/citilink.png"
+          class="mr-4"
+        />
         <img v-else src="../../../assets/icon/air asia.png" class="mr-4" />
-        <div>{{ item.airlanes }}</div>
+        <div>{{ item.airlanes }} - {{ item.airplanesClass }}</div>
       </div>
       <b-row>
         <b-col sm="6" md="3" lg="3" class="plane">
@@ -64,7 +86,7 @@
             <img v-if="item.wifi === 1" src="../../../assets/icon/wifi.png" />
           </div>
           <div class="plane-pricing">
-            $ {{ item.price }} <small>/pax</small>
+            Rp. {{ item.price }} <small>/pax</small>
           </div>
           <b-button
             @click.prevent="selectSchedule(item.scheduleId)"
@@ -89,27 +111,11 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
-      currentPage: 1,
-      form: {
-        inflightMeal: '',
-        wifi: '',
-        luggage: '',
-        direct: '',
-        transit: '',
-        airlanes: 'garuda',
-        departureStart: '',
-        departureEnd: '',
-        arrivedStart: '',
-        arrivedEnd: '',
-        price: 700,
-        page: 1,
-        sort: 'price'
-      }
+      currentPage: 1
     }
   },
   created() {
     this.getData()
-    console.log(this.rows)
   },
   computed: {
     ...mapGetters({
@@ -121,7 +127,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['changePage']),
+    ...mapMutations(['changePage', 'setSort']),
     ...mapActions(['getSchedules', 'getScheduleById']),
     getData() {
       this.getSchedules()
@@ -131,7 +137,6 @@ export default {
         .catch(err => {
           console.log(this.form)
           console.log(err)
-          // alert(err.data.message)
         })
     },
     handlePageChange(numberPage) {
@@ -139,7 +144,6 @@ export default {
       this.getSchedules()
     },
     selectSchedule(param) {
-      // console.log(param)
       this.getScheduleById(param)
         .then(result => {
           console.log(result)
@@ -150,6 +154,14 @@ export default {
           // alert(error.data.message)
           console.log(error)
         })
+    },
+    sortLowest() {
+      this.setSort('price')
+      this.getData()
+    },
+    sortHighest() {
+      this.setSort('price DESC')
+      this.getData()
     }
   }
 }
@@ -185,7 +197,7 @@ export default {
   font-weight: 500;
 }
 .top {
-  padding: 20px 0px;
+  padding: 10px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -224,6 +236,9 @@ export default {
 }
 .centered {
   text-align: center;
+}
+.box-logo img {
+  width: 120px;
 }
 
 @media (max-width: 768px) {

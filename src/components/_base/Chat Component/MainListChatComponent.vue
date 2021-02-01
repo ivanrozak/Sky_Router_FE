@@ -12,6 +12,7 @@
             <div
               v-for="(items, index) in chats"
               :key="index"
+              style="cursor : pointer;"
               @click="roomGet(items)"
               class="d-flex mb-lg-3 align-items-center mt-2 pr-1"
             >
@@ -20,7 +21,7 @@
                 :src="
                   items.user_image
                     ? `${config}${items.user_image}`
-                    : require('../../../assets/logo.png')
+                    : require('../../../assets/chatImg/profile1.jpg')
                 "
                 alt="image_chatfriend"
               />
@@ -59,31 +60,20 @@ export default {
       config: process.env.VUE_APP_URL
     }
   },
-  created() {
-    this.socket.on('chatMessage', data => {
-      this.setChating(data)
-    })
-    if (this.oldRoom) {
-      this.socket.on('leaveRoom', this.oldRoom)
-    }
-    /*    console.log(this.oldRoom) */
-  },
+  created() {},
   methods: {
     ...mapActions(['getChat']),
-    ...mapMutations(['setRoomDisplay', 'setRoom', 'setChating']),
-    getDataRoom(room) {
-      console.log(room)
-    },
+    ...mapMutations(['setRoomDisplay', 'setRoom']),
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
     },
     roomGet(data) {
       /*  this.setRoom(data.room_chat) */
-      this.socket.emit('joinRoom', {
-        room_chat: data.room_chat
-      })
-      this.setRoom(data.room_chat)
+      // this.socket.emit('joinRoom', {
+      //   room_chat: data.room_chat
+      // })
+      // this.setRoom(data.room_chat)
       const display = {
         user_name: data.user_name,
         user_image: data.user_image,
@@ -91,8 +81,14 @@ export default {
         room_chat: data.room_chat
       }
       this.setRoomDisplay(display)
+
       this.getChat(data.room_chat).then(() => {
-        this.$router.push('/chatroom')
+        this.$router.push({
+          name: 'ChatRoom',
+          params: {
+            room: data.room_chat
+          }
+        })
       })
     }
   }
