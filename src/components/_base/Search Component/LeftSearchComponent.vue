@@ -271,7 +271,8 @@ export default {
       'setDepartureEnd',
       'setArrivedStart',
       'setArrivedEnd',
-      'setPrice'
+      'setPrice',
+      'setSort'
     ]),
     ...mapActions(['getSchedules']),
     filterData() {
@@ -332,24 +333,22 @@ export default {
         })
     },
     resetFilter() {
-      this.setInflightMeal('')
-      this.setWifi('')
-      this.setLuggage('')
-      this.setDirect('')
-      this.setTransit('')
-      this.setAirlanes('')
-      this.setDepartureStart('')
-      this.setDepartureEnd('')
-      this.setArrivedStart('')
-      this.setArrivedEnd('')
-      this.setPrice('')
-      this.getSchedules()
-        .then(result => {
-          console.log(result)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.form.inflightMeal = ''
+      this.form.wifi = ''
+      this.form.luggage = ''
+      this.form.direct = ''
+      this.form.transit = ''
+      this.form.price = ''
+      this.departure = ''
+      this.arrive = ''
+      this.airlane.garuda = ''
+      this.airlane.lionair = ''
+      this.airlane.sriwijaya = ''
+      this.airlane.airasia = ''
+      this.airlane.citilink = ''
+      this.airlane.batikair = ''
+      this.setSort('')
+      this.filterData()
     }
   }
 }

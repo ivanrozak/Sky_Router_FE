@@ -11,25 +11,27 @@
             />
           </b-col>
           <b-col>
-            <p class="airline-name">Garuda Indonesia</p>
+            <p class="airline-name">{{ data.airlanes }}</p>
           </b-col>
         </b-row>
         <br /><br />
         <p style="font-size: 18px;font-weight: 600; line-height: 27px">
-          Medan (IDN)
+          {{ data.takeOff }}
           <span
             ><img src="../../../assets/myBooking/airplaneIcon.png" alt=""
           /></span>
-          Tokyo (JPN)
+          {{ data.landing }}
         </p>
         <b-row>
           <b-col
             ><p class="grey">
-              Sunday, 15 August 2020<span
+              {{ formatTime(data.date)
+              }}<span
                 ><img
                   src="../../../assets/myBooking/Ellipse 48.png"
                   alt=""/></span
-              >12:33 - 15:21
+              >{{ data.takeOffTime.slice(11, 16) }} -
+              {{ data.landingTime.slice(11, 16) }}
             </p></b-col
           >
         </b-row>
@@ -37,7 +39,7 @@
         <br />
         <b-row>
           <b-col cols="7"><h5>Total Payment</h5></b-col>
-          <b-col cols="5" class="right">@145.00</b-col>
+          <b-col cols="5" class="right">Rp. {{ data.price }}</b-col>
         </b-row>
         <br />
       </div>
@@ -45,6 +47,24 @@
   </div>
 </template>
 
+<script>
+import { mapGetters } from 'vuex'
+import moment from 'moment'
+export default {
+  created() {
+    console.log(this.data)
+  },
+  computed: {
+    ...mapGetters({ data: 'getDataScheduleById' })
+  },
+  methods: {
+    formatTime(value) {
+      moment.locale('en')
+      return moment(String(value)).format('dddd, D MMMM YYYY')
+    }
+  }
+}
+</script>
 <style scoped>
 span {
   margin: 0 15px;
