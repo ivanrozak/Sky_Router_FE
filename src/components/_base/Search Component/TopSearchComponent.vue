@@ -13,7 +13,7 @@
           </div>
           <div class="flex-comp mb-2">
             <div class="mdm">{{ params.takeOff }}</div>
-            <img src="../../../assets/icon/change.png" />
+            <img src="../../../assets/icon/change.png" class="ml-2 mr-2" />
             <div class="mdm">{{ params.landing }}</div>
           </div>
 
