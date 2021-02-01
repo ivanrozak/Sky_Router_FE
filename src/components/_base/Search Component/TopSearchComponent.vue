@@ -4,7 +4,7 @@
       <div class="flex-comp">
         <img
           src="../../../assets/icon/logo sky-router white.png"
-          class="mr-5"
+          class="mr-2"
         />
         <div class="search-comp">
           <div class="flex-comp mb-2">
@@ -73,5 +73,11 @@ main {
 .sml {
   font-size: 0.7em;
   font-weight: lighter;
+}
+
+@media (max-width: 768px) {
+  .right-top {
+    display: none;
+  }
 }
 </style>

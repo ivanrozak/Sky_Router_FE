@@ -18,12 +18,12 @@
           {{ items.text }}
         </p>
         <p class="mt-lg-3">
-          
           <timeago
             :datetime="items.createdAt"
             locale="id"
             :auto-update="60"
           ></timeago>
+        
         </p>
       </b-card>
     </div>
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
   name: 'Notif',
   data() {
@@ -44,14 +45,9 @@ export default {
   },
   methods: {
     ...mapActions(['getNotif']),
-    filterTime(val) {
-      const date = new Date(val)
-      const minute = date.getMinutes()
-      const hours = date.getHours()
-      const result = `${hours < 10 ? '0' + hours : hours}:${
-        minute < 10 ? '0' + minute : minute
-      }`
-      return result
+    formatTime(value) {
+      moment.locale('ID')
+      return moment(String(value)).format('LT')
     }
   }
 }
