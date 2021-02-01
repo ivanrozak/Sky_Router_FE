@@ -190,7 +190,7 @@ export default {
 }
 .my-booking,
 .payment-status {
-  width: 90%;
+  width: 100%;
   background-color: white;
   border-radius: 15px;
   padding: 20px;
