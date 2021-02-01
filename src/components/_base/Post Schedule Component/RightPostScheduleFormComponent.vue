@@ -62,10 +62,53 @@
       </b-form-radio-group>
     </div>
     <br />
-    <div style="text-align: right;"><b-button class="btn">Add</b-button></div>
+    <button class="btn btn-primary w-100" @click="postData">
+      <h3 class="m-0">Add</h3>
+    </button>
   </div>
 </template>
-
+<script>
+// import axios from 'axios'
+export default {
+  data() {
+    return {
+      form: {
+        airlanes: '',
+        date: null,
+        takeOff: '',
+        takeOffAirport: '',
+        takeOffTime: null,
+        landing: '',
+        landingAirport: '',
+        landingTime: null,
+        Duration: '',
+        luggage: 0,
+        inflightMeal: 0,
+        wifi: 0,
+        direct: 0,
+        transit: 0,
+        airplanesClass: '',
+        refun: 0,
+        reschedule: 0,
+        price: null
+      }
+    }
+  },
+  methods: {
+    postData() {
+      console.log(this.form)
+      // axios
+      //   .post('http://localhost:3000/schedule', this.form)
+      //   .then(() => {
+      //     alert('yes')
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
+    }
+  }
+}
+</script>
 <style scoped>
 .btn {
   background: #2395ff;
