@@ -4,7 +4,7 @@
       <div class="flex-comp">
         <img
           src="../../../assets/icon/logo sky-router white.png"
-          class="mr-2"
+          class="mr-2 sm-hide"
         />
         <div class="search-comp">
           <div class="flex-comp mb-2">
@@ -17,21 +17,25 @@
             <div class="mdm">{{ params.landing }}</div>
           </div>
 
-          <div class="flex-comp">
-            <div class="sml mr-2">{{ formatTime(params.date) }}</div>
-            <div class="sml mr-2">
+          <div class="flex-comp flex-bot">
+            <div v-if="params.date" class="sml mr-2">
+              {{ formatTime(params.date) }}
+            </div>
+            <div v-if="params.totalAdult" class="sml mr-2">
               <li>
                 {{ parseInt(params.totalAdult) + parseInt(params.totalChild) }}
                 Passenger
               </li>
             </div>
-            <div class="sml">
+            <div v-if="params.class" class="sml">
               <li>{{ params.class }}</li>
             </div>
           </div>
         </div>
       </div>
-      <div class="right-top">Change search</div>
+      <div>
+        <router-link class="right-top" to="/">Change search</router-link>
+      </div>
     </b-container>
   </main>
 </template>
@@ -74,10 +78,28 @@ main {
   font-size: 0.7em;
   font-weight: lighter;
 }
+.right-top {
+  color: white;
+}
+.search-comp {
+  min-width: 250px;
+}
 
 @media (max-width: 768px) {
   .right-top {
     display: none;
+  }
+  .flex-bot {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .search-comp {
+    min-width: 320px;
+  }
+  main {
+    padding: 20px 0px;
   }
 }
 </style>
