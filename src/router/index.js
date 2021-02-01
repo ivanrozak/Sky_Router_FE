@@ -12,6 +12,7 @@ import store from '../store'
 import ChatList from '../views/Chat/ChatList.vue'
 import DetailFlight from '../views/FlightDetail/FlightDetail.vue'
 import ChatRoom from '../views/Chat/ChatRoom.vue'
+import AddSchedule from '../views/PostSchedule/PostSchedule.vue'
 
 Vue.use(VueRouter)
 
@@ -90,6 +91,12 @@ const routes = [
     path: '/chatroom',
     name: 'ChatRoom',
     component: ChatRoom,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/postschedule',
+    name: 'PostSchedule',
+    component: AddSchedule,
     meta: { requiresAuth: true }
   }
 ]
