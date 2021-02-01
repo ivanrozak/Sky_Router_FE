@@ -12,6 +12,7 @@
             <div
               v-for="(items, index) in chats"
               :key="index"
+              @click="roomGet(items)"
               class="d-flex mb-lg-3 align-items-center mt-2 pr-1"
             >
               <img
@@ -43,27 +44,56 @@
 
 <script>
 import moment from 'moment'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import dotenv from 'dotenv'
+import io from 'socket.io-client'
 dotenv.config()
 export default {
   name: 'MailListChatComponent',
   computed: {
-    ...mapGetters({ chats: 'getListChats' })
+    ...mapGetters({ chats: 'getListChats', oldRoom: 'setOldRoom' })
   },
   data() {
     return {
+      socket: io('http://localhost:3000'),
       config: process.env.VUE_APP_URL
     }
   },
-  created() {},
+  created() {
+    this.socket.on('chatMessage', data => {
+      this.setChating(data)
+    })
+    if (this.oldRoom) {
+      this.socket.on('leaveRoom', this.oldRoom)
+    }
+    /*    console.log(this.oldRoom) */
+  },
   methods: {
+    ...mapActions(['getChat']),
+    ...mapMutations(['setRoomDisplay', 'setRoom', 'setChating']),
     getDataRoom(room) {
       console.log(room)
     },
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
+    },
+    roomGet(data) {
+      /*  this.setRoom(data.room_chat) */
+      this.socket.emit('joinRoom', {
+        room_chat: data.room_chat
+      })
+      this.setRoom(data.room_chat)
+      const display = {
+        user_name: data.user_name,
+        user_image: data.user_image,
+        user_id: data.user_id,
+        room_chat: data.room_chat
+      }
+      this.setRoomDisplay(display)
+      this.getChat(data.room_chat).then(() => {
+        this.$router.push('/chatroom')
+      })
     }
   }
 }
