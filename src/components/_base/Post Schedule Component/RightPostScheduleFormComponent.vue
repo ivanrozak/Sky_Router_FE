@@ -62,7 +62,9 @@
       </b-form-radio-group>
     </div>
     <br />
-    <div style="text-align: right;"><b-button class="btn">Add</b-button></div>
+    <button class="btn btn-primary w-100" @click="postData">
+      <h3 class="m-0">Add</h3>
+    </button>
   </div>
 </template>
 <script>
