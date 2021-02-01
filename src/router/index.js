@@ -12,7 +12,7 @@ import store from '../store'
 import ChatList from '../views/Chat/ChatList.vue'
 import DetailFlight from '../views/FlightDetail/FlightDetail.vue'
 import ChatRoom from '../views/Chat/ChatRoom.vue'
-import PostSchedule from '../views/PostSchedule.vue'
+import AddSchedule from '../views/PostSchedule/PostSchedule.vue'
 
 Vue.use(VueRouter)
 
@@ -96,7 +96,7 @@ const routes = [
   {
     path: '/postschedule',
     name: 'PostSchedule',
-    component: PostSchedule,
+    component: AddSchedule,
     meta: { requiresAuth: true }
   }
 ]

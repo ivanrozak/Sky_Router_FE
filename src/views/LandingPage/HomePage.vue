@@ -72,16 +72,34 @@
                       </button>
                     </b-col>
                     <b-col cols="6">
-                      <button class="btn_round py-3 py-lg-3">
+                      <b-button
+                        variant="none"
+                        v-b-toggle.collapse-1
+                        class="btn_round py-3 py-lg-3"
+                      >
                         <img
                           class="mr-2"
                           src="../../assets/Images/Logo/icns_rollback.png"
                           alt="icons_rolls"
                         />
                         Round trip
-                      </button>
+                      </b-button>
                     </b-col>
                   </b-row>
+                </div>
+                <div class="departure">
+                  <b-collapse id="collapse-1">
+                    <h5 class="mb-lg-3 mb-3">Round trip date</h5>
+                    <b-form-datepicker
+                      id="datepicker-buttons1"
+                      class="mb-lg-4"
+                      today-button
+                      reset-button
+                      close-button
+                      locale="en"
+                      v-model="roundTripDate"
+                    ></b-form-datepicker>
+                  </b-collapse>
                 </div>
                 <div class="departure">
                   <h5 class="mb-lg-3 mb-3">Departure</h5>
@@ -180,6 +198,7 @@ export default {
   data() {
     return {
       date: '',
+      roundTripDate: '',
       flightClass: '',
       totalAdult: '',
       totalChild: '',
@@ -221,6 +240,7 @@ export default {
     toPageSearch() {
       const params = {
         date: this.date,
+        roundTripDate: this.roundTripDate,
         class: this.flightClass,
         totalAdult: this.totalAdult,
         totalChild: this.totalChild,

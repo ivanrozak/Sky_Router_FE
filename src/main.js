@@ -21,11 +21,11 @@ Vue.use(VueTelInput)
 Vue.use(AutoCompletePlugin)
 Vue.use(VueTimeago, {
   name: 'Timeago', // Component name, `Timeago` by default
-  locale: undefined, // Default locale
+  locale: 'IDN', // Default locale
   // We use `date-fns` under the hood
   // So you can use all locales from it
   locales: {
-    'id': require('date-fns/locale/id')
+    id: require('date-fns/locale/id')
   }
 })
 
