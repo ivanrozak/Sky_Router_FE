@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     schedules: [],
-    limit: 8,
+    limit: 6,
     page: 1,
     totalRows: null,
     takeOff: '',

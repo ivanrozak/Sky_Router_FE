@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="my-booking">
       <p class="title">MY BOOKING</p>
       <b-row align-h="between" align-v="end">

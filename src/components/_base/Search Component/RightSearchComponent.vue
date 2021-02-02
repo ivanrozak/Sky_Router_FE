@@ -53,38 +53,38 @@
         <b-col sm="6" md="3" lg="3" class="plane">
           <div class="plane-from centered">
             <div v-if="item.takeOff === 'Jakarta'" class="text1">
-              JKT
+              CGK
             </div>
             <div v-else-if="item.takeOff === 'Yogyakarta'" class="text1">
-              YGKT
+              YIA
             </div>
             <div
               v-else-if="item.takeOff === 'Semarang, Jawa Tengah'"
               class="text1"
             >
-              SMG
+              SRG
             </div>
             <div v-else class="text1">
-              JYP
+              BIK
             </div>
             <small>{{ item.takeOffTime.slice(11, 16) }}</small>
           </div>
           <img src="../../../assets/icon/flight-to.png" class="mt-2" />
           <div class="plane-to  centered">
             <div v-if="item.landing === 'Jakarta'" class="text1">
-              JKT
+              CGK
             </div>
             <div v-else-if="item.landing === 'Yogyakarta'" class="text1">
-              YGKT
+              YIA
             </div>
             <div
               v-else-if="item.landing === 'Semarang, Jawa Tengah'"
               class="text1"
             >
-              SMG
+              SRG
             </div>
             <div v-else class="text1">
-              JYP
+              BIK
             </div>
             <small>{{ item.landingTime.slice(11, 16) }}</small>
           </div>
