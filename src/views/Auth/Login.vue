@@ -6,6 +6,7 @@
           <LoginL />
         </b-col>
         <b-col lg="6">
+          <H1>ADASD</H1>
           <LoginR />
         </b-col>
       </b-row>
