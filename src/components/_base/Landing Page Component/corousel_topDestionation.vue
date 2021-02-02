@@ -2,18 +2,16 @@
   <div class="">
     <VueSlickCarousel class="top_carousel" ref="carousel" v-bind="settings">
       <div
-        v-for="(items, index) in data"
+        v-for="(items, index) in setDataCard"
         :key="index"
         class="card_destination py-5"
       >
         <div class="image_destination">
-          <img
-            class="image_details"
-            src="https://images.unsplash.com/photo-1604980372461-45fe2a94c84d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=440&q=80"
-            alt="image_desti"
-          />
+          <img class="image_details" :src="items.images" alt="image_desti" />
         </div>
-        <h5 class="text-center mt-3 mr-3 mr-lg-4 mr-xl-3">Australia</h5>
+        <h5 class="text-center mt-3 mr-3 mr-lg-4 mr-xl-3">
+          {{ items.nameCountry }}
+        </h5>
       </div>
     </VueSlickCarousel>
     <div class="btnNextnPrev">
@@ -35,7 +33,41 @@ export default {
   components: { VueSlickCarousel },
   data() {
     return {
-      data: 7,
+      setDataCard: [
+        {
+          images:
+            'https://images.unsplash.com/photo-1517154421773-0529f29ea451?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+
+          nameCountry: 'Korea'
+        },
+        {
+          images:
+            'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80',
+
+          nameCountry: 'Japan'
+        },
+        {
+          images:
+            'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80',
+
+          nameCountry: 'Indonesia'
+        },
+        {
+          images:
+            'https://images.unsplash.com/photo-1601712373547-4a997d1ebbf1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80',
+          nameCountry: 'Indonesia'
+        },
+        {
+          images:
+            'https://images.unsplash.com/photo-1583807232206-0ed21ff95843?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80',
+          nameCountry: 'Indonesia'
+        },
+        {
+          images:
+            'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1961&q=80',
+          nameCountry: 'Sydney'
+        }
+      ],
       settings: {
         centerMode: true,
         arrows: false,

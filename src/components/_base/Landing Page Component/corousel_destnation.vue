@@ -1,20 +1,20 @@
 <template>
   <VueSlickCarousel v-bind="settings">
     <div
-      v-for="(items, index) in data"
+      v-for="(items, index) in setDataCard"
       :key="index"
       class="card_destination py-5"
     >
       <b-card
-        img-src="https://images.unsplash.com/photo-1596455123891-2a1a691b17de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80"
+        :img-src="items.image"
         img-alt="Image"
         img-top
         class="mb-2 px-2 pt-2 image_destination"
       >
         <b-card-text class="title_card">
-          <h5 class="mt-lg-3 mt-2">Tokyo,</h5>
+          <h5 class="mt-lg-3 mt-2">{{items.nameDestination}}</h5>
           <div class="title_card_destination d-flex align-items-center">
-            <h3>Japan</h3>
+            <h3>{{ items.nameCountry }}</h3>
             <span class="badge ml-auto"
               ><img src="../../../assets/Images/Logo/btnback.png" alt=""
             /></span>
@@ -33,14 +33,51 @@ export default {
   components: { VueSlickCarousel },
   data() {
     return {
-      data: 7,
+      setDataCard: [
+        {
+          image:
+            'https://images.unsplash.com/photo-1517154421773-0529f29ea451?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          nameDestination: 'Jeonju',
+          nameCountry: 'Korea'
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80',
+          nameDestination: 'Fujiyoshida',
+          nameCountry: 'Japan'
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80',
+          nameDestination: 'Bali',
+          nameCountry: 'Indonesia'
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1601712373547-4a997d1ebbf1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80',
+          nameDestination: 'Paralayang, Malang',
+          nameCountry: 'Indonesia'
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1583807232206-0ed21ff95843?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80',
+          nameDestination: 'Padar Island, Komodo',
+          nameCountry: 'Indonesia'
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1961&q=80',
+          nameDestination: 'Sydney Harbour Bridge',
+          nameCountry: 'Sydney'
+        }
+      ],
+
       settings: {
         centerMode: true,
         centerPadding: '10px',
         infinite: true,
         slidesToShow: 5,
         arrows: false,
-
         adaptiveHeight: true,
         slidesToScroll: 1,
         autoplay: true,
