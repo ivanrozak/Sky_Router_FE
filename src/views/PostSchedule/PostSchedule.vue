@@ -108,6 +108,14 @@
                   </select>
                 </b-col>
                 <b-col lg="6" sm="12">
+                  <label for="date">Date Time:</label><br />
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    v-model="form.date"
+                  />
+                  <br />
                   <label for="duration">Duration :</label><br />
                   <input type="text" name="duration" v-model="form.duration" />
                   <br />
@@ -145,6 +153,15 @@
                     id="inflightMeal"
                     class="ml-1"
                     v-model="form.inflightMeal"
+                  />
+                  <span class="mx-2"></span>
+                  <label for="wifi">Wifi</label>
+                  <input
+                    type="checkbox"
+                    name="wifi"
+                    id="wifi"
+                    class="ml-1"
+                    v-model="form.wifi"
                   />
                   <span class="mx-2"></span>
                   <label for="refun">Can Refun </label>
@@ -203,12 +220,14 @@
 import axios from 'axios'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
+import Alert from '../../mixins/Alert'
 export default {
   name: 'PostSchedule',
   components: {
     Navbar,
     Footer
   },
+  mixins: [Alert],
   data() {
     return {
       form: {
@@ -239,10 +258,10 @@ export default {
       axios
         .post('http://localhost:3000/schedule', this.form)
         .then(() => {
-          alert('yes')
+          this.AlertSucces('Yeay, your schedule has been posted')
         })
         .catch(err => {
-          console.log(err)
+          this.AlertError(err)
         })
     }
   }
@@ -256,6 +275,7 @@ label {
   margin-top: 20px;
 }
 input[type='text'],
+input[type='date'],
 input[type='number'],
 input[type='datetime-local'],
 select {
@@ -265,6 +285,7 @@ select {
   -webkit-appearance: none;
 }
 input[type='text']:focus,
+input[type='date']:focus,
 input[type='number']:focus,
 input[type='datetime-local']:focus,
 select:focus {

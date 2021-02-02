@@ -211,17 +211,17 @@ export default {
       ],
       takeOffOpt: [
         { value: '', text: 'SELECT' },
-        { value: 'Jakarta', text: 'JKT' },
-        { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
-        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
+        { value: 'Jakarta', text: 'CGK' },
+        { value: 'Yogyakarta', text: 'YIA' },
+        { value: 'Semarang, Jawa Tengah', text: 'SRG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'BIK' }
       ],
       landingOpt: [
         { value: '', text: 'SELECT' },
-        { value: 'Jakarta', text: 'JKT' },
-        { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
-        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
+        { value: 'Jakarta', text: 'CGK' },
+        { value: 'Yogyakarta', text: 'YIA' },
+        { value: 'Semarang, Jawa Tengah', text: 'SRG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'BIK' }
       ],
       child: [
         { value: '', text: 'SELECT' },
