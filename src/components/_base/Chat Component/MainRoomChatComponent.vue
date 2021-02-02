@@ -167,7 +167,6 @@ export default {
       this.postChat(setDataToDatabase)
       this.message = ''
     },
-    // =================
     leaveRoom() {
       if (this.oldRoom) {
         this.socket.emit('leaveRoom', this.oldRoom)
@@ -176,7 +175,6 @@ export default {
       this.getChat(this.roomChat.room_chat)
       this.$router.push('/chatlist')
     }
-    // =================
   }
 }
 </script>
