@@ -43,7 +43,7 @@
               src="../../../assets/myBooking/btnback.png"
               alt=""
               style="cursor:pointer"
-              @click="myBookingDetail(el, i)"/></span
+              @click="showPassenger(el, i)"/></span
         ></b-col>
       </b-row>
       <div v-show="isClickDetails[i]">
@@ -101,7 +101,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(item, index) in passengers" :key="index">
+                  <tr v-for="(item, index) in passengersData[i]" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ item.title }}. {{ item.fullname }}</td>
                     <td>{{ item.nationality }}</td>
@@ -133,7 +133,8 @@ export default {
   data() {
     return {
       isClickDetails: [false],
-      isPaymentSuccess: false
+      isPaymentSuccess: false,
+      passengersData: []
     }
   },
   computed: {
@@ -143,22 +144,28 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getPassengers']),
-    ...mapMutations(['setElementMyBooking']),
-    myBookingDetail(el, i) {
-      this.isClickDetails.push(false)
+    ...mapActions(['getPassengers', 'deleteBookingVuex']),
+    ...mapMutations(['setElementMyBooking', 'setDataPassengers']),
+    myBookingDetail(i) {
       if (this.isClickDetails[i]) this.isClickDetails[i] = false
       else this.isClickDetails[i] = true
-      this.getPassengers(el.bookingId)
-      console.log('passengers vue')
-      console.log(this.passengers)
-      console.log('setelement')
-      console.log(el)
-      this.setElementMyBooking(el)
+      this.isClickDetails.push(false)
     },
     formatTime(value) {
       moment.locale('en')
       return moment(String(value)).format('lll')
+    },
+    showPassenger(el, i) {
+      this.getPassengers(el.bookingId)
+      this.passengersData[i] = this.passengers
+
+      this.myBookingDetail(i)
+
+      if (this.passengersData.length <= this.myBooking.length) {
+        this.passengersData.push()
+      }
+
+      this.setElementMyBooking(el)
     }
   }
 }

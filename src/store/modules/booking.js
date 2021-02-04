@@ -67,6 +67,20 @@ export default {
           .then(result => {
             console.log(result)
             context.commit('setDataPassengers', result.data.data)
+            resolve(result.data.data)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
+    },
+    deleteBookingVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`${process.env.VUE_APP_URL}booking/${payload}`)
+          .then(result => {
+            context.dispatch('getBooking')
             resolve(result)
           })
           .catch(error => {
