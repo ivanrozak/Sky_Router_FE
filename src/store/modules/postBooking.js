@@ -6,7 +6,7 @@ export default {
     postBooking(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}booking/mybooking`, payload)
+          .post(`${process.env.VUE_APP_URL}/api1/booking/mybooking`, payload)
           .then(result => {
             resolve(result)
           })
@@ -19,7 +19,7 @@ export default {
     postPesenger(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}booking/passenger`, payload)
+          .post(`${process.env.VUE_APP_URL}/api1/booking/passenger`, payload)
           .then(result => {
             resolve(result)
           })

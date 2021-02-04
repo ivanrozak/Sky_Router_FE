@@ -131,7 +131,8 @@ export default {
   border-radius: 50%;
   border: 3px solid #2395ff;
   padding: 5px;
-  max-width: 130px;
+  width: 130px;
+  height: 130px;
 }
 .top button {
   padding: 5px 15px;

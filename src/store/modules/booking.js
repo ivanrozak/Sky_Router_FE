@@ -26,7 +26,7 @@ export default {
     getNotif(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}notif/${payload}`)
+          .get(`${process.env.VUE_APP_URL}/api1/notif/${payload}`)
           .then(result => {
             context.commit('setNotif', result.data)
             resolve(result)
@@ -39,7 +39,7 @@ export default {
     deleteNotif(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`${process.env.VUE_APP_URL}notif/${payload}`)
+          .delete(`${process.env.VUE_APP_URL}/api1/notif/${payload}`)
           .then(result => {
             resolve(result)
           })
@@ -52,7 +52,9 @@ export default {
       return new Promise((resolve, reject) => {
         console.log(payload)
         axios
-          .get(`${process.env.VUE_APP_URL}booking/mybookingbyid/${payload}`)
+          .get(
+            `${process.env.VUE_APP_URL}/api1/booking/mybookingbyid/${payload}`
+          )
           .then(result => {
             context.commit('setDataBooking', result.data.data)
             resolve(result)
@@ -66,7 +68,7 @@ export default {
       return new Promise((resolve, reject) => {
         console.log(payload)
         axios
-          .get(`${process.env.VUE_APP_URL}booking/passenger/${payload}`)
+          .get(`${process.env.VUE_APP_URL}/api1/booking/passenger/${payload}`)
           .then(result => {
             context.commit('setDataPassengers', result.data.data)
             resolve(result)
