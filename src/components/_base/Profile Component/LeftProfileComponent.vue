@@ -44,7 +44,7 @@ export default {
   },
   mixins: [Alert],
   computed: {
-    ...mapGetters({ user: 'getUser', image: 'getImage' })
+    ...mapGetters({ user: 'getUser', image: 'getImage', admin: 'isAdmin' })
   },
   methods: {
     ...mapGetters(['getUser']),

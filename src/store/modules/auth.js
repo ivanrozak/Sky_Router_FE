@@ -159,6 +159,9 @@ export default {
     },
     getImage(state) {
       return state.image
+    },
+    isAdmin(state) {
+      return state.user.user_role !== 0
     }
   }
 }

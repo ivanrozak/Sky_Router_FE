@@ -186,7 +186,7 @@ import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
 import topDesti from '../../components/_base/Landing Page Component/corousel_topDestionation'
 import corouseDesti from '../../components/_base/Landing Page Component/corousel_destnation'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'landingPage',
   components: {
@@ -194,6 +194,9 @@ export default {
     Footer,
     corouseDesti,
     topDesti
+  },
+  computed: {
+    ...mapGetters({ user: 'getUser', admin: 'isAdmin' })
   },
   data() {
     return {
