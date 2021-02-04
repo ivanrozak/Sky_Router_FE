@@ -15,15 +15,21 @@
           <div class="Confirm_form">
             <div class="logo_Confirm d-flex align-items-center pt-lg-5 ">
               <img
+                class="d-none d-lg-block"
                 src="../../assets/Images/Logo/illustration.svg"
                 alt="image_logo"
               />
               <span class="ml-2">SkyRouter</span>
             </div>
-            <h1 class="text-center title_text">Activation your account</h1>
-            <button @click="onVerify" class="btn_signin w-50 mt-lg-4 py-lg-3">
-              Click this Button for Activation
-            </button>
+            <div class="btn_Confirm">
+              <h1 class="text-center title_text">Activation your account</h1>
+              <button
+                @click="onVerify"
+                class="btn_signin mt-lg-4 mt-3 py-3 py-lg-3"
+              >
+                Click this Button for Activation
+              </button>
+            </div>
           </div>
         </b-col>
       </b-row>
@@ -104,6 +110,7 @@ export default {
   outline: none;
   font-family: 'Poppins', sans-serif;
   color: #ffffff;
+  width: 50%;
   font-size: 18px;
   font-weight: 700;
   display: block;
@@ -114,5 +121,53 @@ export default {
 }
 .btn_signin:hover {
   background: #118cff;
+}
+@media (max-width: 1430px) {
+  .form_Confirm {
+    padding: 29% 25% 0 25%;
+  }
+}
+@media (max-width: 1280px) {
+  .form_Confirm {
+    padding: 35% 15% 0 15%;
+  }
+  .btn_signin {
+    width: 70%;
+  }
+}
+@media (max-width: 576px) {
+  .bg_Confirm {
+    background: none;
+    height: 0;
+  }
+  .logo_Confirm span {
+    color: #ffffff;
+    font-size: 32px;
+  }
+  .btn_signin {
+    color: #2395ff;
+    width: 100%;
+    background: #ffffff;
+  }
+  .btn_signin:hover {
+    background: #ffffff;
+  }
+
+  .logo_Confirm {
+    padding-left: 0%;
+  }
+  
+  .btn_Confirm{
+    padding-top: 30%;
+  }
+  .ConfirmEmail {
+    background: #2395ff;
+    height: auto;
+    background-image: url('../../assets/Images/Main Image/image_login.svg');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: -30px;
+    background-position-y: 7%;
+  }
 }
 </style>

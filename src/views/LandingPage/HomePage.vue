@@ -36,6 +36,7 @@
                       <b-form-select
                         style="width: 120px; font-size: 1.1em; font-weight: bolder;"
                         v-model="takeOff"
+                        @change="changestakeoff"
                         :options="takeOffOpt"
                       ></b-form-select>
                       <!-- <h3>Medan</h3> -->
@@ -43,6 +44,8 @@
                     </section>
                     <section class="image_iconsSwith">
                       <img
+                        style=" cursor: pointer;"
+                        @click="changesData"
                         class="image_size"
                         src="../../assets/Images/Logo/swithIcons.jpg"
                         alt="icons_image"
@@ -53,6 +56,7 @@
                       <b-form-select
                         style="width: 120px; font-size: 1.1em; font-weight: bolder;"
                         v-model="landing"
+                        @change="changeslanding"
                         :options="landingOpt"
                       ></b-form-select>
                       <p>Indonesia</p>
@@ -207,6 +211,8 @@ export default {
       totalChild: '',
       takeOff: '',
       landing: '',
+      takeOffSwitch: '',
+      landingSwitch: '',
       options: [
         { item: 'economy', name: 'Economy' },
         { item: 'Business', name: 'Business' },
@@ -254,6 +260,25 @@ export default {
       }
       this.setParams(params)
       this.$router.push('/searchresult')
+    },
+    changestakeoff(value) {
+      this.takeOffSwitch = value
+    },
+    changeslanding(value) {
+      this.landingSwitch = value
+    },
+    changesData() {
+      if (
+        this.takeOff === this.takeOffSwitch &&
+        this.landingSwitch &&
+        this.takeOffSwitch
+      ) {
+        this.takeOff = this.landingSwitch
+        this.landing = this.takeOffSwitch
+      } else {
+        this.takeOff = this.takeOffSwitch
+        this.landing = this.landingSwitch
+      }
     }
   }
 }
@@ -391,7 +416,7 @@ export default {
 }
 .image_iconsSwith {
   position: relative;
-  top: 25px;
+  top: 37px;
 }
 .card_searchLocation .from p,
 .to p {

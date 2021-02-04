@@ -23,4 +23,26 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+@media (max-width: 576px) {
+  .Register {
+    background: #2395ff;
+    height: auto;
+    background-image: url('../../assets/Images/Main Image/image_login.svg');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: -30px;
+    background-position-y: -3%;
+  }
+}
+@media (max-width: 414px) {
+  .Register {
+    height: 110vh;
+  }
+}
+@media (max-width: 376px) {
+  .Register {
+    height: 120vh;
+  }
+}
+</style>
