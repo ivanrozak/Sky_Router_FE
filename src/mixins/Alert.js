@@ -72,6 +72,30 @@ export default {
           })
       })
     },
+    AlertSuccesBooking(link) {
+      return new Promise((resolve, reject) => {
+        this.$swal({
+          title: 'Yeay !! Success Booking',
+          text: `Let's Continue for paying`,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2300,
+          timerProgressBar: true,
+          showClass: {
+            popup: 'animate__animated animate__bounceInUp'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__bounceOutDown'
+          }
+        })
+          .then(() => {
+            window.location.href = link
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     AlertError(msg) {
       return new Promise((resolve, reject) => {
         this.$swal({

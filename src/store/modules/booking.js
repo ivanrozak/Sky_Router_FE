@@ -10,16 +10,10 @@ export default {
   },
   mutations: {
     setDataBooking(state, payload) {
-      console.log('payload')
-      console.log(payload)
       state.myBooking = payload
-      console.log('state.myBooking')
-      console.log(state.myBooking)
     },
     setDataPassengers(state, payload) {
       state.passengers = payload
-      console.log('passengers')
-      console.log(state.passengers)
     },
     setElementMyBooking(state, payload) {
       state.elMyBooking = payload
@@ -38,7 +32,18 @@ export default {
             resolve(result)
           })
           .catch(error => {
-            console.log(error)
+            reject(error)
+          })
+      })
+    },
+    deleteNotif(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`${process.env.VUE_APP_URL}notif/${payload}`)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
             reject(error)
           })
       })
@@ -49,12 +54,10 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}booking/mybookingbyid/${payload}`)
           .then(result => {
-            console.log(result)
             context.commit('setDataBooking', result.data.data)
             resolve(result)
           })
           .catch(error => {
-            console.log(error)
             reject(error)
           })
       })
@@ -65,7 +68,6 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}booking/passenger/${payload}`)
           .then(result => {
-            console.log(result)
             context.commit('setDataPassengers', result.data.data)
             resolve(result.data.data)
           })
@@ -84,7 +86,6 @@ export default {
             resolve(result)
           })
           .catch(error => {
-            console.log(error)
             reject(error)
           })
       })

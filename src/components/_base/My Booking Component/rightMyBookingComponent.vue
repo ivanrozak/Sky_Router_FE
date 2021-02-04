@@ -140,7 +140,8 @@ export default {
   computed: {
     ...mapGetters({
       myBooking: 'getMyBooking',
-      passengers: 'getAllPassengers'
+      passengers: 'getAllPassengers',
+      display: 'getDisplay'
     })
   },
   methods: {

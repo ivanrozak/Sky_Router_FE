@@ -211,17 +211,17 @@ export default {
       ],
       takeOffOpt: [
         { value: '', text: 'SELECT' },
-        { value: 'Jakarta', text: 'JKT' },
-        { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
-        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
+        { value: 'Jakarta', text: 'CGK' },
+        { value: 'Yogyakarta', text: 'YIA' },
+        { value: 'Semarang, Jawa Tengah', text: 'SRG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'BIK' }
       ],
       landingOpt: [
         { value: '', text: 'SELECT' },
-        { value: 'Jakarta', text: 'JKT' },
-        { value: 'Yogyakarta', text: 'YGKT' },
-        { value: 'Semarang, Jawa Tengah', text: 'SMG' },
-        { value: 'Kabupaten Biak Numfor, Papua', text: 'JYP' }
+        { value: 'Jakarta', text: 'CGK' },
+        { value: 'Yogyakarta', text: 'YIA' },
+        { value: 'Semarang, Jawa Tengah', text: 'SRG' },
+        { value: 'Kabupaten Biak Numfor, Papua', text: 'BIK' }
       ],
       child: [
         { value: '', text: 'SELECT' },
@@ -447,7 +447,7 @@ export default {
   }
   .HomePage {
     background: #000;
-    /* background-image: url('https://images4.alphacoders.com/312/thumb-1920-31288.jpg'); */
+    background-image: url('https://cdn.discordapp.com/attachments/805362039429005322/805971445326151680/photo-1544644181-1484b3fdfc62.jpeg');
     background-size: cover;
   }
   .title_landing h1,

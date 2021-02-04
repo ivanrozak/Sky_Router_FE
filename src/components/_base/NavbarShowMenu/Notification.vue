@@ -5,7 +5,7 @@
       <h2>
         Notifications
       </h2>
-      <a class="ml-auto">Clear</a>
+      <a class="ml-auto" @click="deleteHandle">Clear</a>
     </div>
     <div class="scroll mt-lg-3 pr-1">
       <b-card
@@ -23,7 +23,6 @@
             locale="id"
             :auto-update="60"
           ></timeago>
-        
         </p>
       </b-card>
     </div>
@@ -44,10 +43,14 @@ export default {
     this.getNotif(this.Id.user_id)
   },
   methods: {
-    ...mapActions(['getNotif']),
+    ...mapActions(['getNotif', 'deleteNotif']),
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
+    },
+    deleteHandle() {
+      this.deleteNotif(this.Id.user_id)
+      this.getNotif(this.Id.user_id)
     }
   }
 }

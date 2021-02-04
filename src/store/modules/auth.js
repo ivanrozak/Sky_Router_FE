@@ -38,6 +38,7 @@ export default {
           })
       })
     },
+
     RegisterAccount(context, payload) {
       return new Promise((resolve, reject) => {
         axios
@@ -59,7 +60,7 @@ export default {
             resolve(result)
           })
           .catch(err => {
-            /*   console.clear() */
+            console.clear()
             reject(err.response)
           })
       })
@@ -72,7 +73,7 @@ export default {
             resolve(result)
           })
           .catch(err => {
-            /*   console.clear() */
+            console.clear()
             reject(err.response)
           })
       })
@@ -89,7 +90,7 @@ export default {
             resolve(result)
           })
           .catch(err => {
-            /*   console.clear() */
+            console.clear()
             reject(err.response)
           })
       })

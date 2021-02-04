@@ -5,7 +5,7 @@ dotenv.config()
 export default {
   state: {
     listChat: {},
-    socket: io('http://localhost:3000'),
+    socket: io(process.env.VUE_APP_URL),
     chat: [],
     oldRoom: '',
     room_chat: '',

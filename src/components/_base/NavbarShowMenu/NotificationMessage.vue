@@ -9,22 +9,30 @@
     </div>
     <div class="chat_list mt-3">
       <div
-        v-for="(items, index) in data"
+        v-for="(items, index) in chats"
         :key="index"
+        style="cursor : pointer;"
+        @click="roomGet(items)"
         class="d-flex mb-lg-3 align-items-center mt-2 pr-1"
       >
         <img
           class="image_friendProfile"
-          src="https://images.unsplash.com/photo-1611493056239-9f15dfe79373?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          :src="
+            items.user_image
+              ? `${config}${items.user_image}`
+              : require('../../../assets/chatImg/profile1.jpg')
+          "
           alt="image_chatfriend"
         />
         <div class="ml-lg-3 name_tag mt-lg-3">
-          <h2>Soham Henry</h2>
-          <p class="mt-lg-2">Bro, just fuck off</p>
+          <h2>{{ items.user_name }}</h2>
+          <p class="mt-lg-2">{{ items.lastChat.chat_content }}</p>
         </div>
         <div class="desc_time ml-auto mr-lg-2">
-          <h3>17.00</h3>
-          <span class="badge">10</span>
+          <h3>{{ formatTime(items.lastChat.chat_created_at) }}</h3>
+          <span v-if="items.unreadmessage[0].total > 0" class="badge">{{
+            items.unreadmessage[0].total
+          }}</span>
         </div>
       </div>
     </div>
@@ -32,17 +40,54 @@
 </template>
 <script>
 import moment from 'moment'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import io from 'socket.io-client'
 export default {
   name: 'Notif',
   data() {
     return {
-      data: 7
+      socket: io('http://localhost:3000'),
+      config: process.env.VUE_APP_URL
     }
   },
+  created() {
+    this.getListChat()
+  },
+  computed: {
+    ...mapGetters({ chats: 'getListChats', oldRoom: 'setOldRoom' })
+  },
   methods: {
+    ...mapActions(['getChat', 'getListChat']),
+    ...mapMutations(['setRoomDisplay', 'setRoom']),
+    getDataRoom(room) {
+      console.log(room)
+    },
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
+    },
+    roomGet(data) {
+      /*  this.setRoom(data.room_chat) */
+      // this.socket.emit('joinRoom', {
+      //   room_chat: data.room_chat
+      // })
+      // this.setRoom(data.room_chat)
+      const display = {
+        user_name: data.user_name,
+        user_image: data.user_image,
+        user_id: data.user_id,
+        room_chat: data.room_chat
+      }
+      this.setRoomDisplay(display)
+
+      this.getChat(data.room_chat).then(() => {
+        this.$router.push({
+          name: 'ChatRoom',
+          params: {
+            room: data.room_chat
+          }
+        })
+      })
     }
   }
 }

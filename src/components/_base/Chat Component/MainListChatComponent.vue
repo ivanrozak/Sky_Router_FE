@@ -64,9 +64,6 @@ export default {
   methods: {
     ...mapActions(['getChat']),
     ...mapMutations(['setRoomDisplay', 'setRoom']),
-    getDataRoom(room) {
-      console.log(room)
-    },
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
