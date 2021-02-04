@@ -24,7 +24,7 @@ export default {
     LoginAccount(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}/api1/user/login/`, payload)
+          .post(`${process.env.VUE_APP_URL}user/login/`, payload)
           .then(result => {
             console.log(result)
             context.commit('setUser', result.data)
@@ -42,7 +42,7 @@ export default {
     RegisterAccount(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}/api1/user/register/`, payload)
+          .post(`${process.env.VUE_APP_URL}user/register/`, payload)
           .then(result => {
             resolve(result)
           })
@@ -55,7 +55,7 @@ export default {
     verifyAccount(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch(`${process.env.VUE_APP_URL}/api1/user/verification/${payload}`)
+          .patch(`${process.env.VUE_APP_URL}user/verification/${payload}`)
           .then(result => {
             resolve(result)
           })
@@ -68,7 +68,7 @@ export default {
     sendEmailForgot(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}/api1/user/forgetpassword/`, payload)
+          .post(`${process.env.VUE_APP_URL}user/forgetpassword/`, payload)
           .then(result => {
             resolve(result)
           })
@@ -82,7 +82,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `${process.env.VUE_APP_URL}/api1/user/forgetpassword/${payload.id}`,
+            `${process.env.VUE_APP_URL}user/forgetpassword/${payload.id}`,
             payload.data
           )
           .then(result => {
@@ -98,7 +98,7 @@ export default {
     updateProfileUser(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch(`${process.env.VUE_APP_URL}/api1/user/updateuser/`, payload)
+          .patch(`${process.env.VUE_APP_URL}user/updateuser/`, payload)
           .then(result => {
             context.commit('setImage', result.data)
             resolve(result)

@@ -5,7 +5,7 @@ dotenv.config()
 export default {
   state: {
     listChat: {},
-    socket: io('http://localhost:3000'),
+    socket: io(process.env.VUE_APP_URL),
     chat: [],
     oldRoom: '',
     room_chat: '',
@@ -36,7 +36,7 @@ export default {
     getListChat(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}/api1/chat/getallroom/`)
+          .get(`${process.env.VUE_APP_URL}chat/getallroom/`)
           .then(result => {
             context.commit('setListChat', result.data.data)
             resolve(result)
@@ -50,7 +50,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .post(
-            `${process.env.VUE_APP_URL}/api1/chat/sendmessage/${payload.room}`,
+            `${process.env.VUE_APP_URL}chat/sendmessage/${payload.room}`,
             payload.data
           )
           .then(result => {
@@ -64,7 +64,7 @@ export default {
     getChat(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}/api1/chat/getroom/${payload}`)
+          .get(`${process.env.VUE_APP_URL}chat/getroom/${payload}`)
           .then(result => {
             context.commit('setChat', result.data)
             resolve(result)

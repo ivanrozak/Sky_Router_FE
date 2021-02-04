@@ -87,7 +87,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `${process.env.VUE_APP_URL}/api1/schedule?takeoff=${state.params.takeOff}&landing=${state.params.landing}&inflightMeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}&date=${state.params.date}&airplanesClass=${state.params.class}`
+            `${process.env.VUE_APP_URL}schedule?takeoff=${state.params.takeOff}&landing=${state.params.landing}&inflightMeal=${state.inflightMeal}&wifi=${state.wifi}&luggage=${state.luggage}&direct=${state.direct}&transit=${state.transit}&airlanes=${state.airlanes}&departureStart=${state.departureStart}&departureEnd=${state.departureEnd}&arrivedStart=${state.arrivedStart}&arrivedEnd=${state.arrivedEnd}&page=${state.page}&limit=${state.limit}&sort=${state.sort}&price=${state.price}&date=${state.params.date}&airplanesClass=${state.params.class}`
           )
           .then(result => {
             resolve(result)
@@ -101,7 +101,7 @@ export default {
     getScheduleById(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}/api1/schedule/${payload}`)
+          .get(`${process.env.VUE_APP_URL}schedule/${payload}`)
           .then(response => {
             context.commit('setScheduleById', response.data.data[0])
             resolve(response)
