@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      socket: io(process.env.VUE_APP_URL),
+      socket: io(process.env.VUE_APP_URL, { transport: ['websocket'] }),
       config: process.env.VUE_APP_URL
     }
   },

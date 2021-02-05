@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       isMe: 1,
-      socket: io(process.env.VUE_APP_URL),
+      socket: io(process.env.VUE_APP_URL, { transport: ['websocket'] }),
       config: process.env.VUE_APP_URL,
       message: ''
     }
