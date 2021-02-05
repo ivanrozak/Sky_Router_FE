@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="box-flight">
-      <h5 style="color:white">Contact Person Details</h5>
+      <h5 class="title-box1">Contact Person Details</h5>
       <div class="box1">
         <label for="name">Full Name</label>
         <b-form-input
@@ -140,7 +140,7 @@
         <h5>Passenger Details</h5>
         <div class="box3">
           <b-row>
-            <b-col>
+            <b-col cols="12" sm="12" md="6" lg="6">
               <b-form-checkbox
                 id="checkbox-1"
                 name="checkbox-1"
@@ -151,7 +151,7 @@
                 Travel Insurance
               </b-form-checkbox>
             </b-col>
-            <b-col style="text-align:right">
+            <b-col class="price" cols="12" sm="12" md="6" lg="6">
               IDR 5.000.000
             </b-col>
           </b-row>
@@ -271,6 +271,12 @@ export default {
   background: #2395ff;
   color: white;
 }
+.title-box1 {
+  color: white;
+}
+.price {
+  text-align: right;
+}
 .box-flight {
   font-family: 'Poppins', sans-serif;
 }
@@ -354,5 +360,33 @@ label {
   color: rgb(131, 131, 131);
   padding-left: 13px;
   font-size: 0.9em;
+}
+@media only screen and (max-width: 420px) {
+  .box1,
+  .box2,
+  .box3 {
+    margin-bottom: 20px;
+    padding: 20px 25px;
+  }
+  .price {
+    margin-left: 25px;
+    text-align: left;
+    color: #0986fc;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .price {
+    margin-left: 25px;
+    text-align: left;
+    color: #0986fc;
+  }
+  .title-box1 {
+    color: black;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .title-box1 {
+    color: white;
+  }
 }
 </style>

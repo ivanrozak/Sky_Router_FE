@@ -11,6 +11,7 @@ export default {
   mutations: {
     setDataBooking(state, payload) {
       state.myBooking = payload
+      console.log(state.myBooking)
     },
     setDataPassengers(state, payload) {
       state.passengers = payload
@@ -51,7 +52,7 @@ export default {
     getBooking(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}booking/mybookingbyid/${payload}`)
+          .get(`${process.env.VUE_APP_URL}booking/mybooking/${payload}`)
           .then(result => {
             context.commit('setDataBooking', result.data.data)
             resolve(result)
@@ -66,6 +67,7 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}booking/passenger/${payload}`)
           .then(result => {
+            console.log(result.data.data)
             context.commit('setDataPassengers', result.data.data)
             resolve(result.data.data)
           })
