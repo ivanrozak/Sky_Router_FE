@@ -16,17 +16,32 @@
       <b-collapse visible id="collapse-1">
         <div class="checkbox-group">
           <label>Direct</label>
-          <b-form-checkbox v-model="form.direct" value="1" unchecked-value="0">
+          <b-form-checkbox
+            @change="filterData()"
+            v-model="form.direct"
+            value="1"
+            unchecked-value="0"
+          >
           </b-form-checkbox>
         </div>
         <div class="checkbox-group">
           <label>Transit</label>
-          <b-form-checkbox v-model="form.transit" value="1" unchecked-value="">
+          <b-form-checkbox
+            @change="filterData()"
+            v-model="form.transit"
+            value="1"
+            unchecked-value=""
+          >
           </b-form-checkbox>
         </div>
         <div class="checkbox-group">
           <label>Transit 2+</label>
-          <b-form-checkbox v-model="form.transit" value="2x" unchecked-value="">
+          <b-form-checkbox
+            @change="filterData()"
+            v-model="form.transit"
+            value="2x"
+            unchecked-value=""
+          >
           </b-form-checkbox>
         </div>
       </b-collapse>
@@ -38,12 +53,18 @@
       <b-collapse visible id="collapse-2">
         <div class="checkbox-group">
           <label>Luggage</label>
-          <b-form-checkbox v-model="form.luggage" value="1" unchecked-value="0">
+          <b-form-checkbox
+            @change="filterData()"
+            v-model="form.luggage"
+            value="1"
+            unchecked-value="0"
+          >
           </b-form-checkbox>
         </div>
         <div class="checkbox-group">
           <label>In-Flight Meal</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="form.inflightMeal"
             value="1"
             unchecked-value="0"
@@ -52,7 +73,12 @@
         </div>
         <div class="checkbox-group">
           <label>Wi-fi</label>
-          <b-form-checkbox v-model="form.wifi" value="1" unchecked-value="0">
+          <b-form-checkbox
+            @change="filterData()"
+            v-model="form.wifi"
+            value="1"
+            unchecked-value="0"
+          >
           </b-form-checkbox>
         </div>
       </b-collapse>
@@ -65,6 +91,7 @@
         <div class="checkbox-group">
           <label>00.00 - 06.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="departure"
             value="T00:00:00 T06:00:00"
             unchecked-value=""
@@ -74,6 +101,7 @@
         <div class="checkbox-group">
           <label>06.00 - 12.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="departure"
             value="T06:00:00 T12:00:00"
             unchecked-value=""
@@ -83,6 +111,7 @@
         <div class="checkbox-group">
           <label>12.00 - 18.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="departure"
             value="T12:00:00 T18:00:00"
             unchecked-value=""
@@ -92,6 +121,7 @@
         <div class="checkbox-group">
           <label>18.00 - 24.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="departure"
             value="T18:00:00 T24:00:00"
             unchecked-value=""
@@ -108,6 +138,7 @@
         <div class="checkbox-group">
           <label>00.00 - 06.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="arrive"
             value="T00:00:00 T06:00:00"
             unchecked-value=""
@@ -117,6 +148,7 @@
         <div class="checkbox-group">
           <label>06.00 - 12.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="arrive"
             value="T06:00:00 T12:00:00"
             unchecked-value=""
@@ -126,6 +158,7 @@
         <div class="checkbox-group">
           <label>12.00 - 18.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="arrive"
             value="T12:00:00 T18:00:00"
             unchecked-value=""
@@ -135,6 +168,7 @@
         <div class="checkbox-group">
           <label>18.00 - 24.00</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="arrive"
             value="T18:00:00 T24:00:00"
             unchecked-value=""
@@ -151,6 +185,7 @@
         <div class="checkbox-group">
           <label>Garuda</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.garuda"
             value="Garuda"
             unchecked-value=""
@@ -160,6 +195,7 @@
         <div class="checkbox-group">
           <label>Lion Air</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.lionair"
             value="Lion Air"
             unchecked-value=""
@@ -169,6 +205,7 @@
         <div class="checkbox-group">
           <label>Sriwijaya</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.sriwijaya"
             value="Sriwijaya"
             unchecked-value=""
@@ -178,6 +215,7 @@
         <div class="checkbox-group">
           <label>Air Asia</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.airasia"
             value="Air Asia"
             unchecked-value=""
@@ -187,6 +225,7 @@
         <div class="checkbox-group">
           <label>Citilink</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.citilink"
             value="Citilink"
             unchecked-value=""
@@ -196,6 +235,7 @@
         <div class="checkbox-group">
           <label>Batik Air</label>
           <b-form-checkbox
+            @change="filterData()"
             v-model="airlane.batikair"
             value="Batik Air"
             unchecked-value=""
@@ -212,6 +252,7 @@
         <div style="padding: 0px 15px">
           <label for="range-2">Highest</label>
           <b-form-input
+            @change="filterData()"
             id="range-2"
             v-model="form.price"
             type="range"
@@ -219,13 +260,10 @@
             max="1000"
             step="10"
           ></b-form-input>
-          <div class="mt-2">$ {{ form.price }}</div>
+          <div class="mt-2">Rp. {{ form.price }}</div>
         </div>
       </b-collapse>
     </div>
-    <b-button @click.prevent="filterData()" class="apply"
-      >Apply Filter</b-button
-    >
   </main>
 </template>
 
@@ -281,6 +319,24 @@ export default {
       this.setLuggage(this.form.luggage)
       this.setDirect(this.form.direct)
       this.setTransit(this.form.transit)
+      if (this.airlane.garuda === '') {
+        delete this.airlane.garuda
+      }
+      if (this.airlane.sriwijaya === '') {
+        delete this.airlane.sriwijaya
+      }
+      if (this.airlane.lionair === '') {
+        delete this.airlane.lionair
+      }
+      if (this.airlane.citilink === '') {
+        delete this.airlane.citilink
+      }
+      if (this.airlane.airasia === '') {
+        delete this.airlane.airasia
+      }
+      if (this.airlane.batikair === '') {
+        delete this.airlane.batikair
+      }
       const airlaneData = Object.values(this.airlane).join()
       this.setAirlanes(airlaneData)
 
@@ -309,6 +365,7 @@ export default {
           arrive: this.arrive.slice(0, 9)
         }
         const arrstarts = Object.values(arrstart).join('')
+
         this.setArrivedStart(arrstarts)
         const arrend = {
           date: this.params.date,
