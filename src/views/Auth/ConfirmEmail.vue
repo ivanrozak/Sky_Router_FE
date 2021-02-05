@@ -156,8 +156,8 @@ export default {
   .logo_Confirm {
     padding-left: 0%;
   }
-  
-  .btn_Confirm{
+
+  .btn_Confirm {
     padding-top: 30%;
   }
   .ConfirmEmail {

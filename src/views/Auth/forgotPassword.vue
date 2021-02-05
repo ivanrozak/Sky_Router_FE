@@ -15,7 +15,7 @@
           <div class="Forgot_form">
             <div class="logo_Forgot d-flex align-items-center pt-lg-5 ">
               <img
-              class="d-none d-lg-block"
+                class="d-none d-lg-block"
                 src="../../assets/Images/Logo/illustration.svg"
                 alt="image_logo"
               />
@@ -41,7 +41,10 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <button type="submit" class="btn_signin w-100 mt-lg-4 mt-4 py-3 py-lg-3">
+              <button
+                type="submit"
+                class="btn_signin w-100 mt-lg-4 mt-4 py-3 py-lg-3"
+              >
                 Change Password
               </button>
             </b-form>

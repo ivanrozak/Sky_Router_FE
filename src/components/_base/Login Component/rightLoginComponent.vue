@@ -218,6 +218,5 @@ input {
   .form_login {
     padding: 40% 0 0 0;
   }
- 
 }
 </style>

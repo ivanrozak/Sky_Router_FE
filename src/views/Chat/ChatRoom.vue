@@ -5,7 +5,7 @@
       <div class="bg-image">
         <b-container class="chat-list">
           <b-row align-h="center">
-            <b-col xs="12" sm="12" md="8" lg="7">
+            <b-col sm="12" md="8" lg="7">
               <ChatRoom />
             </b-col>
           </b-row>
@@ -47,7 +47,7 @@ export default {
   background-repeat: no-repeat;
   position: relative;
   margin-bottom: 200px;
-  padding: 50px;
+  padding: 50px 0;
   border-radius: 0 0 30px 30px;
 }
 </style>

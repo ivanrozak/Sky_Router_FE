@@ -25,7 +25,7 @@
                 "
                 alt="image_chatfriend"
               />
-              <div class="ml-lg-3 name_tag mt-lg-3">
+              <div class="ml-lg-3 ml-3 mt-3 name_tag mt-lg-3">
                 <h2>{{ items.user_name }}</h2>
                 <p class="mt-lg-2">{{ items.lastChat.chat_content }}</p>
               </div>
@@ -69,11 +69,6 @@ export default {
       return moment(String(value)).format('LT')
     },
     roomGet(data) {
-      /*  this.setRoom(data.room_chat) */
-      // this.socket.emit('joinRoom', {
-      //   room_chat: data.room_chat
-      // })
-      // this.setRoom(data.room_chat)
       const display = {
         user_name: data.user_name,
         user_image: data.user_image,

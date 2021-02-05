@@ -24,7 +24,7 @@
           "
           alt="image_chatfriend"
         />
-        <div class="ml-lg-3 name_tag mt-lg-3">
+        <div class="ml-lg-3 ml-3 mt-3 name_tag mt-lg-3">
           <h2>{{ items.user_name }}</h2>
           <p class="mt-lg-2">{{ items.lastChat.chat_content }}</p>
         </div>
@@ -59,19 +59,11 @@ export default {
   methods: {
     ...mapActions(['getChat', 'getListChat']),
     ...mapMutations(['setRoomDisplay', 'setRoom']),
-    getDataRoom(room) {
-      return room
-    },
     formatTime(value) {
       moment.locale('ID')
       return moment(String(value)).format('LT')
     },
     roomGet(data) {
-      /*  this.setRoom(data.room_chat) */
-      // this.socket.emit('joinRoom', {
-      //   room_chat: data.room_chat
-      // })
-      // this.setRoom(data.room_chat)
       const display = {
         user_name: data.user_name,
         user_image: data.user_image,
@@ -79,7 +71,6 @@ export default {
         room_chat: data.room_chat
       }
       this.setRoomDisplay(display)
-
       this.getChat(data.room_chat).then(() => {
         this.$router.push({
           name: 'ChatRoom',
@@ -167,5 +158,34 @@ export default {
   border-radius: 50%;
   background: #2395ff;
   color: white;
+}
+@media (max-width: 1426px) {
+  .notification {
+    left: auto;
+    right: -12px;
+    width: 400px;
+  }
+}
+@media (max-width: 575px) {
+  .notification {
+    width: 390px;
+    left: auto;
+    right: -12px;
+    top: 280px;
+  }
+}
+@media (max-width: 393px) {
+  .notification {
+    left: auto;
+    right: -12px;
+    width: 370px;
+  }
+}
+@media (max-width: 375px) {
+  .notification {
+    left: auto;
+    right: -12px;
+    width: 350px;
+  }
 }
 </style>

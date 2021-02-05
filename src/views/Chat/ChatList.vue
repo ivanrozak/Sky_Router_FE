@@ -48,7 +48,21 @@ export default {
   background-repeat: no-repeat;
   position: relative;
   margin-bottom: 200px;
-  padding: 50px;
+  padding: 50px 0;
   border-radius: 0 0 30px 30px;
+}
+@media (max-width: 576px) {
+  .bg-image {
+    height: 350px;
+    width: 100%;
+    margin: 0 auto;
+    background: #2395ff;
+    background-image: url('../../assets/chatImg/vector 02.png');
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 200px;
+    padding: 50px 0;
+    border-radius: 0 0 30px 30px;
+  }
 }
 </style>

@@ -89,7 +89,7 @@
           <div class="input">
             <b-row align-v="center" align-h="center">
               <b-col cols="1"><i class="fa fa-smile-o fa-lg"></i></b-col>
-              <b-col cols="8" style="width: 100%"
+              <b-col cols="7" lg="8" style="width: 100%"
                 ><b-form-input
                   id="input-2"
                   v-model="message"
