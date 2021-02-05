@@ -88,22 +88,16 @@ export default {
 </script>
 
 <style scoped>
-/* p {
-  font-size: 10px;
-} */
 .qr {
   width: 150px;
   height: 150px;
   margin-left: -30px;
-  /* margin-top: 70px;  */
 }
 .grey {
   color: #979797;
 }
 .two-circles {
   width: 650px;
-
-  /*  background-color: red; */
   background: radial-gradient(
         circle at right top,
         transparent 10px,
@@ -160,9 +154,6 @@ span {
       radial-gradient(circle at left bottom, transparent 10px, #eeeeee 0) bottom
         right / 280px 51% no-repeat;
   }
-  /* .line {
-    display: none;
-  } */
 }
 @media only screen and (max-width: 767px) {
   .detail-booking {

@@ -140,17 +140,22 @@ export default {
   computed: {
     ...mapGetters({
       myBooking: 'getMyBooking',
-      passengers: 'getAllPassengers',
-      display: 'getDisplay'
+      passengers: 'getAllPassengers'
     })
   },
   methods: {
     ...mapActions(['getPassengers', 'deleteBookingVuex']),
     ...mapMutations(['setElementMyBooking', 'setDataPassengers']),
-    myBookingDetail(i) {
+    myBookingDetail(el, i) {
       if (this.isClickDetails[i]) this.isClickDetails[i] = false
       else this.isClickDetails[i] = true
+
+      console.log('Getters passenger after action 5')
+      console.log(this.passengers)
       this.isClickDetails.push(false)
+      this.setElementMyBooking(el)
+      console.log('Getters passenger after action 4')
+      console.log(this.passengers)
     },
     formatTime(value) {
       moment.locale('en')
@@ -158,15 +163,19 @@ export default {
     },
     showPassenger(el, i) {
       this.getPassengers(el.bookingId)
+
       this.passengersData[i] = this.passengers
 
-      this.myBookingDetail(i)
+      this.myBookingDetail(el, i)
 
       if (this.passengersData.length <= this.myBooking.length) {
         this.passengersData.push()
+        console.log('Getters passenger after action 3')
+        console.log(this.passengers)
       }
-
-      this.setElementMyBooking(el)
+      // ========================================
+      // this.passengersData = el.passenger
+      // console.log(this.passengersData)
     }
   }
 }

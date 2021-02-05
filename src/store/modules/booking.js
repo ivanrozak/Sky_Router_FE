@@ -68,6 +68,7 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}booking/passenger/${payload}`)
           .then(result => {
+            console.log(result.data.data)
             context.commit('setDataPassengers', result.data.data)
             resolve(result.data.data)
           })
