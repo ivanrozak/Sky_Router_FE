@@ -1,11 +1,15 @@
 <template>
   <div class="Register_form">
-    <div class="logo_Register d-flex align-items-center pt-lg-5 ">
+    <div
+      @click="toHome"
+      class="logo_Register d-flex align-items-center pt-lg-5 "
+    >
       <img
+        class="d-none d-lg-block"
         src="../../../assets/Images/Logo/illustration.svg"
         alt="image_logo"
       />
-      <span class="ml-2">SkyRouter</span>
+      <span class="ml-lg-2 pt-3">SkyRouter</span>
     </div>
     <b-form @submit.prevent="onSubmit" class="form_Register ">
       <h1>Register</h1>
@@ -19,11 +23,7 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group
-        class="pt-lg-3"
-        id="input-group-1"
-        description="We'll never share your email with anyone else."
-      >
+      <b-form-group class="pt-lg-3" id="input-group-1">
         <b-form-input
           id="input-1"
           type="text"
@@ -32,6 +32,9 @@
           placeholder="Email"
           required
         ></b-form-input>
+        <label class="labels" for=""
+          >We'll never share your email with anyone else.</label
+        >
       </b-form-group>
       <b-form-group id="input-group-2">
         <b-form-input
@@ -53,8 +56,8 @@
           required
         ></b-form-input>
       </b-form-group>
-      <button class="btn_signin w-100 mt-lg-4 py-lg-3">Sign Up</button>
-      <div class="reset_btn mt-lg-3">
+      <button class="btn_signin w-100 py-3 mt-lg-4 py-lg-3">Sign Up</button>
+      <div class="reset_btn mt-lg-3 mt-3">
         <b-form-checkbox
           id="checkbox-1"
           required
@@ -62,7 +65,7 @@
           name="checkbox-1"
           value="0"
           v-model="form.user_role"
-          unchecked-value="not_accepted"
+          unchecked-value="unchacked"
         >
           Accept terms and condition
         </b-form-checkbox>
@@ -71,8 +74,11 @@
     </b-form>
     <b-col class="btn_RegisterbyType" lg="12">
       <p class="text-center">Already have an account?</p>
-      <div class="d-flex justify-content-center">
-        <button @click="onSignIn" class="btn_google w-50 px-lg-4 py-lg-3">
+      <div class="d-flex  justify-content-center">
+        <button
+          @click="onSignIn"
+          class="btn_google w-50 px-4 py-3 px-lg-4 py-lg-3"
+        >
           Sign in
         </button>
       </div>
@@ -91,7 +97,7 @@ export default {
         user_name: '',
         user_email: '',
         user_password: '',
-        user_role: 0
+        user_role: 'unchacked'
       },
       confirmPassword: ''
     }
@@ -100,6 +106,9 @@ export default {
     ...mapActions(['RegisterAccount']),
     onSignIn() {
       this.$router.push('/login')
+    },
+    toHome() {
+      this.$router.push('/')
     },
     onSubmit() {
       if (this.confirmPassword === this.form.user_password) {
@@ -142,6 +151,7 @@ export default {
   cursor: pointer;
 }
 .logo_Register {
+  cursor: pointer;
   padding-left: 25%;
 }
 .form_Register {
@@ -184,11 +194,57 @@ export default {
 .btn_signin:hover {
   background: #118cff;
 }
-
 input {
   font-family: 'Poppins', sans-serif;
   height: 50px;
   border: none;
   border-bottom: 2px solid rgba(210, 194, 255, 0.68);
+}
+@media (max-width: 1430px) {
+  .form_Register {
+    padding: 7% 17% 0 17%;
+  }
+}
+@media (max-width: 1280px) {
+  .form_Register {
+    padding: 15% 15% 0 15%;
+  }
+  .login_form {
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+@media (max-width: 576px) {
+  .form_Register {
+    padding: 40% 0 0 0;
+  }
+  .btn_signin,
+  .btn_signin:hover {
+    background: #ffffff;
+    color: #118cff;
+  }
+  .labels {
+    color: #ffffff;
+    font-size: 14px;
+  }
+  .btn_google,
+  .btn_google:hover {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+  }
+  .logo_Register span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 33px;
+    color: #ffffff;
+  }
+  .logo_Register {
+    padding-left: 0%;
+  }
+}
+@media (max-width: 375px) {
+  .form_Register {
+    padding: 40% 0 0 0;
+  }
 }
 </style>

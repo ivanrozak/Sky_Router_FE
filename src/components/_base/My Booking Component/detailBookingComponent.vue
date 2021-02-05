@@ -7,13 +7,39 @@
         <b-row align-v="center">
           <b-col cols="12" sm="6" md="7" lg="8">
             <b-row align-h="baseline">
-              <b-col md="auto">
+              <b-col cols="12">
                 <img
-                  style="width:70px"
-                  src="../../../assets/myBooking/GA_900.png"
-                  alt=""
-              /></b-col>
-              <b-col>
+                  v-if="elMyBooking.airlanes === 'Garuda'"
+                  src="../../../assets/icon/garuda.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="elMyBooking.airlanes === 'Lion Air'"
+                  src="../../../assets/icon/lion air.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="elMyBooking.airlanes === 'Sriwijaya'"
+                  src="../../../assets/icon/sriwijaya.png"
+                  class="mr-4 img-fit"
+                />
+                <img
+                  v-else-if="elMyBooking.airlanes === 'Batik Air'"
+                  src="../../../assets/icon/batik air.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="elMyBooking.airlanes === 'Citilink'"
+                  src="../../../assets/icon/citilink.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else
+                  src="../../../assets/icon/air asia.png"
+                  class="mr-4"
+                />
+              </b-col>
+              <b-col cols="12">
                 <p style="font-size: 20px;font-weight: 600">
                   IDN
                   <span
@@ -95,6 +121,11 @@ export default {
 }
 .grey {
   color: #979797;
+}
+.img-fit {
+  height: 50px;
+
+  object-fit: cover;
 }
 .two-circles {
   width: 650px;

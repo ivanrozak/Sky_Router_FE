@@ -23,4 +23,21 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+@media (max-width: 576px) {
+  .Login {
+    background: #2395ff;
+    height: auto;
+    background-image: url('../../assets/Images/Main Image/image_login.svg');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: -30px;
+    background-position-y: -3%;
+  }
+}
+@media (max-width: 376px) {
+  .Login {
+    height: 110vh;
+  }
+}
+</style>

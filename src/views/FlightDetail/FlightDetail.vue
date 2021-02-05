@@ -5,10 +5,12 @@
       <div class="top-bg">
         <b-container>
           <b-row align-h="center">
-            <b-col md="7" sm="12">
+            <b-col md="7" order-sm="5" order-md="0" order-lg="0" sm="12">
               <LeftFlight />
             </b-col>
-            <b-col md="5" sm="12"> <RightFlight /></b-col>
+            <b-col md="5" cols="12" order-xs="0" order-sm="0" sm="12">
+              <RightFlight
+            /></b-col>
           </b-row>
         </b-container>
       </div>
@@ -57,7 +59,7 @@ export default {
 }
 @media only screen and (max-width: 767px) {
   .detail {
-    height: 1800px;
+    height: 1850px;
   }
 }
 </style>

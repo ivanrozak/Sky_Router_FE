@@ -97,7 +97,7 @@ const routes = [
     path: '/postschedule',
     name: 'PostSchedule',
     component: AddSchedule,
-    meta: { requiresAuth: true }
+    meta: { requiresAdmin: true }
   }
 ]
 
@@ -117,6 +117,14 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     if (store.getters.isLogin) {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+    if (!store.getters.isAdmin) {
       next({
         path: '/'
       })

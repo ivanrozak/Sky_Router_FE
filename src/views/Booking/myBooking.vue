@@ -36,7 +36,9 @@ export default {
     Footer
   },
   created() {
-    this.getBooking(this.user.user_id)
+    this.getBooking(this.user.user_id).then(res => {
+      console.log(res)
+    })
   },
   computed: {
     ...mapGetters({ user: 'getUser' })

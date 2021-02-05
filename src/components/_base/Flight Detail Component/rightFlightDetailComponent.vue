@@ -3,45 +3,54 @@
     <div class="detail">
       <div class="box-detail">
         <div class="flex-comp">
-          <img
-            v-if="data.airlanes === 'Garuda'"
-            src="../../../assets/icon/garuda.png"
-            class="mr-3 img-fit"
-          />
-          <img
-            v-else-if="data.airlanes === 'Lion Air'"
-            src="../../../assets/icon/lion air.png"
-            class="mr-3 img-fit"
-          />
-          <img
-            v-else-if="data.airlanes === 'Sriwijaya'"
-            src="../../../assets/icon/sriwijaya.png"
-            class="mr-4 img-fit"
-          />
-          <img
-            v-else-if="data.airlanes === 'Batik Air'"
-            src="../../../assets/icon/batik air.png"
-            class="mr-3 img-fit"
-          />
-          <img
-            v-else-if="data.airlanes === 'Citilink'"
-            src="../../../assets/icon/citilink.png"
-            class="mr-3 img-fit"
-          />
-          <img v-else src="../../../assets/icon/air asia.png" class="mr-4" />
-
-          <h5 class="grey">
-            {{ data.airlanes }}
-          </h5>
+          <b-row align-v="center">
+            <b-col cols="12" sm="12" md="12" lg="7">
+              <img
+                v-if="data.airlanes === 'Garuda'"
+                src="../../../assets/icon/garuda.png"
+                class="mr-3 img-fit"
+              />
+              <img
+                v-else-if="data.airlanes === 'Lion Air'"
+                src="../../../assets/icon/lion air.png"
+                class="mr-3 img-fit"
+              />
+              <img
+                v-else-if="data.airlanes === 'Sriwijaya'"
+                src="../../../assets/icon/sriwijaya.png"
+                class="mr-4 img-fit"
+              />
+              <img
+                v-else-if="data.airlanes === 'Batik Air'"
+                src="../../../assets/icon/batik air.png"
+                class="mr-3 img-fit"
+              />
+              <img
+                v-else-if="data.airlanes === 'Citilink'"
+                src="../../../assets/icon/citilink.png"
+                class="mr-3 img-fit"
+              />
+              <img
+                v-else
+                src="../../../assets/icon/air asia.png"
+                class="mr-4"
+              />
+            </b-col>
+            <b-col cols="12" sm="12" md="12" lg="5">
+              <h5 class="grey">
+                {{ data.airlanes }}
+              </h5>
+            </b-col>
+          </b-row>
         </div>
         <br />
-        <h4 class="flex-comp mb-3">
+        <h5 class="flex-comp mb-3">
           {{ data.takeOff }}
           <span
             ><img src="../../../assets/myBooking/airplaneIcon.png" alt=""
           /></span>
           {{ data.landing }}
-        </h4>
+        </h5>
         <div class="flex-comp grey">
           <div class="mr-3">{{ formatTime(data.date) }}</div>
           <li></li>
@@ -65,9 +74,6 @@
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
-  created() {
-    console.log(this.data)
-  },
   computed: {
     ...mapGetters({ data: 'getDataScheduleById' })
   },
@@ -83,6 +89,7 @@ export default {
 .flex-comp {
   display: flex;
   align-items: center;
+  overflow-wrap: break-word;
 }
 .flex-comp2 {
   display: flex;
@@ -100,6 +107,7 @@ span {
   width: 100%;
   border-radius: 15px;
   padding: 30px;
+  margin-bottom: 20px;
 }
 .detail {
   padding: 82px 0;
@@ -108,11 +116,11 @@ span {
   color: #2395ff;
 }
 .img-fit {
-  height: 70px;
+  height: 50px;
 }
 @media only screen and (max-width: 576px) {
   .detail {
-    padding: 25px 0;
+    padding: 20px 0;
   }
 }
 @media only screen and (max-width: 767px) {

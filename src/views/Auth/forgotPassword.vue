@@ -15,6 +15,7 @@
           <div class="Forgot_form">
             <div class="logo_Forgot d-flex align-items-center pt-lg-5 ">
               <img
+                class="d-none d-lg-block"
                 src="../../assets/Images/Logo/illustration.svg"
                 alt="image_logo"
               />
@@ -40,7 +41,10 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <button type="submit" class="btn_signin w-100 mt-lg-4 py-lg-3">
+              <button
+                type="submit"
+                class="btn_signin w-100 mt-lg-4 mt-4 py-3 py-lg-3"
+              >
                 Change Password
               </button>
             </b-form>
@@ -144,5 +148,51 @@ input {
   height: 50px;
   border: none;
   border-bottom: 2px solid rgba(210, 194, 255, 0.68);
+}
+@media (max-width: 1430px) {
+  .form_Forgot {
+    padding: 29% 25% 0 25%;
+  }
+}
+@media (max-width: 1280px) {
+  .form_Forgot {
+    padding: 35% 15% 0 15%;
+  }
+}
+@media (max-width: 576px) {
+  .bg_forgot {
+    background: none;
+    height: 0;
+  }
+  .logo_Forgot span {
+    color: #ffffff;
+    font-size: 32px;
+  }
+  .btn_signin {
+    color: #2395ff;
+
+    background: #ffffff;
+  }
+  .btn_signin:hover {
+    background: #ffffff;
+  }
+  .labels {
+    color: #ffffff;
+  }
+  .logo_Forgot {
+    padding-left: 0%;
+  }
+  .form_Forgot {
+    padding: 60% 0 0 0;
+  }
+  .forgotpass {
+    background: #2395ff;
+    height: auto;
+    background-image: url('../../assets/Images/Main Image/image_login.svg');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: -30px;
+    background-position-y: 7%;
+  }
 }
 </style>

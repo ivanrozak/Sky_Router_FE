@@ -3,9 +3,9 @@
     <b-container fluid>
       <b-row>
         <b-col style="padding: 0;" lg="6">
-          <div class="bg_forgot d-flex">
+          <div class="bg_forgot d-flex mt-lg-0 mt-4">
             <img
-              class="image_forgot"
+              class="image_forgot d-none d-lg-block"
               src="../../assets/Images/Main Image/image_login.svg"
               alt="imageBackground"
             />
@@ -15,6 +15,7 @@
           <div class="Forgot_form">
             <div class="logo_Forgot d-flex align-items-center pt-lg-5 ">
               <img
+                class="d-none d-lg-block"
                 src="../../assets/Images/Logo/illustration.svg"
                 alt="image_logo"
               />
@@ -22,11 +23,7 @@
             </div>
             <b-form @submit.prevent="onSend" class="form_Forgot ">
               <h1>Forgot Password</h1>
-              <b-form-group
-                class="pt-lg-3"
-                id="input-group-1"
-                description="We'll never share your email with anyone else."
-              >
+              <b-form-group class="pt-lg-3" id="input-group-1">
                 <b-form-input
                   id="input-1"
                   type="email"
@@ -34,12 +31,18 @@
                   placeholder="Email"
                   required
                 ></b-form-input>
+                <label class="labels" for=""
+                  >We'll never share your email with anyone else.</label
+                >
               </b-form-group>
 
-              <button type="submit" class="btn_signin w-100 mt-lg-4 py-lg-3">
+              <button
+                type="submit"
+                class="btn_signin w-100 mt-lg-4 py-3 mt-3 py-lg-3"
+              >
                 Send
               </button>
-              <p class="text-center title_bottom mt-lg-3">
+              <p class="text-center title_bottom mt-3 mt-lg-3">
                 You’ll get message soon on your email
               </p>
             </b-form>
@@ -129,5 +132,51 @@ input {
   height: 50px;
   border: none;
   border-bottom: 2px solid rgba(210, 194, 255, 0.68);
+}
+@media (max-width: 1430px) {
+  .form_Forgot {
+    padding: 29% 25% 0 25%;
+  }
+}
+@media (max-width: 1280px) {
+  .form_Forgot {
+    padding: 35% 15% 0 15%;
+  }
+}
+@media (max-width: 576px) {
+  .bg_forgot {
+    background: none;
+    height: 0;
+  }
+  .logo_Forgot span {
+    color: #ffffff;
+    font-size: 32px;
+  }
+  .btn_signin {
+    color: #2395ff;
+
+    background: #ffffff;
+  }
+  .btn_signin:hover {
+    background: #ffffff;
+  }
+  .labels {
+    color: #ffffff;
+  }
+  .logo_Forgot {
+    padding-left: 0%;
+  }
+  .form_Forgot {
+    padding: 60% 0 0 0;
+  }
+  .forgotpass {
+    background: #2395ff;
+    height: auto;
+    background-image: url('../../assets/Images/Main Image/image_login.svg');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: -30px;
+    background-position-y: 7%;
+  }
 }
 </style>

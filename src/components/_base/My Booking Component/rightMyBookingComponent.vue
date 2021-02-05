@@ -30,12 +30,6 @@
             <p>Pending</p>
           </div></b-col
         >
-        <!-- <b-col cols="2" sm="2" md="2" lg="2" v-if="el.status === 0"
-          ><b-button
-            style="background:#2395ff;width:80px;height:30px;font-size:10px"
-            >Cancel</b-button
-          ></b-col
-        > -->
         <b-col cols="12" sm="12" md="12" lg="6" class="right"
           >View Details
           <span
@@ -43,7 +37,7 @@
               src="../../../assets/myBooking/btnback.png"
               alt=""
               style="cursor:pointer"
-              @click="showPassenger(el, i)"/></span
+              @click="myBookingDetail(el, i)"/></span
         ></b-col>
       </b-row>
       <div v-show="isClickDetails[i]">
@@ -52,9 +46,34 @@
             <b-row align-v="baseline">
               <b-col md="auto">
                 <img
-                  style="width:100px"
-                  src="../../../assets/myBooking/GA_900.png"
-                  alt=""
+                  v-if="el.airlanes === 'Garuda'"
+                  src="../../../assets/icon/garuda.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="el.airlanes === 'Lion Air'"
+                  src="../../../assets/icon/lion air.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="el.airlanes === 'Sriwijaya'"
+                  src="../../../assets/icon/sriwijaya.png"
+                  class="mr-4 img-fit"
+                />
+                <img
+                  v-else-if="el.airlanes === 'Batik Air'"
+                  src="../../../assets/icon/batik air.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else-if="el.airlanes === 'Citilink'"
+                  src="../../../assets/icon/citilink.png"
+                  class="mr-3 img-fit"
+                />
+                <img
+                  v-else
+                  src="../../../assets/icon/air asia.png"
+                  class="mr-4"
                 />
               </b-col>
               <b-col>
@@ -86,7 +105,7 @@
             <b-row>
               <b-col cols="7"><h6>Total Payment</h6></b-col>
               <b-col cols="5" class="right"
-                >IDR. {{ passengers.length * el.price }}</b-col
+                >IDR. {{ el.passenger.length * el.price }}</b-col
               >
             </b-row>
             <br />
@@ -101,7 +120,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(item, index) in passengersData[i]" :key="index">
+                  <tr v-for="(item, index) in el.passenger" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ item.title }}. {{ item.fullname }}</td>
                     <td>{{ item.nationality }}</td>
@@ -133,8 +152,7 @@ export default {
   data() {
     return {
       isClickDetails: [false],
-      isPaymentSuccess: false,
-      passengersData: []
+      isPaymentSuccess: false
     }
   },
   computed: {
@@ -150,38 +168,24 @@ export default {
       if (this.isClickDetails[i]) this.isClickDetails[i] = false
       else this.isClickDetails[i] = true
 
-      console.log('Getters passenger after action 5')
-      console.log(this.passengers)
       this.isClickDetails.push(false)
+
       this.setElementMyBooking(el)
-      console.log('Getters passenger after action 4')
-      console.log(this.passengers)
     },
     formatTime(value) {
       moment.locale('en')
       return moment(String(value)).format('lll')
-    },
-    showPassenger(el, i) {
-      this.getPassengers(el.bookingId)
-
-      this.passengersData[i] = this.passengers
-
-      this.myBookingDetail(el, i)
-
-      if (this.passengersData.length <= this.myBooking.length) {
-        this.passengersData.push()
-        console.log('Getters passenger after action 3')
-        console.log(this.passengers)
-      }
-      // ========================================
-      // this.passengersData = el.passenger
-      // console.log(this.passengersData)
     }
   }
 }
 </script>
 
 <style scoped>
+.img-fit {
+  height: 50px;
+
+  object-fit: cover;
+}
 .blue {
   color: #2395ff;
 }

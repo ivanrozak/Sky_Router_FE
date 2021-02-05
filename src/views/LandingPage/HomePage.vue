@@ -36,13 +36,16 @@
                       <b-form-select
                         style="width: 120px; font-size: 1.1em; font-weight: bolder;"
                         v-model="takeOff"
+                        @change="changestakeoff"
                         :options="takeOffOpt"
+                        required
                       ></b-form-select>
-                      <!-- <h3>Medan</h3> -->
                       <p>Indonesia</p>
                     </section>
                     <section class="image_iconsSwith">
                       <img
+                        style=" cursor: pointer;"
+                        @click="changesData"
                         class="image_size"
                         src="../../assets/Images/Logo/swithIcons.jpg"
                         alt="icons_image"
@@ -53,7 +56,9 @@
                       <b-form-select
                         style="width: 120px; font-size: 1.1em; font-weight: bolder;"
                         v-model="landing"
+                        @change="changeslanding"
                         :options="landingOpt"
+                        required
                       ></b-form-select>
                       <p>Indonesia</p>
                     </section>
@@ -111,6 +116,7 @@
                     close-button
                     locale="en"
                     v-model="date"
+                    required
                   ></b-form-datepicker>
                 </div>
                 <div class="input_selected">
@@ -126,6 +132,7 @@
                       <b-form-select
                         v-model="totalAdult"
                         :options="adult"
+                        required
                       ></b-form-select>
                     </b-col>
                   </b-row>
@@ -186,14 +193,19 @@ import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
 import topDesti from '../../components/_base/Landing Page Component/corousel_topDestionation'
 import corouseDesti from '../../components/_base/Landing Page Component/corousel_destnation'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+import Alert from '../../mixins/Alert'
 export default {
   name: 'landingPage',
+  mixins: [Alert],
   components: {
     Navbar,
     Footer,
     corouseDesti,
     topDesti
+  },
+  computed: {
+    ...mapGetters({ user: 'getUser', admin: 'isAdmin' })
   },
   data() {
     return {
@@ -204,6 +216,8 @@ export default {
       totalChild: '',
       takeOff: '',
       landing: '',
+      takeOffSwitch: '',
+      landingSwitch: '',
       options: [
         { item: 'economy', name: 'Economy' },
         { item: 'Business', name: 'Business' },
@@ -249,8 +263,31 @@ export default {
         takeOff: this.takeOff,
         landing: this.landing
       }
-      this.setParams(params)
-      this.$router.push('/searchresult')
+      if (this.date && this.takeOff && this.landing && this.totalAdult) {
+        this.setParams(params)
+        this.$router.push('/searchresult')
+      } else {
+        this.AlertError('Please fill all flight data !')
+      }
+    },
+    changestakeoff(value) {
+      this.takeOffSwitch = value
+    },
+    changeslanding(value) {
+      this.landingSwitch = value
+    },
+    changesData() {
+      if (
+        this.takeOff === this.takeOffSwitch &&
+        this.landingSwitch &&
+        this.takeOffSwitch
+      ) {
+        this.takeOff = this.landingSwitch
+        this.landing = this.takeOffSwitch
+      } else {
+        this.takeOff = this.takeOffSwitch
+        this.landing = this.landingSwitch
+      }
     }
   }
 }
@@ -388,7 +425,7 @@ export default {
 }
 .image_iconsSwith {
   position: relative;
-  top: 25px;
+  top: 37px;
 }
 .card_searchLocation .from p,
 .to p {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="box-flight">
-      <h5 style="color:white">Contact Person Details</h5>
+      <h5 class="title-box1">Contact Person Details</h5>
       <div class="box1">
         <label for="name">Full Name</label>
         <b-form-input
@@ -33,30 +33,17 @@
           <div class="box2 pt-5">
             <div class="scroll pr-4">
               <div
-                v-for="(items, index) in formPesenger"
-                :key="index"
+                v-for="(items, index) in formAdults"
+                :key="'Adult' + index"
                 class="Forms mb-3"
               >
-                <span
-                  class="badge"
-                  v-if="index >= 1"
-                  @click="removeFrom(index)"
-                >
-                  <b-icon
-                    font-scale="2"
-                    icon="trash2-fill"
-                    aria-hidden="true"
-                  ></b-icon>
-                </span>
                 <b-row
                   class="alert alert-info"
                   role="alert"
                   align-h="between"
                   align-v="center"
                 >
-                  <b-col>
-                    Passenger : 1 adult
-                  </b-col>
+                  <b-col> Passenger : {{ index + 1 }} adult </b-col>
                   <b-col style="text-align:right">
                     <b-form-checkbox
                       switch
@@ -84,11 +71,62 @@
                   type="text"
                   required
                   v-model="items.fullname"
-                  id="fname"
+                  :id="'namesAdults' + (index + 1)"
                 ></b-form-input>
                 <label for="country">country</label>
                 <ejs-autocomplete
-                  id="country"
+                  :id="'Adult' + (index + 1)"
+                  :dataSource="countries"
+                  v-model="items.nationality"
+                  popupWidth="300px"
+                  popupHeight="800px"
+                ></ejs-autocomplete>
+              </div>
+              <!-- Childs -->
+              <div
+                v-for="(items, index) in formChilds"
+                :key="'Childs' + index"
+                class="Forms mb-3"
+              >
+                <b-row
+                  class="alert alert-info"
+                  role="alert"
+                  align-h="between"
+                  align-v="center"
+                >
+                  <b-col> Passenger : {{ index + 1 }} Childs </b-col>
+                  <b-col style="text-align:right">
+                    <b-form-checkbox
+                      switch
+                      v-model="items.statusCheeck"
+                      name="checkbox-1"
+                      value="accepted"
+                      unchecked-value="not_accepted"
+                      inline
+                      class="my-2"
+                    >
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+
+                <label for="title">Title</label>
+                <b-form-select required v-model="items.title" class="mb-3">
+                  <b-form-select-option :value="null"
+                    >Please select an option</b-form-select-option
+                  >
+                  <b-form-select-option value="Mr">Mr</b-form-select-option>
+                  <b-form-select-option value="Mrs">Mrs</b-form-select-option>
+                </b-form-select>
+                <label for="fname">Full Name</label>
+                <b-form-input
+                  type="text"
+                  required
+                  v-model="items.fullname"
+                  :id="'namesChilds' + (index + 1)"
+                ></b-form-input>
+                <label for="country">country</label>
+                <ejs-autocomplete
+                  :id="'childs' + (index + 1)"
                   :dataSource="countries"
                   v-model="items.nationality"
                   popupWidth="300px"
@@ -96,17 +134,13 @@
                 ></ejs-autocomplete>
               </div>
             </div>
-
-            <button class="btn_more mt-3 py-lg-3 px-lg-4" @click="AddPesenger">
-              More Pesengger
-            </button>
           </div>
         </div>
 
         <h5>Passenger Details</h5>
         <div class="box3">
           <b-row>
-            <b-col>
+            <b-col cols="12" sm="12" md="6" lg="6">
               <b-form-checkbox
                 id="checkbox-1"
                 name="checkbox-1"
@@ -117,7 +151,7 @@
                 Travel Insurance
               </b-form-checkbox>
             </b-col>
-            <b-col style="text-align:right">
+            <b-col class="price" cols="12" sm="12" md="6" lg="6">
               IDR 5.000.000
             </b-col>
           </b-row>
@@ -148,31 +182,42 @@ export default {
         insurance: 0,
         status: 0
       },
-      formPesenger: [
-        {
-          statusCheeck: 'not_accepted',
-          title: '',
-          fullname: '',
-          nationality: ''
-        }
-      ]
+      formAdults: [],
+      formChilds: []
     }
   },
-  computed: { ...mapGetters({ user: 'getUser', data: 'getDataScheduleById' }) },
-  methods: {
-    ...mapActions(['postPesenger', 'postBooking']),
-    AddPesenger() {
-      this.formPesenger.push({
+  created() {
+    for (let i = 0; i < this.getPassanger.totalAdult; i++) {
+      this.formAdults.push({
         title: '',
         fullname: '',
         nationality: '',
         statusCheeck: ''
       })
-    },
+    }
+    for (let i = 0; i < this.getPassanger.totalChild; i++) {
+      this.formChilds.push({
+        title: '',
+        fullname: '',
+        nationality: '',
+        statusCheeck: ''
+      })
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'getUser',
+      data: 'getDataScheduleById',
+      getPassanger: 'getParams'
+    })
+  },
+  methods: {
+    ...mapActions(['postPesenger', 'postBooking']),
     async onSubmit() {
       const dataCombine = {
         userId: this.user.user_id,
-        total: this.data.price * this.formPesenger.length,
+        total:
+          this.data.price * (this.formAdults.length + this.formChilds.length),
         scheduleId: this.data.scheduleId
       }
       const payload = {
@@ -186,30 +231,22 @@ export default {
         .catch(() => {
           this.AlertError('Error Booking')
         })
-      for (let i = 0; i < this.formPesenger.length; i++) {
+      for (let i = 0; i < this.formAdults.length; i++) {
         const data = {
-          title: this.formPesenger[i].title,
-          fullname: this.formPesenger[i].fullname,
-          nationality: this.formPesenger[i].nationality
+          title: this.formAdults[i].title,
+          fullname: this.formAdults[i].fullname,
+          nationality: this.formAdults[i].nationality
         }
         await this.postPesenger(data)
       }
-    },
-    switchOn() {},
-    removeFrom(index) {
-      this.formPesenger.splice(index, 1)
-      return this.$swal({
-        icon: 'info',
-        position: 'top-end',
-        showConfirmButton: false,
-        toast: true,
-        title: 'Success Remove Form Passenger',
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: () => {
-          this.$swal.showLoading()
+      for (let i = 0; i < this.formChilds.length; i++) {
+        const data = {
+          title: this.formChilds[i].title,
+          fullname: this.formChilds[i].fullname,
+          nationality: this.formChilds[i].nationality
         }
-      })
+        await this.postPesenger(data)
+      }
     }
   }
 }
@@ -233,6 +270,12 @@ export default {
   border-radius: 50%;
   background: #2395ff;
   color: white;
+}
+.title-box1 {
+  color: white;
+}
+.price {
+  text-align: right;
 }
 .box-flight {
   font-family: 'Poppins', sans-serif;
@@ -317,5 +360,33 @@ label {
   color: rgb(131, 131, 131);
   padding-left: 13px;
   font-size: 0.9em;
+}
+@media only screen and (max-width: 420px) {
+  .box1,
+  .box2,
+  .box3 {
+    margin-bottom: 20px;
+    padding: 20px 25px;
+  }
+  .price {
+    margin-left: 25px;
+    text-align: left;
+    color: #0986fc;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .price {
+    margin-left: 25px;
+    text-align: left;
+    color: #0986fc;
+  }
+  .title-box1 {
+    color: black;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .title-box1 {
+    color: white;
+  }
 }
 </style>
