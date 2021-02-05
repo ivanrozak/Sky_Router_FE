@@ -44,7 +44,6 @@ VUE_APP_URL=http://localhost:3000/
 
 ## License - TEAM Sky Router
 
-
 © [Anka Abdullah](https://github.com/Anka-Abdullah)<br>
 © [Rudy Galih Putra Wijaya](https://github.com/Cotllinz)<br>
 © [Risky Amalia Haris](https://github.com/riskyamaliaharis)<br>

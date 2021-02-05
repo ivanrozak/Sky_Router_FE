@@ -89,13 +89,9 @@ export default {
       data.append('user_address', user_address)
       data.append('user_city', user_city)
       data.append('user_post_code', user_post_code)
-      for (var pair of data.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-      }
       this.updateProfileUser(data)
         .then(result => {
           this.AlertSucces(result.data.message)
-          console.log(result)
         })
         .catch(err => {
           this.AlertError(err.data.message)

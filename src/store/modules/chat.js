@@ -5,7 +5,7 @@ dotenv.config()
 export default {
   state: {
     listChat: {},
-    socket: io('http://localhost:3000'),
+    socket: io(process.env.VUE_APP_URL),
     chat: [],
     oldRoom: '',
     room_chat: '',
@@ -17,7 +17,6 @@ export default {
     },
     setChat(state, payload) {
       state.chat = payload.data
-      console.log(state.chat)
     },
     setRoomDisplay(state, payload) {
       state.displayData = payload

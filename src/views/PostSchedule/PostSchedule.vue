@@ -1,274 +1,48 @@
 <template>
   <div>
     <Navbar />
-    <div class="schedule">
-      <div class="post-schedule">
-        <b-container>
-          <b-card class="border-0 shadow bg-white">
-            <form action="#" @submit.prevent="postData">
-              <b-row>
-                <b-col lg="6" sm="12" class="text-center">
-                  <label for="airlanes">Airlane :</label><br />
-                  <select name="airlanes" id="airlanes" v-model="form.airlanes">
-                    <option value="">Select Airlane</option>
-                    <option value="Lion Air">Lion Air</option>
-                    <option value="Batik Air">Batik Air</option>
-                    <option value="Sriwijaya">Sriwijaya</option>
-                    <option value="Garuda">Garuda</option>
-                    <option value="Citilink">Citilink</option>
-                    <option value="Air Asia">Air Asia</option>
-                  </select>
-                  <br />
-                  <label for="takeOff">Departure Time:</label><br />
-                  <input
-                    type="datetime-local"
-                    id="takeOff"
-                    name="takeOff"
-                    v-model="form.takeOffTime"
-                  />
-                  <br />
-                  <label for="cityTakeOff">Departure City :</label><br />
-                  <select
-                    name="cityTakeOff"
-                    id="cityTakeOff"
-                    v-model="form.takeOff"
-                  >
-                    <option value="Jakarta">Jakarta</option>
-                    <option value="Yogyakarta">Yogyakarta</option>
-                    <option value="Semarang, Jawa Tengah"
-                      >Semarang, Jawa Tengah</option
-                    >
-                    <option value="Kabupaten Biak Numfor, Papua"
-                      >Kabupaten Biak Numfor, Papua</option
-                    >
-                  </select>
-                  <br />
-                  <label for="airportTakeOff">Departure Airport :</label><br />
-                  <select
-                    name="airportTakeOff"
-                    id="airportTakeOff"
-                    v-model="form.takeOffAirport"
-                  >
-                    <option value="Bandara Soekarno Hatta (CGK)"
-                      >Bandara Soekarno Hatta (CGK)</option
-                    >
-                    <option value="Bandara Internasional Yogyakarta (YIA)"
-                      >Bandara Internasional Yogyakarta (YIA)</option
-                    >
-                    <option value="Bandara Ahmad Yani (SRG)"
-                      >Bandara Ahmad Yani (SRG)</option
-                    >
-                    <option value="Bandara Frans Kaisiepo (BIK)"
-                      >Bandara Frans Kaisiepo (BIK)</option
-                    >
-                  </select>
-                  <br />
-                  <label for="landing">Arrived Time:</label><br />
-                  <input
-                    type="datetime-local"
-                    id="landing"
-                    name="landing"
-                    v-model="form.landingTime"
-                  />
-                  <br />
-                  <label for="citylanding">Arrived City :</label><br />
-                  <select
-                    name="citylanding"
-                    id="citylanding"
-                    v-model="form.landing"
-                  >
-                    <option value="Jakarta">Jakarta</option>
-                    <option value="Yogyakarta">Yogyakarta</option>
-                    <option value="Semarang, Jawa Tengah"
-                      >Semarang, Jawa Tengah</option
-                    >
-                    <option value="Kabupaten Biak Numfor, Papua"
-                      >Kabupaten Biak Numfor, Papua</option
-                    >
-                  </select>
-                  <br />
-                  <label for="airportlanding">Arrived Airport :</label><br />
-                  <select
-                    name="airportlanding"
-                    id="airportlanding"
-                    v-model="form.landingAirport"
-                  >
-                    <option value="Bandara Soekarno Hatta (CGK)"
-                      >Bandara Soekarno Hatta (CGK)</option
-                    >
-                    <option value="Bandara Internasional Yogyakarta (YIA)"
-                      >Bandara Internasional Yogyakarta (YIA)</option
-                    >
-                    <option value="Bandara Ahmad Yani (SRG)"
-                      >Bandara Ahmad Yani (SRG)</option
-                    >
-                    <option value="Bandara Frans Kaisiepo (BIK)"
-                      >Bandara Frans Kaisiepo (BIK)</option
-                    >
-                  </select>
-                </b-col>
-                <b-col lg="6" sm="12">
-                  <label for="date">Date Time:</label><br />
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    v-model="form.date"
-                  />
-                  <br />
-                  <label for="duration">Duration :</label><br />
-                  <input type="text" name="duration" v-model="form.duration" />
-                  <br />
-                  <label for="classes">Airplane Class :</label><br />
-                  <select
-                    name="classes"
-                    id="classes"
-                    v-model="form.airplanesClass"
-                  >
-                    <option value="economy">economy</option>
-                    <option value="Business">Business</option>
-                    <option value="First Class">First Class</option>
-                  </select>
-                  <br />
-                  <label for="price">Price </label><br />
-                  <input
-                    type="number"
-                    name="price"
-                    v-model="form.price"
-                  /><br />
-                  <h5 class="text-secondary mt-4 mb-0">Facilities</h5>
-                  <label for="luggage">Luggage </label>
-                  <input
-                    type="checkbox"
-                    name="luggage"
-                    id="luggage"
-                    class="ml-1"
-                    v-model="form.luggage"
-                  />
-                  <span class="mx-2"></span>
-                  <label for="inflightMeal">Inflight-Meal </label>
-                  <input
-                    type="checkbox"
-                    name="inflightMeal"
-                    id="inflightMeal"
-                    class="ml-1"
-                    v-model="form.inflightMeal"
-                  />
-                  <span class="mx-2"></span>
-                  <label for="wifi">Wifi</label>
-                  <input
-                    type="checkbox"
-                    name="wifi"
-                    id="wifi"
-                    class="ml-1"
-                    v-model="form.wifi"
-                  />
-                  <span class="mx-2"></span>
-                  <label for="refun">Can Refun </label>
-                  <input
-                    type="checkbox"
-                    name="refun"
-                    id="refun"
-                    class="ml-1"
-                    v-model="form.refun"
-                  />
-                  <br />
-                  <label for="reschedule">Reschedule </label>
-                  <input
-                    type="checkbox"
-                    name="reschedule"
-                    id="reschedule"
-                    class="ml-1"
-                    v-model="form.reschedule"
-                  />
-                  <span class="mx-2"></span>
-                  <label for="direct">Direct</label>
-                  <input
-                    type="checkbox"
-                    name="direct"
-                    id="direct"
-                    class="ml-1"
-                    v-model="form.direct"
-                  />
-                  <br />
-                  <label for="transit">Choose a Transit :</label>
-                  <select
-                    name="transit"
-                    id="transit"
-                    class="ml-2"
-                    v-model="form.transit"
-                  >
-                    <option value="1">1x</option>
-                    <option value="2x">2x</option> </select
-                  ><br />
-                </b-col>
-
-                <button type="submit" class="btn btn-primary w-25 ml-auto mx-3">
-                  <h4 class="m-0">Post Schedule</h4>
-                </button>
-              </b-row>
-            </form>
-          </b-card>
-        </b-container>
-      </div>
+    <div class="main">
+      <b-container>
+        <div class="profile">
+          <h2>Post Flight Schedule</h2>
+          <hr />
+          <RightPostSchedule />
+        </div>
+      </b-container>
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import RightPostSchedule from '../../components/_base/Post Schedule Component/RightPostScheduleFormComponent'
 import Navbar from '../../components/naviationBar'
 import Footer from '../../components/footer'
-import Alert from '../../mixins/Alert'
 export default {
   name: 'PostSchedule',
   components: {
     Navbar,
-    Footer
-  },
-  mixins: [Alert],
-  data() {
-    return {
-      form: {
-        airlanes: '',
-        date: '',
-        takeOff: '',
-        takeOffAirport: '',
-        takeOffTime: '',
-        landing: '',
-        landingAirport: '',
-        landingTime: '',
-        Duration: '',
-        luggage: 0,
-        inflightMeal: 0,
-        wifi: 0,
-        direct: 0,
-        transit: '',
-        airplanesClass: '',
-        refun: 0,
-        reschedule: 0,
-        price: null
-      }
-    }
-  },
-  methods: {
-    postData() {
-      console.log(this.form)
-      axios
-        .post('http://localhost:3000/schedule', this.form)
-        .then(() => {
-          this.AlertSucces('Yeay, your schedule has been posted')
-        })
-        .catch(err => {
-          this.AlertError(err)
-        })
-    }
+    Footer,
+    RightPostSchedule
   }
 }
 </script>
 
 <style scoped>
+h2 {
+  text-align: center;
+}
+.main {
+  font-family: 'Poppins', sans-serif;
+  background-color: whitesmoke;
+  padding: 30px 0;
+}
+.profile {
+  padding: 30px;
+  background-color: white;
+  border-radius: 20px;
+}
+
 label {
   color: #0f7fe9;
   margin-bottom: 0px;

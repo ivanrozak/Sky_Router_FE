@@ -21,9 +21,18 @@
             <div v-if="params.date" class="sml mr-2">
               {{ formatTime(params.date) }}
             </div>
-            <div v-if="params.totalAdult" class="sml mr-2">
+            <div v-if="params.totalAdult && params.totalChild" class="sml mr-2">
               <li>
                 {{ parseInt(params.totalAdult) + parseInt(params.totalChild) }}
+                Passenger
+              </li>
+            </div>
+            <div
+              v-if="params.totalAdult && !params.totalChild"
+              class="sml mr-2"
+            >
+              <li>
+                {{ parseInt(params.totalAdult) }}
                 Passenger
               </li>
             </div>

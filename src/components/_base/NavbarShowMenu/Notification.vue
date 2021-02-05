@@ -110,4 +110,32 @@ export default {
   right: -200px;
   top: 70px;
 }
+@media (max-width: 1426px) {
+  .notification {
+    left: auto;
+    right: -87px;
+    width: 400px;
+  }
+}
+@media (max-width: 576px) {
+  .notification {
+    left: auto;
+    right: -195px;
+    width: 390px;
+  }
+}
+@media (max-width: 393px) {
+  .notification {
+    left: auto;
+    right: -182px;
+    width: 370px;
+  }
+}
+@media (max-width: 375px) {
+  .notification {
+    left: auto;
+    right: -173px;
+    width: 350px;
+  }
+}
 </style>

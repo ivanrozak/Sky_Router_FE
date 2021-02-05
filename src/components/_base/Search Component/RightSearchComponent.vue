@@ -156,11 +156,10 @@ export default {
     getData() {
       this.getSchedules()
         .then(result => {
-          console.log(result)
+          return result
         })
         .catch(err => {
-          console.log(this.form)
-          console.log(err)
+          alert(err)
         })
     },
     handlePageChange(numberPage) {
@@ -170,13 +169,11 @@ export default {
     selectSchedule(param) {
       this.getScheduleById(param)
         .then(result => {
-          console.log(result)
           this.$router.push('/detailflight')
-          // alert(result.data.message)
+          return result
         })
         .catch(error => {
-          // alert(error.data.message)
-          console.log(error)
+          alert(error.data.message)
         })
     },
     sortLowest() {

@@ -4,8 +4,8 @@
       <h3>Booking Pass</h3>
       <br />
       <div class=" two-circles">
-        <b-row>
-          <b-col lg="8">
+        <b-row align-v="center">
+          <b-col cols="12" sm="6" md="7" lg="8">
             <b-row align-h="baseline">
               <b-col md="auto">
                 <img
@@ -55,14 +55,12 @@
               </b-col>
             </b-row>
           </b-col>
-          <b-col lg="1">
+          <b-col sm="1" md="1" lg="1">
             <div class="line"></div>
           </b-col>
-
-          <vue-qrcode
-            value="elMyBooking.bookingId"
-            style="width: 150px; height:150px; margin-left:-30px; margin-top:70px"
-          />
+          <b-col cols="12" sm="5" md="4" lg="3">
+            <vue-qrcode value="elMyBooking.bookingId" class="qr" />
+          </b-col>
         </b-row>
       </div>
     </div>
@@ -90,6 +88,15 @@ export default {
 </script>
 
 <style scoped>
+/* p {
+  font-size: 10px;
+} */
+.qr {
+  width: 150px;
+  height: 150px;
+  margin-left: -30px;
+  /* margin-top: 70px;  */
+}
 .grey {
   color: #979797;
 }
@@ -135,7 +142,100 @@ span {
   border-width: 1px;
   border-style: dashed;
   height: 300px;
-  width: 2px;
+  width: 1px;
   margin-left: -45px;
+}
+@media only screen and (max-width: 991px) {
+  .two-circles {
+    background: radial-gradient(
+          circle at right top,
+          transparent 10px,
+          #eeeeee 1px
+        )
+        top left / 370px 51% no-repeat,
+      radial-gradient(circle at right bottom, transparent 10px, #eeeeee 0)
+        bottom left / 370px 51% no-repeat,
+      radial-gradient(circle at left top, transparent 10px, #eeeeee 0) top right /
+        280px 51% no-repeat,
+      radial-gradient(circle at left bottom, transparent 10px, #eeeeee 0) bottom
+        right / 280px 51% no-repeat;
+  }
+  /* .line {
+    display: none;
+  } */
+}
+@media only screen and (max-width: 767px) {
+  .detail-booking {
+    width: 530px;
+  }
+  .two-circles {
+    width: 510px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .qr {
+    width: 120px;
+    height: 120px;
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+  .two-circles {
+    width: 400px;
+    background: #eeeeee;
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+  }
+  h3 {
+    margin-left: 20px;
+    margin-bottom: 5px;
+  }
+  p {
+    margin-bottom: 2px;
+  }
+  .detail-booking {
+    background: white;
+    width: 420px;
+
+    margin: 0 auto;
+    padding: 20px 0;
+    border-radius: 20px;
+  }
+
+  .line {
+    display: none;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .qr {
+    width: 100px;
+    height: 100px;
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+  .two-circles {
+    width: 300px;
+    background: #eeeeee;
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+  }
+
+  p {
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+  .detail-booking {
+    background: white;
+    width: 320px;
+
+    margin: 0 auto;
+    padding: 20px 0;
+    border-radius: 20px;
+  }
+
+  .line {
+    display: none;
+  }
 }
 </style>
