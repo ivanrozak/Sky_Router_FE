@@ -73,7 +73,6 @@ export default {
     },
     changePage(state, payload) {
       state.page = payload
-      console.log(this.state.page)
     },
     setParams(state, payload) {
       state.params = payload

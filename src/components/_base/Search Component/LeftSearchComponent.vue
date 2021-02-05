@@ -382,8 +382,7 @@ export default {
       this.setPrice(this.form.price)
       this.getSchedules()
         .then(result => {
-          console.log(result)
-          // alert(result.data.message)
+          return result
         })
         .catch(err => {
           alert(err.data.message)

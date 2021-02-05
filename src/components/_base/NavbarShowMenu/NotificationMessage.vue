@@ -60,7 +60,7 @@ export default {
     ...mapActions(['getChat', 'getListChat']),
     ...mapMutations(['setRoomDisplay', 'setRoom']),
     getDataRoom(room) {
-      console.log(room)
+      return room
     },
     formatTime(value) {
       moment.locale('ID')

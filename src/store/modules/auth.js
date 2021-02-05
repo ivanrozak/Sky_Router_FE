@@ -26,7 +26,6 @@ export default {
         axios
           .post(`${process.env.VUE_APP_URL}user/login/`, payload)
           .then(result => {
-            console.log(result)
             context.commit('setUser', result.data)
             context.commit('setImage', result.data)
             localStorage.setItem('token', result.data.data.token)
@@ -86,7 +85,6 @@ export default {
             payload.data
           )
           .then(result => {
-            console.log(result)
             resolve(result)
           })
           .catch(err => {

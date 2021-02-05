@@ -194,7 +194,6 @@ export default {
   },
   methods: {
     postData() {
-      console.log(this.form)
       axios
         .post(`${process.env.VUE_APP_URL}schedule`, this.form)
         .then(() => {

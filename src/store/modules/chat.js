@@ -17,7 +17,6 @@ export default {
     },
     setChat(state, payload) {
       state.chat = payload.data
-      console.log(state.chat)
     },
     setRoomDisplay(state, payload) {
       state.displayData = payload

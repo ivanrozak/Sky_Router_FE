@@ -65,9 +65,6 @@
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
-  created() {
-    console.log(this.data)
-  },
   computed: {
     ...mapGetters({ data: 'getDataScheduleById' })
   },

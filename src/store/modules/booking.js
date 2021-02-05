@@ -50,7 +50,6 @@ export default {
     },
     getBooking(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log(payload)
         axios
           .get(`${process.env.VUE_APP_URL}booking/mybookingbyid/${payload}`)
           .then(result => {
@@ -64,7 +63,6 @@ export default {
     },
     getPassengers(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log(payload)
         axios
           .get(`${process.env.VUE_APP_URL}booking/passenger/${payload}`)
           .then(result => {
@@ -72,7 +70,6 @@ export default {
             resolve(result.data.data)
           })
           .catch(error => {
-            console.log(error)
             reject(error)
           })
       })
